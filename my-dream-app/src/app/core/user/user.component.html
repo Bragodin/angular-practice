@@ -1,0 +1,26 @@
+<ul class="main__users">
+    <li class="main__users_user" *ngFor='let user of (users | async); let i = index'>
+        <label>name:
+            <input type="text" [(ngModel)]='user.name'/>
+        </label>
+        <label>surname:
+            <input type="text" [(ngModel)]='user.surname'/>
+        </label>
+        <label>login:
+            <input type="text" [(ngModel)]='user.login'/>
+        </label>
+        <label>phone:
+            <input type="text" [(ngModel)]='user.phone'/>
+        </label>
+        <button (click)='changeUsers(user._id, user)'>Change</button>
+        <button (click)='remove(user._id)'>X</button>
+    </li>
+    <li class="main__users_user">
+        <input type="text" [(ngModel)] ='name' placeholder="Input name"/>
+        <input type="text" [(ngModel)] ='surname' placeholder="Input surname"/>
+        <input type="text" [(ngModel)]='login' placeholder="Input login"/>
+        <input type="text" [(ngModel)]='password' placeholder="Input password"/>
+        <input type="text" [(ngModel)] ='phone' placeholder="Input phone"/>
+        <button (click)='add()'>Add User</button>
+    </li>
+</ul>

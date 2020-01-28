@@ -1,0 +1,15 @@
+.users{
+    display: flex;
+    flex-wrap: wrap;
+}
+.user {
+    width: 150px;
+    height: 150px;
+    background: black;
+    margin: 20px;
+    cursor: pointer;
+}
+.user h2, h3{
+    color: red;
+    text-align: center;
+}

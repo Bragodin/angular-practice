@@ -1,0 +1,31 @@
+.main__users{
+    text-align: center;
+}
+.main__users_user {
+    display: flex;
+    justify-content: space-around;
+    background: #000000;
+    color: red;
+    margin-bottom: 10px;
+}
+.main__users_user input{
+    height: 40px;
+    background: #000000;
+    color: red;
+    border: none;
+    font-family: Arial, Helvetica, sans-serif;
+    outline: none;
+    cursor: pointer;
+}
+.main__users_user button{
+    align-self: center;
+    outline: none;
+}
+button {
+    border: 1px solid red;
+    background: none;
+    border-radius: 30%;
+    cursor: pointer;
+    color: red;
+    margin-left: 10px;
+}
