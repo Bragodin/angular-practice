@@ -1,6 +1,9 @@
 <section class="users">
-    <div class="user" *ngFor='let user of (users | async)'>
+    <div class="user" *ngFor='let user of (users | async)' [routerLink] = "['profile', user._id]">
         <h2>{{user.name}}</h2>
-        <h3>{{user.login}}</h3>
+        <h3 *ngIf='user.login.length < 15; else smallerContainer'>{{user.login}}</h3>
+        <ng-template #smallerContainer>
+            <h4>{{user.login}}</h4>
+        </ng-template>
     </div>
 </section>

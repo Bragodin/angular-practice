@@ -21,11 +21,3 @@
     align-self: center;
     outline: none;
 }
-button {
-    border: 1px solid red;
-    background: none;
-    border-radius: 30%;
-    cursor: pointer;
-    color: red;
-    margin-left: 10px;
-}

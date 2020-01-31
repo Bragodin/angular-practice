@@ -5,5 +5,6 @@ export interface User {
     login: String;
     password: String;
     phone: String;
+    pets?: [];
     tokens?: []
 }

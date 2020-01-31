@@ -1,0 +1,15 @@
+.profile {
+    background: black;
+    color: red;
+    width: 500px;
+    height: 300px;
+    display: flex;
+    justify-content: space-around;
+    align-content: space-around;
+}
+.photo {
+    background: red;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}

@@ -1,6 +1,6 @@
 import { Component, OnInit,  Input } from '@angular/core';
-import { UsersService } from './users.service';
-import { User } from './user.model';
+import { UsersService } from '../../services/users.service';
+import { User } from '../models/user.model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -19,7 +19,7 @@ export class UserComponent implements OnInit {
     this.users = this.usersService.getUsers();
    }
   ngOnInit() {
-
+     
   }
   remove(id){
     this.usersService.remove(id);
@@ -37,4 +37,6 @@ export class UserComponent implements OnInit {
   changeUsers(id, user){
     this.usersService.updateUsers(id, user);
   }
+
+  // Отписаться 
 }

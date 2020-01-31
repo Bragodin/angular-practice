@@ -1,0 +1,27 @@
+<form class="form" #myForm='ngForm'>
+    <label *ngIf='requireAllfilds'>Name: </label>
+    <input *ngIf='requireAllfilds' name='name' type="text" placeholder="Input your login here" ngModel required  name>
+    <label *ngIf='requireAllfilds'>Surname: </label>
+    <input *ngIf='requireAllfilds' type="text" name='surname' placeholder="Input your login here" ngModel required surname>
+
+    <label>E-mail: </label>
+    <input type="text" name='email' placeholder="Input yout login here" ngModel required email >
+
+    <label>Password: </label>
+    <input type="password" name='password' placeholder="Input yout password here" ngModel required password>
+
+    <label *ngIf='requireAllfilds'>Return password: </label>
+    <input *ngIf='requireAllfilds' name='password' type="password" placeholder="Input yout password here" ngModel>
+
+    <label *ngIf='requireAllfilds'>Phone: </label>
+    <input *ngIf='requireAllfilds' type="text" name='phone' placeholder="Input yout login here" ngModel required phone>
+
+    <button *ngIf='!requireAllfilds; 
+     else signIn' (click)='submit(myForm)' [disabled]="myForm.invalid">Sign In</button>
+    <a *ngIf='!requireAllfilds' routerLink = "/registration">registration</a>
+    <ng-template #signIn>
+        <button (click)='submit(myForm)' [disabled]="myForm.invalid">Register</button>
+        <a routerLink = "/login">login</a>
+    </ng-template>
+</form>
+

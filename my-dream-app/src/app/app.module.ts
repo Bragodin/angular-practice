@@ -8,19 +8,30 @@ import { HttpClientModule }    from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './core/dashboard/dashboard.component';
+import { ProfileComponent } from './core/profile/profile.component';
+import { LoginComponent } from './core/auth/login/login.component';
+import { RegistrationComponent } from './core/auth/registration/registration.component';
+import { FormComponent } from './core/auth/form/form.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     UserComponent,
-    DashboardComponent
+    DashboardComponent,
+    ProfileComponent,
+    LoginComponent,
+    RegistrationComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

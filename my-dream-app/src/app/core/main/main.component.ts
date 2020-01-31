@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { User } from '../models/user.model';
+
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class MainComponent implements OnInit {
   name: String = 'Vasia';
   surname: String = 'Grishkovets';
-  users: any;
+  users: User[];
   constructor() { 
   }
   ngOnInit() {

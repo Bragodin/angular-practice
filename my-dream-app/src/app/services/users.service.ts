@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { User } from './user.model'; 
+import { User } from '../core/models/user.model'; 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Observable, BehaviorSubject} from 'rxjs';
-import { applySourceSpanToExpressionIfNeeded } from '@angular/compiler/src/output/output_ast';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,16 +12,20 @@ export class UsersService {
   syncUsers: User[];
   constructor(private http: HttpClient) { }
   updateUsers(id, user){
-    this.http.put<User[]>(`http://localhost:3000/users/${id}`, user).subscribe(data => {
-      this.getUsers();    //  change  
-    });
-    return this.getUsers();
+    this.http.put<User[]>(`http://localhost:3000/users/${id}`, user).subscribe();
+    this.syncUsers.find((elem, i) => {
+      if(elem._id === id){
+        this.syncUsers.splice(i, 1, user);
+        }
+      });
+   return this.users;
   }
   addUser(user: User){
     this.http.post<User[]>('http://localhost:3000/users', user).subscribe(data => {
-      this.getUsers();//  change 
+      this.syncUsers.push(user);
+      this.users.next(this.syncUsers);
     });
-    return this.getUsers();
+    return this.users;
   }
   remove(id: string){
     this.http.delete(`http://localhost:3000/users/${id}`).subscribe();
@@ -35,6 +39,12 @@ export class UsersService {
       this.syncUsers = data;
   });
     return this.users;
+  }
+  getUserPets(id){
+    return this.http.get<User>(`http://localhost:3000/users/${id}/pets`);
+  }
+  getUserById(id){
+    return this.http.get<User>(`http://localhost:3000/users/${id}`);
   }
 }
 

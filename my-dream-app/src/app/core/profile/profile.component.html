@@ -1,0 +1,17 @@
+<div class="profile"> 
+   <div class="photo">
+   </div>
+   <div class="profile__information">
+      <h3>{{user.name}}  {{user.surname}}</h3>
+      <h4>{{user.login}}</h4>
+      <h4>{{user.phone}}</h4>
+      <button *ngIf='!buttonState; else pets' (click)='showPets()'>Show User Pets</button>
+      <ng-template #pets>
+         <button (click)='showPets()'>Hide User Pets</button>
+         <h3>{{user.name}}s pets:</h3>
+         <div class="pets" *ngFor='let pet of userPets'>
+            {{pet.name}}
+         </div>
+      </ng-template>
+   </div>
+</div>
