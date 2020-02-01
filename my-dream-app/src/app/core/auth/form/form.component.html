@@ -1,8 +1,8 @@
 <form class="form" #myForm='ngForm'>
     <label *ngIf='requireAllfilds'>Name: </label>
-    <input *ngIf='requireAllfilds' name='name' type="text" placeholder="Input your login here" ngModel required  name>
+    <input *ngIf='requireAllfilds' type="text" name='name' placeholder="Input your name here" ngModel>
     <label *ngIf='requireAllfilds'>Surname: </label>
-    <input *ngIf='requireAllfilds' type="text" name='surname' placeholder="Input your login here" ngModel required surname>
+    <input *ngIf='requireAllfilds' type="text" name='surname' placeholder="Input your surname here" ngModel>
 
     <label>E-mail: </label>
     <input type="text" name='email' placeholder="Input yout login here" ngModel required email >

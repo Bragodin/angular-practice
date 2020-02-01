@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { LoginService } from '../../../services/login.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit, OnDestroy{
   value: boolean = false;
   token: string;
   sub: any;
-  constructor(private loginService: LoginService, private route: ActivatedRoute, private router: Router) {}
+  constructor(private loginService: LoginService, private router: Router) {}
   ngOnInit() {}
   onSubmit(form){
     this.sub = this.loginService.login({
