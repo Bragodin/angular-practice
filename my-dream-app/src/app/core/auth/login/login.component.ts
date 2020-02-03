@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy{
     }).subscribe((data: any) => {
       this.token = data.token;
       localStorage.setItem('token', this.token);
-      this.router.navigate([`/dashboard/profile/${data.user._id}`]);
+      this.router.navigate([`/profile/${data.user._id}`]);
     });
   }
   ngOnDestroy() {

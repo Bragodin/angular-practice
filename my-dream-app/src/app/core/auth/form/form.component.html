@@ -1,26 +1,24 @@
-<form class="form" #myForm='ngForm'>
+<form class="form" [formGroup]='authForm' (ngSubmit)="submit()">
     <label *ngIf='requireAllfilds'>Name: </label>
-    <input *ngIf='requireAllfilds' type="text" name='name' placeholder="Input your name here" ngModel>
+    <input *ngIf='requireAllfilds' type="text" name="name" formControlName="name" placeholder="Input your name here" >
     <label *ngIf='requireAllfilds'>Surname: </label>
-    <input *ngIf='requireAllfilds' type="text" name='surname' placeholder="Input your surname here" ngModel>
+    <input *ngIf='requireAllfilds' type="text" name="surname" formControlName="surname" placeholder="Input your surname here" >
 
     <label>E-mail: </label>
-    <input type="text" name='email' placeholder="Input yout login here" ngModel required email >
+    <input type="text" name='email' formControlName="email" placeholder="Input yout login here">
 
     <label>Password: </label>
-    <input type="password" name='password' placeholder="Input yout password here" ngModel required password>
+    <input type="password" name='password' formControlName="password" placeholder="Input yout password here">
 
     <label *ngIf='requireAllfilds'>Return password: </label>
-    <input *ngIf='requireAllfilds' name='password' type="password" placeholder="Input yout password here" ngModel>
+    <input *ngIf='requireAllfilds' name='passwordRepeat' formControlName="passwordRepeat" type="password" placeholder="Input yout password here" >
 
     <label *ngIf='requireAllfilds'>Phone: </label>
-    <input *ngIf='requireAllfilds' type="text" name='phone' placeholder="Input yout login here" ngModel required phone>
-
-    <button *ngIf='!requireAllfilds; 
-     else signIn' (click)='submit(myForm)' [disabled]="myForm.invalid">Sign In</button>
-    <a *ngIf='!requireAllfilds' routerLink = "/registration">registration</a>
+    <input *ngIf='requireAllfilds' type="text" name='phone' formControlName="phone" placeholder="Input yout login here">
+    <button *ngIf='!requireAllfilds; else signIn' [disabled]="authForm.invalid">Sign In</button>
+    <a *ngIf='!requireAllfilds' routerLink="/registration">registration</a>
     <ng-template #signIn>
-        <button (click)='submit(myForm)' [disabled]="myForm.invalid">Register</button>
+        <button type="submit" [disabled]="authForm.invalid">Register</button>
         <a routerLink = "/login">login</a>
     </ng-template>
 </form>

@@ -18,3 +18,11 @@
     color: black;
     background: red;
 }
+.main__logout_button{ 
+    background: #000000;
+    margin-left: 70%;;
+}
+.main__logout_button:hover{ 
+    color: #000000;
+    background: red;
+}

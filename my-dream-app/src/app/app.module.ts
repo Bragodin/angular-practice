@@ -13,6 +13,8 @@ import { LoginComponent } from './core/auth/login/login.component';
 import { RegistrationComponent } from './core/auth/registration/registration.component';
 import { FormComponent } from './core/auth/form/form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ParamInterceptor } from '../app/interceptors/auth.interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{
+      provide: HTTP_INTERCEPTORS,
+      useClass: ParamInterceptor,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

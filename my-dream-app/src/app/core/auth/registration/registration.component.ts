@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UsersService } from '../../../services/users.service';
 import { User } from '../../models/user.model';
 import { LoginService } from '../../../services/login.service';
 import { Router } from '@angular/router';
@@ -9,9 +8,9 @@ import { Router } from '@angular/router';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 }) 
-export class RegistrationComponent implements OnInit, OnDestroy {
+export class RegistrationComponent implements OnInit {
   value: boolean= true;
-  constructor(private usersService: UsersService, private loginService: LoginService,  private router: Router) { }
+  constructor(private loginService: LoginService,  private router: Router) { }
   register;
   ngOnInit() {
 
@@ -33,7 +32,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     } as User;
     this.register = this.loginService.register(user);
     this.register.subscribe(
-      data => this.router.navigate([`/profile`]),
+      data => this.router.navigate([`/profile/${data.user._id}`]),
       error => console.log(error)
     );
   }

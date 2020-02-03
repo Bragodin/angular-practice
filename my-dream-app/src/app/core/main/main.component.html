@@ -2,6 +2,7 @@
     <nav>
         <a class="main__links" routerLink = "/users" routerLinkActive ='active-link'>users</a>
         <a class="main__links" routerLink = "/dashboard" routerLinkActive ='active-link'>dashboard</a>
+        <button class="main__logout_button" *ngIf='token' (click)='logOut()'>LogOut</button>
     </nav>
     <router-outlet></router-outlet>
 </div>
