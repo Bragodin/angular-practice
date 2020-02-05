@@ -5,7 +5,15 @@ import { HttpEvent, HttpInterceptor, HttpHandler, HttpRequest } from '@angular/c
 @Injectable()
 export class ParamInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        console.log('INCEPTOR')
-        return next.handle(req);
+        let token = localStorage.getItem('token');
+        const newReq = req.clone({
+            headers: req.headers.set(
+                'Authorization',
+                `Bearer ${token}`
+            )
+        });
+        return next.handle(newReq);
     }
 }
+
+

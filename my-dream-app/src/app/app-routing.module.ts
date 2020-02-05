@@ -5,18 +5,21 @@ import { UserComponent } from './core/user/user.component';
 import { DashboardComponent } from './core/dashboard/dashboard.component';
 import { ProfileComponent } from './core/profile/profile.component';
 import { LoginComponent } from './core/auth/login/login.component';
-import { MainComponent } from './core/main/main.component';
 import { RegistrationComponent } from './core/auth/registration/registration.component';
+import { AuthGuard } from './guards/auth.guard';
+import { SettingsComponent } from './core/settings/settings.component';
+import { ChangeUserComponent } from './core/change-user/change-user.component';
 
 const routes: Routes = [
-  { path: 'users', component: UserComponent },
-  { path: 'main', component: MainComponent },
+  { path: 'users', canActivate: [AuthGuard], component: UserComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'profile/:id', component: ProfileComponent },
+  { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
+  { path: 'profile/:id', canActivate: [AuthGuard], component: ProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
+  { path: 'settings', canActivate: [AuthGuard], component: SettingsComponent },
+  { path: 'changeProfile', canActivate: [AuthGuard], component: ChangeUserComponent }
 ];
 
 @NgModule({

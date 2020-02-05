@@ -1,0 +1,20 @@
+
+
+<div class="change-photo">
+    <input type="file" name="photo" (change)="addPhoto($event)"/>
+    <button (click)='sendAvatar()'>Send Photo</button>
+</div>
+
+<div class="change-user">
+    <label>name:</label>
+    <input type="text" [(ngModel)]='name'/>
+    <label>surname:</label>
+    <input type="text" [(ngModel)]='surname'/>
+    <label>login:</label>
+    <input type="text" [(ngModel)]='login'/>
+    <label>password:</label>
+    <input type="text" [(ngModel)]='password'/>
+    <label>phone:</label>
+    <input type="text" [(ngModel)]='phone'/>
+    <button (click)='changeUsers()'>Change</button>
+</div>

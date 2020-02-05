@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { User } from '../core/models/user.model'; 
+import { User } from '../models/user.model'; 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import {Observable, BehaviorSubject} from 'rxjs';
-
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +10,18 @@ import {Observable, BehaviorSubject} from 'rxjs';
 export class UsersService {
   users: BehaviorSubject<User[]> = new BehaviorSubject(null);
   syncUsers: User[];
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.getUsers();
+  }
   updateUsers(id, user){
-    this.http.put<User[]>(`http://localhost:3000/users/${id}`, user).subscribe();
-    this.syncUsers.find((elem, i) => {
+      this.http.put<User[]>(`http://localhost:3000/users/${id}`, user).subscribe(
+        data => console.log(data)
+      );
+      this.syncUsers.find((elem, i) => {
       if(elem._id === id){
         this.syncUsers.splice(i, 1, user);
-        }
-      });
+      }
+    });
    return this.users;
   }
   addUser(user: User){
@@ -45,6 +49,9 @@ export class UsersService {
   }
   getUserById(id){
     return this.http.get<User>(`http://localhost:3000/users/${id}`);
+  }
+  addAvatar(avatar: object){
+    return this.http.post('http://localhost:3000/files', avatar);
   }
 }
 

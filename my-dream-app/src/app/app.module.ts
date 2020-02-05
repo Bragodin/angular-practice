@@ -15,6 +15,12 @@ import { FormComponent } from './core/auth/form/form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ParamInterceptor } from '../app/interceptors/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthGuard } from './guards/auth.guard';
+import { ChangeUserComponent } from './core/change-user/change-user.component';
+import { SettingsComponent } from './core/settings/settings.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -25,7 +31,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     ProfileComponent,
     LoginComponent,
     RegistrationComponent,
-    FormComponent
+    FormComponent,
+    ChangeUserComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -33,13 +41,19 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     HttpClientModule,
     AppRoutingModule,
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatButtonModule 
   ],
-  providers: [{
+  providers: [
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: ParamInterceptor,
       multi: true
-    }],
+    },
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

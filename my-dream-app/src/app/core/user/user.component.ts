@@ -1,6 +1,6 @@
 import { Component, OnInit,  Input } from '@angular/core';
 import { UsersService } from '../../services/users.service';
-import { User } from '../models/user.model';
+import { User } from '../../models/user.model';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -37,6 +37,4 @@ export class UserComponent implements OnInit {
   changeUsers(id, user){
     this.usersService.updateUsers(id, user);
   }
-
-  // Отписаться 
 }

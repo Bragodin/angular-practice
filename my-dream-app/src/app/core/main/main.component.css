@@ -1,3 +1,6 @@
+nav {
+    margin: 30px;
+}
 .element{
     background: gray;
 }
@@ -7,22 +10,20 @@
     border-radius: 3px;
     color: red;
     font-size: 18px;
-    background: black;
     margin-right: 20px;
 }
 .main__links:hover {
-    color: black;
     background: red;
+    color: #ffffff;
 }
 .active-link {
-    color: black;
     background: red;
+    color: #ffffff;
 }
 .main__logout_button{ 
-    background: #000000;
-    margin-left: 70%;;
+    margin-left: 460px;
 }
 .main__logout_button:hover{ 
-    color: #000000;
+    color: #ffffff;
     background: red;
 }

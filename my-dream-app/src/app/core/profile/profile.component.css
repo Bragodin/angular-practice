@@ -1,11 +1,14 @@
 .profile {
-    background: black;
-    color: red;
+    border:2px solid black;
+    border-radius: 3px;
+    color: black;
     width: 500px;
     height: 300px;
     display: flex;
     justify-content: space-around;
     align-content: space-around;
+    margin-left: 30px;
+    padding-top: 30px;
 }
 .photo {
     background: red;

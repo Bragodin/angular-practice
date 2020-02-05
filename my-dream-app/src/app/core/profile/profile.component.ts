@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { User } from '../models/user.model';
+import { User } from '../../models/user.model';
 import { Observable } from 'rxjs';
 import { UsersService } from '../../services/users.service';
 import { ActivatedRoute} from '@angular/router';
-import { Pet } from '../models/pet.model';
+import { Pet } from '../../models/pet.model';
 
 @Component({
   selector: 'app-profile',
@@ -36,6 +36,5 @@ export class ProfileComponent implements OnInit {
     this.buttonState = !this.buttonState;
   }
   ngDoCheck(){
-    
   }
 }
