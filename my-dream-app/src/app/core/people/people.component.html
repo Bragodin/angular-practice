@@ -1,0 +1,9 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Name of person</mat-label>
+      <input matInput #message maxlength="256" [formControl]="amount">
+    </mat-form-field>
+</form>
+<app-user-list-element *ngFor='let user of result' [user]='user'>
+</app-user-list-element>
+

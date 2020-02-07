@@ -1,10 +1,12 @@
-
-
 <div class="change-photo">
-    <input type="file" name="photo" (change)="addPhoto($event)"/>
-    <button (click)='sendAvatar()'>Send Photo</button>
+    <div class="photo">
+        <img [src]="imgURL" height="210" width="250" *ngIf="imgURL">
+    </div>
+    <div class="change-photo__buttons">
+            <input #fileInput type="file" accept='image/*' name="photo" (change)="addPhoto($event, fileInput.files)" class="fileInput"/>
+        <button (click)='sendAvatar()'>Send Photo</button>
+    </div>
 </div>
-
 <div class="change-user">
     <label>name:</label>
     <input type="text" [(ngModel)]='name'/>

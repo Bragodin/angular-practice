@@ -35,6 +35,12 @@ export class UserComponent implements OnInit {
     this.usersService.addUser(user);
   }
   changeUsers(id, user){
-    this.usersService.updateUsers(id, user);
+    let updateUser = {
+      name: user.name,
+      surname: user.surname,
+      login: user.login,
+      phone: user.phone,
+    }
+    this.usersService.updateUsers(id, updateUser);
   }
 }

@@ -29,7 +29,8 @@ export class RegistrationComponent implements OnInit {
       surname: form.value.surname,
       password: form.value.password,
       login: form.value.email,
-      phone: form.value.phone
+      phone: form.value.phone,
+      avatar: 'Star-Wars-Jedis.jpg-1581072415178'
     } as User;
 
     this.sub = this.loginService.register(user).subscribe(

@@ -18,6 +18,12 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
   phone: String;
   file: object;
   sub: Subscription;
+  message: string;
+  imagePath: object;
+  imgURL: any;
+  photoName: string;
+  src: string;  //-------------------
+
   constructor(private usersService: UsersService,  private router: Router) { }
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -25,19 +31,39 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
   ]);
   ngOnInit() {
   }
-  addPhoto(event){
+  ngOnDestroy(){
+    if(this.sub){
+      this.sub.unsubscribe();
+    }
+  }
+  addPhoto(event, inputFile){
     let target = event.target || event.srcElement;
     this.file = target.files;
+    this.src = target.files[0];
+    if (inputFile.length === 0)
+      return;
+    var mimeType = inputFile[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported.";
+      return;
+    }
+    var reader = new FileReader();
+    this.imagePath = inputFile;
+    reader.readAsDataURL(inputFile[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+    }
   }
   sendAvatar(){
     let id: string = localStorage.getItem('id');
     let avatarName: string;
     const formData = new FormData();
     let file: object = this.file;
+    
     formData.append('profiles', file[0]);
     this.sub = this.usersService.addAvatar(formData).subscribe(resp => {
-      avatarName = resp[0].originalname;
-      this.usersService.updateUsers(id, { avatar: avatarName});
+      avatarName = resp[0].filename;
+      this.usersService.updateUsers(id, { avatar: avatarName });
     });
   }
   changeUsers(){
@@ -49,14 +75,9 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
       password: this.password,
       phone: this.phone
     }
-    if(id && user){
+    if(id && user) {
       this.usersService.updateUsers(id, user);
       this.router.navigate([`/profile/${id}`]);
-    }
-  }
-  ngOnDestroy(){
-    if(this.sub){
-      this.sub.unsubscribe();
     }
   }
 }

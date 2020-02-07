@@ -21,6 +21,9 @@ import { SettingsComponent } from './core/settings/settings.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { PeopleComponent } from './core/people/people.component';
+import { UserListElementComponent } from './core/user-list-element/user-list-element.component';
+import { HeaderComponent } from './core/header/header.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { MatButtonModule } from '@angular/material/button';
     RegistrationComponent,
     FormComponent,
     ChangeUserComponent,
-    SettingsComponent
+    SettingsComponent,
+    PeopleComponent,
+    UserListElementComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

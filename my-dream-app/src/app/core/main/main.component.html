@@ -1,10 +1,4 @@
 <div class="main">
-    <nav>
-        <a class="main__links" *ngIf='loggedIn' routerLink = {{getRoute()}} routerLinkActive ='active-link'>my profile</a>
-        <a class="main__links" *ngIf='loggedIn' routerLink = "/users" routerLinkActive ='active-link'>users</a>
-        <a class="main__links" *ngIf='loggedIn' routerLink = "/dashboard" routerLinkActive ='active-link'>dashboard</a>
-        <a class="main__links" *ngIf='loggedIn' routerLink = "/settings" routerLinkActive ='active-link'>settings</a>
-        <button class="main__links main__logout_button " *ngIf='loggedIn' (click)='logOut()'>LogOut</button>
-    </nav>
+    <app-header></app-header>
     <router-outlet></router-outlet>
 </div>

@@ -9,6 +9,7 @@ import { RegistrationComponent } from './core/auth/registration/registration.com
 import { AuthGuard } from './guards/auth.guard';
 import { SettingsComponent } from './core/settings/settings.component';
 import { ChangeUserComponent } from './core/change-user/change-user.component';
+import { PeopleComponent } from './core/people/people.component';
 
 const routes: Routes = [
   { path: 'users', canActivate: [AuthGuard], component: UserComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent },
   { path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
   { path: 'settings', canActivate: [AuthGuard], component: SettingsComponent },
-  { path: 'changeProfile', canActivate: [AuthGuard], component: ChangeUserComponent }
+  { path: 'changeProfile', canActivate: [AuthGuard], component: ChangeUserComponent },
+  { path: 'people', canActivate: [AuthGuard], component: PeopleComponent }
 ];
 
 @NgModule({
