@@ -3,7 +3,7 @@ import { User } from '../../models/user.model';
 import { UsersService } from '../../services/users.service';
 import { ActivatedRoute} from '@angular/router';
 import { Pet } from '../../models/pet.model';
-
+import { WebsocketService } from '../../services/websoket.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -17,11 +17,12 @@ export class ProfileComponent implements OnInit {
     password: 'String',
     phone: 'String'
   };
+  @Input() myProfilePage: boolean;
   userPets: Pet[];
   id: string;
-  photoUrl: string;
+  photoUrl: string = '';
   buttonState: boolean = false;
-  constructor(private usersService: UsersService, private activateRoute: ActivatedRoute) { 
+  constructor(private usersService: UsersService, private activateRoute: ActivatedRoute, private websocketService: WebsocketService) {
     this.id = activateRoute.snapshot.params['id'];
   }
   ngOnInit() {
@@ -39,9 +40,11 @@ export class ProfileComponent implements OnInit {
   ngDoCheck(){
   }
   getMyAvatar(){
-    let avatar ={
+    return {
       'background-image': `url(${this.photoUrl})`
     }
-    return avatar;
+  }
+  addToFriends(){
+    this.websocketService.sendNotification(this.id, localStorage.getItem('id'))
   }
 }

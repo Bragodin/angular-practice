@@ -9,11 +9,13 @@ import { map } from 'rxjs/operators';
 })
 export class UsersService {
   users: BehaviorSubject<User[]> = new BehaviorSubject(null);
-  syncUsers: User[];
+  syncUsers: any;
+  // Users[]
   constructor(private http: HttpClient) {
     this.getUsers();
   }
   updateUsers(id, user){
+    console.log(user);
       this.http.put<User[]>(`http://localhost:3000/users/${id}`, user).subscribe(
         data => console.log(data)
       );

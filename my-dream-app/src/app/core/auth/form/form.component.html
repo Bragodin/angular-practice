@@ -1,19 +1,14 @@
 <form class="form" [formGroup]='authForm' (ngSubmit)="submit()">
- 
         <label  *ngIf='requireAllfilds'>Name: </label>
         <input matInput *ngIf='requireAllfilds' type="text" formControlName="name" >
         <label *ngIf='requireAllfilds'>Surname: </label>
         <input  matInput *ngIf='requireAllfilds' type="text" name="surname" formControlName="surname" placeholder="Input your surname here" >
-
         <label>E-mail: </label>
         <input  matInput type="text" name='email' formControlName="email">
-
         <label>Password: </label>
         <input  matInput type="password" name='password' formControlName="password">
-
         <label *ngIf='requireAllfilds'>Return password: </label>
         <input  matInput *ngIf='requireAllfilds' name='passwordRepeat' formControlName="passwordRepeat" type="password">
-
         <label *ngIf='requireAllfilds'>Phone: </label>
         <input matInput *ngIf='requireAllfilds' type="text" name='phone' formControlName="phone">
         <button *ngIf='!requireAllfilds; else signIn' [disabled]="authForm.invalid">Sign In</button>
@@ -22,6 +17,5 @@
             <button type="submit" [disabled]="authForm.invalid">Register</button>
             <a routerLink = "/login">login</a>
         </ng-template>
-
 </form>
 

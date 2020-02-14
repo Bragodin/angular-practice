@@ -1,0 +1,14 @@
+<div class="my-profile">
+    <h3 *ngIf='isMyProfile else alienProfile'>My Profile:</h3>
+    <ng-template #alienProfile>
+        <h3>Profile:</h3>
+    </ng-template> 
+    <app-profile [myProfilePage]='isMyProfile'></app-profile>
+    <h3 *ngIf='isMyProfile else alienAlbums'>My Albums:</h3> 
+    <ng-template #alienAlbums>
+        <h3>Albums:</h3>
+    </ng-template> 
+    <app-gallery [albums]='albums$ | async' (delete)="onDelete()" [myProfilePage]='isMyProfile'></app-gallery>
+</div>
+
+

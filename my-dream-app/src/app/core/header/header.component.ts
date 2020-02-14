@@ -23,6 +23,7 @@ export class HeaderComponent implements OnInit {
   logOut(){
     this.loginService.logout();
     localStorage.removeItem('token');
+    localStorage.removeItem('id');
     this.router.navigate([`/login`]);
   }
   ngDoCheck(){

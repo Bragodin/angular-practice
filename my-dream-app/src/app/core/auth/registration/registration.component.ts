@@ -30,7 +30,7 @@ export class RegistrationComponent implements OnInit {
       password: form.value.password,
       login: form.value.email,
       phone: form.value.phone,
-      avatar: 'Star-Wars-Jedis.jpg-1581072415178'
+      avatar: 'no_avatar.jpg'
     } as User;
 
     this.sub = this.loginService.register(user).subscribe(

@@ -24,6 +24,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { PeopleComponent } from './core/people/people.component';
 import { UserListElementComponent } from './core/user-list-element/user-list-element.component';
 import { HeaderComponent } from './core/header/header.component';
+import { GalleryComponent } from './core/gallery/gallery.component';
+import { MyProfileComponent } from './pages/my-profile/my-profile.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { AlbumComponent } from './core/album/album.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { WebsocketService } from './services/websoket.service';
+
+const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
 @NgModule({
   declarations: [
@@ -39,7 +48,10 @@ import { HeaderComponent } from './core/header/header.component';
     SettingsComponent,
     PeopleComponent,
     UserListElementComponent,
-    HeaderComponent
+    HeaderComponent,
+    GalleryComponent,
+    MyProfileComponent,
+    AlbumComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +62,10 @@ import { HeaderComponent } from './core/header/header.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatInputModule,
-    MatButtonModule 
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [
     {
@@ -58,7 +73,8 @@ import { HeaderComponent } from './core/header/header.component';
       useClass: ParamInterceptor,
       multi: true
     },
-    AuthGuard
+    AuthGuard,
+    WebsocketService
   ],
   bootstrap: [AppComponent]
 })

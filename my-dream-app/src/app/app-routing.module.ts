@@ -10,15 +10,16 @@ import { AuthGuard } from './guards/auth.guard';
 import { SettingsComponent } from './core/settings/settings.component';
 import { ChangeUserComponent } from './core/change-user/change-user.component';
 import { PeopleComponent } from './core/people/people.component';
+import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 
 const routes: Routes = [
   { path: 'users', canActivate: [AuthGuard], component: UserComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'dashboard', canActivate: [AuthGuard], component: DashboardComponent },
-  { path: 'profile/:id', canActivate: [AuthGuard], component: ProfileComponent },
+  { path: 'profile/:id', canActivate: [AuthGuard], component: MyProfileComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
-  { path: 'profile', canActivate: [AuthGuard], component: ProfileComponent },
+  { path: 'profile', canActivate: [AuthGuard], component: MyProfileComponent },
   { path: 'settings', canActivate: [AuthGuard], component: SettingsComponent },
   { path: 'changeProfile', canActivate: [AuthGuard], component: ChangeUserComponent },
   { path: 'people', canActivate: [AuthGuard], component: PeopleComponent }

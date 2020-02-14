@@ -68,15 +68,22 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
   }
   changeUsers(){
     let id = localStorage.getItem('id');
-    const user = {
+    const user: any = {
       name: this.name,
       surname: this.surname,
       login: this.login,
       password: this.password,
       phone: this.phone
     }
+      let userUpdate: any = {};
+      for(let item in user){
+        if(user[item] !== undefined){
+          userUpdate[item] = user[item];
+        }
+      }
     if(id && user) {
-      this.usersService.updateUsers(id, user);
+      console.log(userUpdate)
+      this.usersService.updateUsers(id, userUpdate);
       this.router.navigate([`/profile/${id}`]);
     }
   }

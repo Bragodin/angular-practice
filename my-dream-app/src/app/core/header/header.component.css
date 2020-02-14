@@ -1,29 +1,12 @@
-nav {
-    margin: 30px;
+.active-link {
+    color: pink;
 }
-.element{
-    background: gray;
+.logout__button{
+    margin-left: 300px;
 }
-.main__links {
-    text-decoration: none;
-    border: 1px solid red;
-    border-radius: 3px;
-    color: red;
-    font-size: 18px;
+.toolbar__row button{
     margin-right: 20px;
 }
-.main__links:hover {
-    background: red;
-    color: #ffffff;
-}
-.active-link {
-    background: red;
-    color: #ffffff;
-}
-.main__logout_button{ 
-    margin-left: 460px;
-}
-.main__logout_button:hover{ 
-    color: #ffffff;
-    background: red;
+.toolbar {
+    max-width: 100%;
 }
