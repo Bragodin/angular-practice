@@ -4,11 +4,15 @@ import { Socket } from 'ngx-socket-io';
 @Injectable()
 export class WebsocketService {
   constructor(private socket: Socket) {
-    this.socket.on('addToFriend', (data) => {
+    this.connection();
+  }
+  connection(){
+    this.socket.emit('id', {id: localStorage.getItem('id')});
+    this.socket.on('newFriend', (data) => {
       console.log(data)
     })
   }
-  sendNotification(myId, userId) {
+  sendNotification(userId, myId) {
     const data = { 
       myid: myId, 
       userid: userId

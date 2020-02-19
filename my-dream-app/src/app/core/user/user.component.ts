@@ -17,9 +17,8 @@ export class UserComponent implements OnInit {
   password: string = '';
   constructor(private usersService: UsersService) {
     this.users = this.usersService.getUsers();
-   }
+  }
   ngOnInit() {
-     
   }
   remove(id){
     this.usersService.remove(id);

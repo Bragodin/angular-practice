@@ -15,14 +15,12 @@ export class RegistrationComponent implements OnInit {
   register;
   sub: Subscription;
   ngOnInit() {
-
   }
   ngOnDestroy() {
     if (this.sub) {
       this.sub.unsubscribe();
     }
   }
-
   onSubmit(form){
     let user = {
       name: form.value.name,
@@ -32,9 +30,9 @@ export class RegistrationComponent implements OnInit {
       phone: form.value.phone,
       avatar: 'no_avatar.jpg'
     } as User;
-
     this.sub = this.loginService.register(user).subscribe(
         (data: any) => {
+          console.log(data)
           localStorage.setItem('id', data.user._id);
           localStorage.setItem('token', data.token);
           return  this.router.navigate([`/profile/${data.user._id}`])
@@ -43,23 +41,3 @@ export class RegistrationComponent implements OnInit {
       );
   }
 }
-
-
-// ngOnDestroy() {
-//   if (this.sub) {
-//     this.sub.unsubscribe();
-//   }
-// }
-// onSubmit(form){
-//   let user = {
-//     name: form.value.name,
-//     surname: form.value.surname,
-//     password: form.value.password,
-//     login: form.value.email,
-//     phone: form.value.phone
-//   } as User;
-//   this.sub = this.loginService.register(user).subscribe(
-//     data => this.router.navigate([`/profile/${data.user._id}`]),
-//     error => console.log(error)
-//   );
-// }

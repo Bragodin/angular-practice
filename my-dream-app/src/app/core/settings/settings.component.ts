@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GeneralStateService } from 'src/app/services/general-state.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private generalStateService: GeneralStateService) { }
 
   ngOnInit() {
+  }
+  deleteProfile(){
+    this.generalStateService.updatedDataSelection('some');
   }
 }

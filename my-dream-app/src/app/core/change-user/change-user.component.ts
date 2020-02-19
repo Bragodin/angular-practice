@@ -4,6 +4,7 @@ import { UsersService } from '../../services/users.service';
 import { FormControl, Validators } from '@angular/forms';
 import { Router} from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AlbumService } from 'src/app/services/album.service';
 
 @Component({
   selector: 'app-change-user',
@@ -18,13 +19,9 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
   phone: String;
   file: object;
   sub: Subscription;
-  message: string;
-  imagePath: object;
   imgURL: any;
-  photoName: string;
-  src: string;  //-------------------
 
-  constructor(private usersService: UsersService,  private router: Router) { }
+  constructor(private usersService: UsersService,  private router: Router, private albumService: AlbumService) { }
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
@@ -36,35 +33,22 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
       this.sub.unsubscribe();
     }
   }
-  addPhoto(event, inputFile){
+  addPhoto(event){
     let target = event.target || event.srcElement;
     this.file = target.files;
-    this.src = target.files[0];
-    if (inputFile.length === 0)
-      return;
-    var mimeType = inputFile[0].type;
-    if (mimeType.match(/image\/*/) == null) {
-      this.message = "Only images are supported.";
-      return;
-    }
     var reader = new FileReader();
-    this.imagePath = inputFile;
-    reader.readAsDataURL(inputFile[0]); 
+    reader.readAsDataURL(this.file[0]); 
     reader.onload = (_event) => { 
       this.imgURL = reader.result; 
     }
   }
   sendAvatar(){
     let id: string = localStorage.getItem('id');
-    let avatarName: string;
-    const formData = new FormData();
-    let file: object = this.file;
-    
-    formData.append('profiles', file[0]);
-    this.sub = this.usersService.addAvatar(formData).subscribe(resp => {
-      avatarName = resp[0].filename;
-      this.usersService.updateUsers(id, { avatar: avatarName });
-    });
+    const formData = new FormData();  
+    formData.append('profiles', this.file[0]);
+    this.sub = this.albumService.sendAvatar(formData, id).subscribe(
+      data => console.log(data)
+    );
   }
   changeUsers(){
     let id = localStorage.getItem('id');

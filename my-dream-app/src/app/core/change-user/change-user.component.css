@@ -10,11 +10,11 @@
     border: 1px solid #000000;
     height: 20px;
 }
-.change-user button{
+/* .change-user button{
     width: 250px;
     height: 25px;
     margin-left: 17px;
-}
+} */
 .change-photo {
     margin-left: 33%;
     width: 250px;
@@ -29,17 +29,12 @@
     /* width: 50px; */
     cursor: pointer;
 }
-.change-photo__buttons {
+/* .change-photo__buttons {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 60px;
     justify-content: space-between;
-}
-/* .upload-photo { */
-    /* position: absolute; */
-    /* top: 95px; */
-/*     
 } */
 .photo {
     height: 220px;

@@ -4,7 +4,7 @@ import { Album } from '../../models/album.model';
 import { ActivatedRoute} from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
-import { UsersService } from 'src/app/services/users.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -16,19 +16,28 @@ export class MyProfileComponent implements OnInit {
   user$: Observable<User>;
   addAlbumState: boolean = false;
   id: string;
+  firendRequest: boolean;
+  userWithFriendRequest: any;
   constructor(
     private albumService: AlbumService,
-    // private usersService: UsersService,
     private route: ActivatedRoute,
+    private notificationsService: NotificationsService
     ) { }
   ngOnInit() {
+    const myId = localStorage.getItem('id'); 
     this.getAlbums();
+    this.notificationsService.getUserNotifications(this.id).subscribe( data => {
+      this.userWithFriendRequest = data.friendsNotification.find(elem => elem === myId);
+      console.log(this.firendRequest);
+      if(this.userWithFriendRequest){
+        this.firendRequest = true;
+      }
+    });
   }
   getAlbums(){
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
       this.albums$ = this.albumService.getUserAlbums(this.id);
-      // this.user$ = this.usersService.getUserById(this.id);
     });
   }
   get isMyProfile(): boolean {

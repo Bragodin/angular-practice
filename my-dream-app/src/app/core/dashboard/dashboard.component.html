@@ -1,9 +1,20 @@
 <section class="users">
-    <div class="user" *ngFor='let user of (users | async)' routerLink = "/profile/{{user._id}}">
-        <h2>{{user.name}}</h2>
-        <h3 *ngIf='user.login.length < 15; else smallerContainer'>{{user.login}}</h3>
-        <ng-template #smallerContainer>
-            <h4>{{user.login}}</h4>
-        </ng-template>
-    </div>
+    <mat-card class="user" *ngFor='let user of (users | async)' routerLink = "/profile/{{user._id}}">
+        <mat-card-header>
+        <div mat-card-avatar></div>
+        <mat-card-title>{{user.name}}</mat-card-title>
+        <mat-card-subtitle>{{user.login}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src='http://localhost:3000/uploads/{{user.avatar}}' alt="Photo of a Shiba Inu">
+        <!-- <mat-card-content>
+        <p>
+            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+            bred for hunting.
+        </p>
+        </mat-card-content> -->
+        <mat-card-actions>
+        <button mat-button>Add To Friends</button>
+        </mat-card-actions>
+    </mat-card>
 </section>

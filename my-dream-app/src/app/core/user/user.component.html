@@ -15,6 +15,7 @@
         <button (click)='changeUsers(user._id, user)'>Change</button>
         <button (click)='remove(user._id)'>X</button>
     </li>
+    <!-- <app-user-list-element *ngFor='let user of (users | async)'></app-user-list-element> -->
     <li class="main__users_user">
         <input type="text" [(ngModel)] ='name' placeholder="Input name"/>
         <input type="text" [(ngModel)] ='surname' placeholder="Input surname"/>

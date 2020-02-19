@@ -31,6 +31,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { AlbumComponent } from './core/album/album.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { WebsocketService } from './services/websoket.service';
+import { FriendsComponent } from './pages/my-friends/friends/friends.component';
+import { RequestToFriendComponent } from './core/request-to-friend/request-to-friend.component';
+import { MatCardModule } from '@angular/material/card';
+import { UploadButtonComponent } from './ui/upload-button/upload-button.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
@@ -51,7 +55,10 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     HeaderComponent,
     GalleryComponent,
     MyProfileComponent,
-    AlbumComponent
+    AlbumComponent,
+    FriendsComponent,
+    RequestToFriendComponent,
+    UploadButtonComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +72,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    MatCardModule
   ],
   providers: [
     {

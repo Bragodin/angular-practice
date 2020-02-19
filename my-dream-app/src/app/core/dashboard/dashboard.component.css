@@ -1,20 +1,25 @@
 .users{
     display: flex;
     flex-wrap: wrap;
-    color: #000000;
 }
 .user {
-    width: 150px;
-    height: 150px;
+    width: 250px;
     border: 1px solid #000000;
     border-radius: 3px;
     margin: 20px;
     cursor: pointer;
+    position: relative;
 }
 .user:hover {
     color: #ffffff;
     background: #000000;
 }
-.user h2, h3{
-    text-align: center;
+.user:hover button{
+    color: #000000;
+    background: #ffffff;
 }
+.user button{
+    position:absolute; 
+    bottom:0; 
+}
+

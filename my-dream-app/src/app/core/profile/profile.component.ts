@@ -18,6 +18,7 @@ export class ProfileComponent implements OnInit {
     phone: 'String'
   };
   @Input() myProfilePage: boolean;
+  @Input() firendRequest: boolean;
   userPets: Pet[];
   id: string;
   photoUrl: string = '';

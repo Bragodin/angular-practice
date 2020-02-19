@@ -18,7 +18,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   addAlbumState: boolean = false;
   constructor(private albumService: AlbumService) { }
   ngOnInit() {
-    console.log(this.myProfilePage)
+    console.log(this.myProfilePage);
   }
   ngOnDestroy(){
   }

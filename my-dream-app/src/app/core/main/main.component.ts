@@ -8,7 +8,7 @@ import { WebsocketService } from 'src/app/services/websoket.service';
 })
 export class MainComponent implements OnInit {
   constructor(private websocketService: WebsocketService){
-    this.websocketService.checkNotification();
+    this.websocketService.connection();
   }
   ngOnInit() { 
   }

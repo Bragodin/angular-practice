@@ -16,6 +16,7 @@ export class UsersService {
   }
   updateUsers(id, user){
     console.log(user);
+    console.log('uppdate User')
       this.http.put<User[]>(`http://localhost:3000/users/${id}`, user).subscribe(
         data => console.log(data)
       );
@@ -51,9 +52,6 @@ export class UsersService {
   }
   getUserById(id){
     return this.http.get<User>(`http://localhost:3000/users/${id}`);
-  }
-  addAvatar(avatar: object){
-    return this.http.post('http://localhost:3000/files', avatar);
   }
 }
 

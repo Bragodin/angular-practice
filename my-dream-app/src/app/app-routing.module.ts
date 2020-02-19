@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { UserComponent } from './core/user/user.component';
@@ -11,6 +11,13 @@ import { SettingsComponent } from './core/settings/settings.component';
 import { ChangeUserComponent } from './core/change-user/change-user.component';
 import { PeopleComponent } from './core/people/people.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
+import { FriendsComponent } from './pages/my-friends/friends/friends.component';
+import { RequestToFriendComponent } from './core/request-to-friend/request-to-friend.component';
+
+const friendsRoutes: Routes = [
+  { path: 'myfriends', component: FriendsComponent},
+  { path: 'friendsrequest', component: RequestToFriendComponent},
+];
 
 const routes: Routes = [
   { path: 'users', canActivate: [AuthGuard], component: UserComponent },
@@ -22,7 +29,8 @@ const routes: Routes = [
   { path: 'profile', canActivate: [AuthGuard], component: MyProfileComponent },
   { path: 'settings', canActivate: [AuthGuard], component: SettingsComponent },
   { path: 'changeProfile', canActivate: [AuthGuard], component: ChangeUserComponent },
-  { path: 'people', canActivate: [AuthGuard], component: PeopleComponent }
+  { path: 'people', canActivate: [AuthGuard], component: PeopleComponent },
+  { path: 'friends', canActivate: [AuthGuard], component: FriendsComponent, children: friendsRoutes}
 ];
 
 @NgModule({

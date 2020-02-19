@@ -11,9 +11,9 @@ export class FormComponent implements OnInit {
   @Input() requireAllfilds: boolean;
   @Output() onSubmit = new EventEmitter<FormGroup>();
   authForm: FormGroup;
+  constructor() {
 
-  constructor() {}
-
+  }
   ngOnInit() {
     const commonValidators = this.requireAllfilds ? [Validators.required]: [];
     this.authForm = new FormGroup({
@@ -38,13 +38,21 @@ export class FormComponent implements OnInit {
       ]),
       'passwordRepeat': new FormControl('', [
         ...commonValidators,
-        Validators.pattern("^[A-Za-z0-9]{6,}")
+        Validators.pattern("^[A-Za-z0-9]{6,}"),
       ]),
       'phone': new FormControl('', [
         ...commonValidators,
         Validators.pattern("^(375(29|33|25|44)|\\+375\\s\\((29|33|25|44)\\)\\s|8\\s\\(0(29|33|25|44)\\)\\s)[1-9]{1}([0-9]{6}|[0-9]{2}-[0-9]{2}-[0-9]{2})$")
       ]),
-    });
+    }, this.passEqual());
+  }
+  passEqual() {
+    return (group: FormGroup) => {
+      return (!group.dirty || !group.touched) ||
+              group.get('password').value === group.get('passwordRepeat').value ?
+                 null : 
+                 { custom: 'passwords did not match' };
+    }
   }
   submit(){
     this.onSubmit.emit(this.authForm);
