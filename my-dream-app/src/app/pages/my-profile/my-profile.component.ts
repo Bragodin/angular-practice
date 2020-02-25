@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AlbumService } from '../../services/album.service';
+import { AlbumService } from '../../features/services/album.service';
 import { Album } from '../../models/album.model';
 import { ActivatedRoute} from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
-import { NotificationsService } from 'src/app/services/notifications.service';
+import { NotificationsService } from 'src/app/features/services/notifications.service';
 
 @Component({
   selector: 'app-my-profile',
@@ -26,13 +26,13 @@ export class MyProfileComponent implements OnInit {
   ngOnInit() {
     const myId = localStorage.getItem('id'); 
     this.getAlbums();
-    this.notificationsService.getUserNotifications(this.id).subscribe( data => {
-      this.userWithFriendRequest = data.friendsNotification.find(elem => elem === myId);
-      console.log(this.firendRequest);
-      if(this.userWithFriendRequest){
-        this.firendRequest = true;
-      }
-    });
+    // this.notificationsService.getUserNotifications(this.id).subscribe( data => {
+    //   this.userWithFriendRequest = data.friendsNotification.find(elem => elem === myId);
+    //   console.log(this.firendRequest);
+    //   if(this.userWithFriendRequest){
+    //     this.firendRequest = true;
+    //   }
+    // });
   }
   getAlbums(){
     this.route.paramMap.subscribe(params => {

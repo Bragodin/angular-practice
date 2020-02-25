@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../models/user.model';
-import { UsersService } from '../../services/users.service';
+import { UsersService } from '../../features/services/users.service';
 import { ActivatedRoute} from '@angular/router';
 import { Pet } from '../../models/pet.model';
-import { WebsocketService } from '../../services/websoket.service';
+import { WebsocketService } from '../../features/services/websoket.service';
+import { NotificationsService } from 'src/app/features/services/notifications.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -23,7 +25,8 @@ export class ProfileComponent implements OnInit {
   id: string;
   photoUrl: string = '';
   buttonState: boolean = false;
-  constructor(private usersService: UsersService, private activateRoute: ActivatedRoute, private websocketService: WebsocketService) {
+  sub: Subscription;
+  constructor(private usersService: UsersService, private activateRoute: ActivatedRoute, private websocketService: WebsocketService, private notificationsService: NotificationsService) {
     this.id = activateRoute.snapshot.params['id'];
   }
   ngOnInit() {
@@ -34,6 +37,11 @@ export class ProfileComponent implements OnInit {
     this.usersService.getUserPets(this.id).subscribe( user => {
       this.userPets = user[0].pets 
     });
+  }
+  ngOnDestroy(){
+    if(this.sub){
+      this.sub.unsubscribe();
+    }
   }
   showPets(){
     this.buttonState = !this.buttonState;
@@ -46,6 +54,9 @@ export class ProfileComponent implements OnInit {
     }
   }
   addToFriends(){
-    this.websocketService.sendNotification(this.id, localStorage.getItem('id'))
+    const friend = localStorage.getItem('id');
+    this.sub = this.notificationsService.addToFriends(this.id, friend).subscribe( data => {
+      this.websocketService.sendNotification(this.id, localStorage.getItem('id'));
+    });
   }
 }

@@ -1,0 +1,12 @@
+.material-icons {
+    cursor: pointer;
+}
+.round {
+    position: absolute;
+    top: 33px;
+    width: 8px;
+    height: 8px;
+    background: #FF1919;
+    border-radius: 50%;
+    box-shadow:0 0 10px #000;
+}

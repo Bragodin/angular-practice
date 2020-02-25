@@ -1,5 +1,5 @@
-<p>request-to-friend works!</p>
-<div *ngFor='let user of users '>
-    {{user}}
-    <button (click)='accept()'>accept</button>
-</div>
+<div>
+    <!-- {{user}}
+    <button (click)='accept()'>accept</button> -->
+    <app-friend-item-in-list *ngFor='let user of users ' [user]='user'></app-friend-item-in-list>
+</div> 

@@ -1,8 +1,8 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
 import { User } from '../../models/user.model';
-import { LoginService } from '../../services/login.service';
+import { LoginService } from '../../features/services/login.service';
 import { Router} from '@angular/router';
-import { GeneralStateService } from '../../services/general-state.service';
+import { GeneralStateService } from '../../features/services/general-state.service';
 
 @Component({
   selector: 'app-header',

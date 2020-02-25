@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from 'src/app/models/user.model';
-import { UsersService } from '../../services/users.service';
+import { UsersService } from '../../features/services/users.service';
 import { FormControl, Validators } from '@angular/forms';
 import { Router} from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AlbumService } from 'src/app/services/album.service';
+import { AlbumService } from 'src/app/features/services/album.service';
 
 @Component({
   selector: 'app-change-user',

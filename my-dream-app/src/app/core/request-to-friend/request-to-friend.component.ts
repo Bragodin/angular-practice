@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NotificationsService } from 'src/app/services/notifications.service';
+import { NotificationsService } from 'src/app/features/services/notifications.service';
+import { FriendsService } from 'src/app/features/services/friends.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-request-to-friend',
@@ -8,17 +10,18 @@ import { NotificationsService } from 'src/app/services/notifications.service';
 })
 export class RequestToFriendComponent implements OnInit {
 
-  constructor(private notificationsService: NotificationsService  ) { }
-
-  users: any;
+  constructor(private notificationsService: NotificationsService , private friendsService: FriendsService) { }
+  users: User[];
   ngOnInit() {
     const id = localStorage.getItem('id');
     this.notificationsService.getUserNotifications(id).subscribe(data => {
-      console.log(data);
-      this.users = data.friendsNotification;
+      // return this.users = data.friendsNotification;
     });
-  }
-  accept(){
-
+    this.friendsService.getUsersWirhFriendRequest(id).subscribe(
+      data => {
+        console.log(data)
+        this.users = data
+      }
+    );
   }
 }

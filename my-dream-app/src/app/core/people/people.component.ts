@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable, Subscription, of } from 'rxjs';
 import { filter, debounceTime, switchMap, catchError } from 'rxjs/operators';
-import { SearchService } from '../../services/search.service';
+import { SearchService } from '../../features/services/search.service';
 
 
 @Component({

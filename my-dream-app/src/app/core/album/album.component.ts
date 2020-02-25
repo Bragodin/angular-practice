@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Album } from 'src/app/models/album.model';
 import { Subscription, Observable } from 'rxjs';
-import { AlbumService } from 'src/app/services/album.service';
+import { AlbumService } from 'src/app/features/services/album.service';
 import { User } from 'src/app/models/user.model';
 
 @Component({
@@ -50,19 +50,19 @@ export class AlbumComponent implements OnInit, OnDestroy {
     for(let i = 0; i < files.length; i++){
       formData.append('profiles', files[i]);
     }
-    this.sub = this.albumService.sendPhotos(formData, item).subscribe();
+    this.sub = this.albumService.sendPhotos(formData, item).subscribe(data => this.onDelete.emit());
     this.subscriptions.push(this.sub);
   }
   uppdateAlbum(item){
     this.sub = this.albumService.updateAlbum(item._id, item).subscribe(
-      data => {},
+      data => {this.onDelete.emit();},
       error => { console.log(error) }
     );
     this.subscriptions.push(this.sub);
   }
   removePhoto(item, image){
     item.photosName = item.photosName.filter( elem => elem !== image);
-    this.sub = this.albumService.deltePhoto(image.name).subscribe();
+    this.sub = this.albumService.deltePhoto(image.name).subscribe( data => this.onDelete.emit());
     this.subscriptions.push(this.sub);
   }
   removeAlbum(item){

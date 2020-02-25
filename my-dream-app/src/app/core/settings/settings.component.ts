@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GeneralStateService } from 'src/app/services/general-state.service';
+import { GeneralStateService } from 'src/app/features/services/general-state.service';
 
 @Component({
   selector: 'app-settings',

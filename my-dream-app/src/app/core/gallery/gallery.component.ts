@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { AlbumService } from '../../services/album.service';
+import { AlbumService } from '../../features/services/album.service';
 import { Album } from 'src/app/models/album.model';
 import { Photo } from '../../models/photo.model';
 import { Subscription } from 'rxjs';
@@ -18,7 +18,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
   addAlbumState: boolean = false;
   constructor(private albumService: AlbumService) { }
   ngOnInit() {
-    console.log(this.myProfilePage);
   }
   ngOnDestroy(){
   }

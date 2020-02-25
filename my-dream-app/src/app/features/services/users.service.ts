@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/user.model'; 
+import { User } from '../../models/user.model'; 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -10,13 +10,10 @@ import { map } from 'rxjs/operators';
 export class UsersService {
   users: BehaviorSubject<User[]> = new BehaviorSubject(null);
   syncUsers: any;
-  // Users[]
   constructor(private http: HttpClient) {
     this.getUsers();
   }
   updateUsers(id, user){
-    console.log(user);
-    console.log('uppdate User')
       this.http.put<User[]>(`http://localhost:3000/users/${id}`, user).subscribe(
         data => console.log(data)
       );
