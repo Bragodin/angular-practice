@@ -37,6 +37,7 @@ export class ProfileComponent implements OnInit {
     this.usersService.getUserPets(this.id).subscribe( user => {
       this.userPets = user[0].pets 
     });
+
   }
   ngOnDestroy(){
     if(this.sub){

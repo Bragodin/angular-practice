@@ -5,15 +5,16 @@ export interface IUserState {
     login : string;
     phone: string;
     avatar: string;
+    password?: string;
     tokens?: object[];
     __v?: number;
 }
 
 export const initialUserState: IUserState = {
-    name : 'Vasiliy',
-    surname: 'Pupkin',
-    login : 'popovich@login.er',
-    phone: '+375 (29) 179-05-81',
+    name : '',
+    surname: '',
+    login : '',
+    phone: '',
     avatar: '',
     __v: 1
 } 

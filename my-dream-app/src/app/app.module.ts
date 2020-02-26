@@ -49,6 +49,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from 'src/environments/environment';
 import { NotificationsEffects } from './features/store/effects/notifications.effects';
 import { FriendItemInListComponent } from './core/friend-item-in-list/friend-item-in-list.component';
+import { MyFriendsComponent } from './core/my-friends/my-friends.component';
+import { UserEffects } from './features/store/effects/user.effects';
 
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
@@ -76,7 +78,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     UploadButtonComponent,
     NotificationComponent,
     PopUpComponent,
-    FriendItemInListComponent 
+    FriendItemInListComponent,
+    MyFriendsComponent 
   ],
   imports: [
     BrowserModule,
@@ -96,7 +99,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     MatListModule,
     MatCommonModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([NotificationsEffects]),
+    EffectsModule.forRoot([UserEffects, NotificationsEffects, AuthEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router'}),
     !environment.production ? StoreDevtoolsModule.instrument() : []
     

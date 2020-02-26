@@ -14,7 +14,6 @@ export class FriendsService {
     return this.http.get<any>(`http://localhost:3000/friends/requests/${id}`);
   }
   addToFriends(friends){
-    console.log("ADD TO FrienddddDDDD")
     return this.http.post<any>(`http://localhost:3000/friends/addFriend`, friends);
   }
 }

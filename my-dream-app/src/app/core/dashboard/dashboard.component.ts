@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { FriendsService } from 'src/app/features/services/friends.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,11 +13,18 @@ import { Subscription } from 'rxjs';
 })
 export class DashboardComponent implements OnInit {
   users: Observable<User[]>;
+  @Input() friends;
   private id;
   private subscription: Subscription;
-  constructor(private usersService: UsersService, private activateRoute: ActivatedRoute) { 
+  constructor(private usersService: UsersService, private activateRoute: ActivatedRoute,
+  private friendsService: FriendsService
+    ) { 
   }
   ngOnInit() {
-    this.users = this.usersService.getUsers();
+    if(this.friends){
+      this.users = this.friendsService.getMyFriends(localStorage.getItem('id'));
+    } else {
+      this.users = this.usersService.getUsers();
+    }
   }
 }

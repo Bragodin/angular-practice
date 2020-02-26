@@ -6,7 +6,7 @@ export function notificationsReducers(
   action: NotificationsActions 
 ): any {
   switch (action.type) {
-    case ENotificationsActions.GetNotifications: {
+    case ENotificationsActions.GetNotificationsSuccess: {
       return {
         ...state,
         notifications: action.payload

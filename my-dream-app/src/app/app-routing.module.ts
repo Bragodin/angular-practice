@@ -13,9 +13,10 @@ import { PeopleComponent } from './core/people/people.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { FriendsComponent } from './pages/my-friends/friends/friends.component';
 import { RequestToFriendComponent } from './core/request-to-friend/request-to-friend.component';
+import { MyFriendsComponent } from './core/my-friends/my-friends.component';
 
 const friendsRoutes: Routes = [
-  { path: 'myfriends', component: FriendsComponent},
+  { path: 'myfriends', component: MyFriendsComponent},
   { path: 'friendsrequest', component: RequestToFriendComponent},
 ];
 
