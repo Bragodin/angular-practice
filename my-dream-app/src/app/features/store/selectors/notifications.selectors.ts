@@ -4,7 +4,7 @@ import { INotificationsState } from '../state/notification.state';
 
 const notificationsState = (state: IAppState) => state.notifications;
 
-export const selectFriendsNotification = createSelector(
+export const selectNotifications = createSelector(
     notificationsState,
-    (state: INotificationsState) => state.friendsNotification
-);
+    (state: INotificationsState) => state
+)

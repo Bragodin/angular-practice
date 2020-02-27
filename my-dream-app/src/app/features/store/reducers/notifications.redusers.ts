@@ -9,7 +9,9 @@ export function notificationsReducers(
     case ENotificationsActions.GetNotificationsSuccess: {
       return {
         ...state,
-        notifications: action.payload
+        ownerId: action.payload.ownerId,
+        friendsNotification: action.payload.friendsNotification,
+        messageNotification: action.payload.messageNotification
       };
     }
     default:

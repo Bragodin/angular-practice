@@ -1,8 +1,11 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import { User } from '../../models/user.model';
 import { LoginService } from '../../features/services/login.service';
 import { Router} from '@angular/router';
 import { GeneralStateService } from '../../features/services/general-state.service';
+import { IAppState } from 'src/app/features/store/state/app.state';
+import { Store, select } from '@ngrx/store';
+import { selectNotifications } from 'src/app/features/store/selectors/notifications.selectors';
+import { GetNotifications } from 'src/app/features/store/actions/notifications.actions';
 
 @Component({
   selector: 'app-header',
@@ -10,17 +13,30 @@ import { GeneralStateService } from '../../features/services/general-state.servi
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  name: String = 'Vasia';
-  surname: String = 'Grishkovets';
-  users: User[];
+  // name: String = '';
+  // surname: String = '';
+  // users: User[];
   token: string = localStorage.getItem('token');
   notificationState: boolean = false;
-  constructor(private loginService: LoginService, private router: Router, private generalStateService: GeneralStateService) { 
+  notifications$ = this._store.pipe(select(selectNotifications));
+
+  constructor(private loginService: LoginService, private router: Router, private generalStateService: GeneralStateService, private _store: Store<IAppState>) { 
   }
   ngOnInit() {
-    this.generalStateService.notificationsState.subscribe(data =>{
-      this.notificationState = true;
-    })
+    // this.generalStateService.notificationsState.subscribe(data =>{
+    //   this.notificationState = true;
+    // })
+    this._store.dispatch(new GetNotifications());
+    this.notifications$.subscribe(
+      data => {
+        console.log(data)
+        if(data.friendsNotification.length || data.messageNotification.length){
+          this.notificationState = true
+        } else {
+          this.notificationState = false
+        }
+      }
+    )
   }
   get loggedIn() {
     return localStorage.getItem('token');

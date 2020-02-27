@@ -9,7 +9,12 @@ export function userReducers(
     case EUserActions.GetUserSuccess: {
       return {
         ...state,
-        user: action.payload
+        _id: action.payload._id,
+        name: action.payload.name,
+        surname: action.payload.surname,
+        phone: action.payload.phone,
+        login: action.payload.login,
+        tokens: action.payload.tokens
       };
     }
     default:

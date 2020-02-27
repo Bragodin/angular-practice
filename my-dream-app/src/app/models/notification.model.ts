@@ -1,4 +1,7 @@
 export interface Notification {
-    friendsNotification: string[];
-    messageNotification: string[];
+    _id?: string;
+    ownerId: string;
+    friendsNotification: string[];    
+    messageNotification: string[];    
+    likes?: string[]
 }

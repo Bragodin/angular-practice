@@ -1,20 +1,19 @@
+import { User } from 'src/app/models/user.model';
+
 export interface IUserState {
     _id?: string;
-    name : string;
+    name: string;
     surname: string;
-    login : string;
+    login: string;
     phone: string;
-    avatar: string;
-    password?: string;
-    tokens?: object[];
-    __v?: number;
+    avatar?: string;
+    pets?: [];
+    tokens?: []
 }
 
 export const initialUserState: IUserState = {
-    name : '',
-    surname: '',
-    login : '',
-    phone: '',
-    avatar: '',
-    __v: 1
+    name: 'string',
+    surname: 'string',
+    login: 'string',
+    phone: 'strin',
 } 

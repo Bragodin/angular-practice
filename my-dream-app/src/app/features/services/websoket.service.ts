@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { Socket } from 'ngx-socket-io';
 import { Store, select } from '@ngrx/store';
 import { GetNotifications } from '../store/actions/notifications.actions';
-import { selectFriendsNotification } from '../store/selectors/notifications.selectors';
+import { selectNotifications } from '../store/selectors/notifications.selectors';
 import { IAppState } from '../store/state/app.state';
 
 @Injectable()
@@ -15,9 +15,8 @@ export class WebsocketService {
     this.socket.on('newFriend', (data) => {
       this._store.dispatch(new GetNotifications());
       // this._store.pipe(select(selectFriendsNotification));
-      this._store.select(selectFriendsNotification).subscribe(d => 
+      this._store.select(selectNotifications).subscribe(d => 
         console.log(d));
-        
     })
   }
   sendNotification(userId, myId) {

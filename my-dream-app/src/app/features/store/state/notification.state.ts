@@ -1,3 +1,5 @@
+import { Notification } from '../../../models/notification.model';
+
 export interface INotificationsState {
     _id?: string;
     ownerId: string;
@@ -8,6 +10,6 @@ export interface INotificationsState {
 
 export const initialNotificationsState: INotificationsState = {
     ownerId: '',
-    friendsNotification: ['1', '2', '3'],    
-    messageNotification: ['0']    
+    friendsNotification: [],   
+    messageNotification: []    
 } 
