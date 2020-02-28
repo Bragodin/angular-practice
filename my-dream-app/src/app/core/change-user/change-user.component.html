@@ -7,7 +7,7 @@
         <button (click)='sendAvatar()'>Send Photo</button>
     </div> -->
     <app-upload-button #fileInput type="file" accept='image/*' name="photo" (change)="addPhoto($event)"></app-upload-button>
-    <button (click)='sendAvatar()'>Send Photo</button>
+    <button mat-raised-button color="accent" (click)='sendAvatar()'>Send Photo</button>
 </div>
 <div class="change-user">
     <label>name:</label>
@@ -20,5 +20,5 @@
     <input type="text" [(ngModel)]='password'/>
     <label>phone:</label>
     <input type="text" [(ngModel)]='phone'/>
-    <button (click)='changeUsers()'>Change</button>
+    <button mat-raised-button color="accent" (click)='changeUsers()' class="change-user__button">Change</button>
 </div>

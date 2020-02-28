@@ -1,22 +1,58 @@
-import { initialUserState } from '../state/user.state';
+import { initialUserState, IUserState } from '../state/user.state';
 import { UserActions, EUserActions } from '../actions/user.actions';
+import { IAppState } from '../state/app.state';
 
 export function userReducers(
-  state = initialUserState,
+  state: IUserState = initialUserState,
   action: UserActions
-): any {
+): IUserState {
   switch (action.type) {
-    case EUserActions.GetUserSuccess: {
+    case EUserActions.GetMyUserSuccess: {
       return {
         ...state,
-        _id: action.payload._id,
-        name: action.payload.name,
-        surname: action.payload.surname,
-        phone: action.payload.phone,
-        login: action.payload.login,
-        tokens: action.payload.tokens
+        activeUser: action.payload
       };
+    }  
+    case EUserActions.UpdateAvatar: {
+      const updatedUser = state.activeUser;
+      updatedUser.avatar = action.payload; 
+      return {
+        ...state,
+        activeUser: updatedUser
+      }
     }
+    case EUserActions.GetAutorizationUserSuccess: {
+      return {
+        ...state,
+        autorizationUser: action.payload
+      }
+    }
+    case EUserActions.GetMyUsersSuccess: {
+      return {
+        ...state,
+        users: action.payload
+      }
+    }
+    // case EUserActions.GetUserSuccess: {
+    //   return {
+    //     ...state,
+    //     ...state
+    //   }
+    // }
+    // case EUserActions.GetMyUserFailure: {
+    //   return {
+    //     ...state,
+    //     activeUser: null
+    //   }
+    // }
+    case EUserActions.PostUserSuccess: {
+      return {
+        ...state,
+        activeUser: null
+      }
+    } 
+
+    //Из-за этого говна не подгружает activeUser
     default:
       return state;
   }

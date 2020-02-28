@@ -1,17 +1,15 @@
 import { NotificationsActions, ENotificationsActions } from '../actions/notifications.actions';
-import { initialNotificationsState } from '../state/notification.state';
+import { initialNotificationsState, INotificationsState } from '../state/notification.state';
 
 export function notificationsReducers(
   state = initialNotificationsState,
   action: NotificationsActions 
-): any {
+): INotificationsState {
   switch (action.type) {
     case ENotificationsActions.GetNotificationsSuccess: {
       return {
         ...state,
-        ownerId: action.payload.ownerId,
-        friendsNotification: action.payload.friendsNotification,
-        messageNotification: action.payload.messageNotification
+        ...action.payload
       };
     }
     default:

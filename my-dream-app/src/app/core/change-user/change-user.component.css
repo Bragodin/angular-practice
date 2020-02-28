@@ -24,18 +24,9 @@
 .change-photo input{
     cursor: pointer;
 }
-.fileInput {
-    /* opacity: 0; */
-    /* width: 50px; */
-    cursor: pointer;
+.change-user__button {
+    width: 300px;
 }
-/* .change-photo__buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 60px;
-    justify-content: space-between;
-} */
 .photo {
     height: 220px;
 }

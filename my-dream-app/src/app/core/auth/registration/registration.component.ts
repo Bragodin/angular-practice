@@ -3,6 +3,9 @@ import { User } from '../../../models/user.model';
 import { LoginService } from '../../../features/services/login.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { IAppState } from 'src/app/features/store/state/app.state';
+import { PostUser } from 'src/app/features/store/actions/user.actions';
 
 @Component({
   selector: 'app-registration',
@@ -11,7 +14,8 @@ import { Subscription } from 'rxjs';
 }) 
 export class RegistrationComponent implements OnInit {
   value: boolean= true;
-  constructor(private loginService: LoginService,  private router: Router) { }
+  constructor(private loginService: LoginService,  private router: Router, 
+    private _store: Store<IAppState>) { }
   register;
   sub: Subscription;
   ngOnInit() {
@@ -39,5 +43,8 @@ export class RegistrationComponent implements OnInit {
         },
         error => console.log(error)
       );
+
+    // this._store.dispatch(new PostUser(user));
+    
   }
 }

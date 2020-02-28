@@ -5,6 +5,9 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AlbumService } from 'src/app/features/services/album.service';
+import { UpdateAvatar } from 'src/app/features/store/actions/user.actions';
+import { Store } from '@ngrx/store';
+import { IAppState } from 'src/app/features/store/state/app.state';
 
 @Component({
   selector: 'app-change-user',
@@ -21,7 +24,7 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
   sub: Subscription;
   imgURL: any;
 
-  constructor(private usersService: UsersService,  private router: Router, private albumService: AlbumService) { }
+  constructor(private usersService: UsersService,  private router: Router, private albumService: AlbumService, private _store: Store<IAppState>) { }
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,
@@ -47,7 +50,7 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
     const formData = new FormData();  
     formData.append('profiles', this.file[0]);
     this.sub = this.albumService.sendAvatar(formData, id).subscribe(
-      data => console.log(data)
+      data => this._store.dispatch(new UpdateAvatar(data.avatar))
     );
   }
   changeUsers(){
@@ -66,7 +69,6 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
         }
       }
     if(id && user) {
-      console.log(userUpdate)
       this.usersService.updateUsers(id, userUpdate);
       this.router.navigate([`/profile/${id}`]);
     }

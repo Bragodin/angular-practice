@@ -5,15 +5,15 @@ import { initialUserState, IUserState } from './user.state';
 
 export interface IAppState {
     router?: RouterReducerState;
-    auth: IAuthState;
+    // auth: IAuthState;
     notifications: INotificationsState;
     user: IUserState;
 }
 
 export const initialAppState: IAppState = {
-    auth: initialAuthState,
+    // auth: initialAuthState,
     notifications: initialNotificationsState,
-    user: initialUserState
+    user: initialUserState,
 }
 
 export function getInitialState(): IAppState {

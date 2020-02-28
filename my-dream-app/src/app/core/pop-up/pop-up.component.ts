@@ -8,9 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 })
 export class PopUpComponent {
   constructor(private _bottomSheetRef:MatDialogRef<PopUpComponent>) {}
-
   openLink(event: MouseEvent): void {
-    // this._bottomSheetRef.dismiss();
     event.preventDefault();
   }
 

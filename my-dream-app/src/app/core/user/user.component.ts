@@ -1,4 +1,4 @@
-import { Component, OnInit,  Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../features/services/users.service';
 import { User } from '../../models/user.model';
 import { Observable } from 'rxjs';

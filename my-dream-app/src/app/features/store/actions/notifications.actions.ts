@@ -8,11 +8,11 @@ export enum ENotificationsActions{
 
 export class GetNotifications implements Action {
     public readonly type = ENotificationsActions.GetNotifications;
-    constructor(public payload?: INotificationsState){}
 }
 
 export class GetNotificationsSuccess implements Action {
     public readonly type = ENotificationsActions.GetNotificationsSuccess;
     constructor(public payload: INotificationsState){}
 }
+
 export type NotificationsActions = GetNotifications | GetNotificationsSuccess;

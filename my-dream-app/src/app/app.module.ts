@@ -51,7 +51,6 @@ import { NotificationsEffects } from './features/store/effects/notifications.eff
 import { FriendItemInListComponent } from './core/friend-item-in-list/friend-item-in-list.component';
 import { MyFriendsComponent } from './core/my-friends/my-friends.component';
 import { UserEffects } from './features/store/effects/user.effects';
-
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
 

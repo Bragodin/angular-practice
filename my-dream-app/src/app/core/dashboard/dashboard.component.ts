@@ -5,6 +5,11 @@ import { User } from '../../models/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FriendsService } from 'src/app/features/services/friends.service';
+import { Store, select } from '@ngrx/store';
+import { IAppState } from 'src/app/features/store/state/app.state';
+import { map } from 'rxjs/operators';
+import { GetMyUsers } from 'src/app/features/store/actions/user.actions';
+import { selectUser, selectUsers } from 'src/app/features/store/selectors/user.selectors';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,19 +17,21 @@ import { FriendsService } from 'src/app/features/services/friends.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  users: Observable<User[]>;
-  @Input() friends;
-  private id;
+  users: User[];
   private subscription: Subscription;
-  constructor(private usersService: UsersService, private activateRoute: ActivatedRoute,
-  private friendsService: FriendsService
-    ) { 
-  }
+  constructor(private friendsService: FriendsService, private _store: Store<IAppState>
+    ) {}
   ngOnInit() {
-    if(this.friends){
-      this.users = this.friendsService.getMyFriends(localStorage.getItem('id'));
-    } else {
-      this.users = this.usersService.getUsers();
-    }
+    this._store.dispatch(new GetMyUsers());
+    this._store.pipe(select(selectUser)).subscribe(data => {
+     console.log('selectoin get users')
+     console.log(data)
+    });
+    this._store.dispatch(new GetMyUsers());
+    this._store.pipe(select(selectUsers)).subscribe(
+      data => {
+        this.users = data;
+      }
+    );
   }
 }

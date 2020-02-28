@@ -43,7 +43,6 @@ export class AlbumComponent implements OnInit, OnDestroy {
       }
     }
   }
-
   sendPhotos(item){
     const formData = new FormData();
     let files: any = this.files;

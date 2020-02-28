@@ -9,10 +9,14 @@
     margin: 20px;
     cursor: pointer;
     position: relative;
+    padding-bottom: 50px;
 }
-.user:hover {
+.user:hover{
     color: #ffffff;
     background: #000000;
+}
+.user:hover mat-card-subtitle{
+    color: #ffffff;
 }
 .user:hover button{
     color: #000000;
@@ -22,4 +26,5 @@
     position:absolute; 
     bottom:0; 
 }
+
 
