@@ -3,9 +3,10 @@ import { User } from '../../../models/user.model';
 import { LoginService } from '../../../features/services/login.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { PostUser } from 'src/app/features/store/actions/user.actions';
+import { selectPostUser } from 'src/app/features/store/selectors/user.selectors';
 
 @Component({
   selector: 'app-registration',
@@ -34,17 +35,18 @@ export class RegistrationComponent implements OnInit {
       phone: form.value.phone,
       avatar: 'no_avatar.jpg'
     } as User;
-    this.sub = this.loginService.register(user).subscribe(
-        (data: any) => {
-          console.log(data)
-          localStorage.setItem('id', data.user._id);
-          localStorage.setItem('token', data.token);
-          return  this.router.navigate([`/profile/${data.user._id}`])
-        },
-        error => console.log(error)
-      );
-
-    // this._store.dispatch(new PostUser(user));
-    
+    // this.sub = this.loginService.register(user).subscribe(
+    //     (data: any) => {
+    //       console.log(data)
+    //       localStorage.setItem('id', data.user._id);
+    //       localStorage.setItem('token', data.token);
+    //       return  this.router.navigate([`/profile/${data.user._id}`])
+    //     },
+    //     error => console.log(error)
+    //   );
+      this._store.dispatch(new PostUser(user));
+      this.sub = this._store.pipe(select(selectPostUser)).subscribe(data => {
+        return this.router.navigate([`/profile/${data._id}`])
+      });
   }
 }

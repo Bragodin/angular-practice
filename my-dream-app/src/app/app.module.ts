@@ -51,6 +51,8 @@ import { NotificationsEffects } from './features/store/effects/notifications.eff
 import { FriendItemInListComponent } from './core/friend-item-in-list/friend-item-in-list.component';
 import { MyFriendsComponent } from './core/my-friends/my-friends.component';
 import { UserEffects } from './features/store/effects/user.effects';
+import { FriendsEffects } from './features/store/effects/friends.effects';
+import { AvatarComponent } from './ui/avatar/avatar.component';
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
 
@@ -78,7 +80,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     NotificationComponent,
     PopUpComponent,
     FriendItemInListComponent,
-    MyFriendsComponent 
+    MyFriendsComponent,
+    AvatarComponent
   ],
   imports: [
     BrowserModule,
@@ -98,7 +101,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     MatListModule,
     MatCommonModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([UserEffects, NotificationsEffects, AuthEffects]),
+    EffectsModule.forRoot([UserEffects, NotificationsEffects, AuthEffects, FriendsEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router'}),
     !environment.production ? StoreDevtoolsModule.instrument() : []
     

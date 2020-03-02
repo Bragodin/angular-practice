@@ -1,18 +1,12 @@
-<mat-card>
-    <!-- <label>name:
-        <input type="text" [(ngModel)]='user.name'/>
-    </label>
-    <label>surname:
-        <input type="text" [(ngModel)]='user.surname'/>
-    </label>
-    <label>login:
-        <input type="text" [(ngModel)]='user.login'/>
-    </label>
-    <label>phone:
-        <input type="text" [(ngModel)]='user.phone'/>
-    </label>
-    <button (click)='changeUsers(user._id, user)'>Change</button>
-    <button (click)='remove(user._id)'>X</button> -->
+<mat-card [ngStyle]="getBackground()">
+    <app-avatar [photoName]='user.avatar'></app-avatar>
     <h4>{{user.name}}</h4>
     <h4>{{user.surname}}</h4>
+    <h5>{{user.phone}}</h5>
+    <ng-container [ngSwitch]="buttonState">
+        <button *ngSwitchCase="'accept'" mat-raised-button color="accent" (click)='sendButtonEvent(user)'>accept</button>
+        <button  *ngSwitchCase="'add'" mat-raised-button color="accent" (click)='sendButtonEvent()'>add to friends</button>
+        <button  *ngSwitchCase="'remove'" mat-raised-button color="accent" (click)='sendButtonEvent()'>remove from friends</button>
+    </ng-container>
+    <button mat-raised-button color="accent">send message</button>
 </mat-card>

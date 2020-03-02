@@ -1,3 +1,12 @@
 .friends {
     margin: 20px;
 }
+
+.friends button {
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.active-link {
+    color: pink;
+}

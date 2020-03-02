@@ -1,5 +1,6 @@
 <div>
     <!-- {{user}}
     <button (click)='accept()'>accept</button> -->
-    <app-friend-item-in-list *ngFor='let user of users ' [user]='user'></app-friend-item-in-list>
+    <app-user-list-element *ngFor='let user of users; let i = index' [index]='i' [user]='user' [buttonState]="'accept'" (onChanged)="accept($event)"></app-user-list-element>
+    <app-friend-item-in-list *ngFor='let user of users' [user]='user'></app-friend-item-in-list>
 </div> 

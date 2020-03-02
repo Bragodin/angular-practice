@@ -1,10 +1,10 @@
 <mat-toolbar class="toolbar" color="accent" *ngIf='loggedIn'>
     <mat-toolbar-row class="toolbar__row">
         <button mat-stroked-button  *ngIf='loggedIn' routerLink = {{getRoute()}} routerLinkActive ='active-link'>my profile</button>
-        <button mat-stroked-button  *ngIf='loggedIn' routerLink = "/friends" routerLinkActive ='active-link'>my friends</button>
+        <button mat-stroked-button  *ngIf='loggedIn' routerLink = "/friends/myfriends" routerLinkActive ='active-link'>my friends</button>
         <button mat-stroked-button  *ngIf='loggedIn' routerLink = "/users" routerLinkActive ='active-link'>users</button>
         <button mat-stroked-button  *ngIf='loggedIn' routerLink = "/dashboard" routerLinkActive ='active-link'>all users</button>
-        <button mat-stroked-button  *ngIf='loggedIn' routerLink = "/people" routerLinkActive ='active-link'>people</button>
+        <button mat-stroked-button  *ngIf='loggedIn' routerLink = "/people" routerLinkActive ='active-link'>find people</button>
         <button mat-stroked-button  *ngIf='loggedIn' routerLink = "/settings" routerLinkActive ='active-link'>settings</button>
         <app-notification [notificationState]='notificationState'></app-notification>
         <button class='logout__button' mat-stroked-button  *ngIf='loggedIn' (click)='logOut()'>LogOut</button>

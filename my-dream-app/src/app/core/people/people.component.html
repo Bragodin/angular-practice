@@ -4,6 +4,6 @@
       <input matInput #message maxlength="256" [formControl]="amount">
     </mat-form-field>
 </form>
-<app-user-list-element *ngFor='let user of result' [user]='user'>
+<app-user-list-element *ngFor='let user of result; let i = index' [index]='i' [user]='user' [buttonState]="'add'">
 </app-user-list-element>
 

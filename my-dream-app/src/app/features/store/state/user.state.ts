@@ -11,4 +11,3 @@ export const initialUserState: IUserState = {
     users: null,
     autorizationUser: null
 } 
- 

@@ -19,7 +19,17 @@ export const autorithationUsers = createSelector(
     (state: IUserState) => state.autorizationUser
 );
 
-// export const selectPostUser = createSelector(
-//     userState,
-//     (state: IUserState) => state.autorizationUser
-// );
+export const selectPostUser = createSelector(
+    userState,
+    (state: IUserState) => state.autorizationUser
+);
+
+export const selectLogout = createSelector(
+    userState,
+    (state: IUserState) => state
+);
+
+export const selectLogin = createSelector(
+    userState,
+    (state: IUserState) => state.autorizationUser
+);

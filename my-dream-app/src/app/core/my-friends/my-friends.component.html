@@ -1,1 +1,1 @@
-<app-dashboard></app-dashboard>
+<app-user-list-element *ngFor='let user of friends; let i = index' [index]='i' [user]='user' [buttonState]="'remove'"></app-user-list-element>

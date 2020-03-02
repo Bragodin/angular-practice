@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { Observable } from 'rxjs';
 import { UsersService } from 'src/app/features/services/users.service';
@@ -9,38 +9,31 @@ import { UsersService } from 'src/app/features/services/users.service';
   styleUrls: ['./user-list-element.component.css']
 })
 export class UserListElementComponent implements OnInit {
-  users: Observable<User[]>;
   name: string ='';
   surname: string ='';
   login: string ='';
   phone: string = '';
   password: string = '';
-  constructor(private usersService: UsersService) {
-    this.users = this.usersService.getUsers();
-  }
+  @Input() index: number;
   @Input() user: User;
+  @Input() buttonState: string;
+  @Output() onChanged = new EventEmitter<any>();
+  constructor() {
+  }
   ngOnInit() {     
   }
-  remove(id){
-    this.usersService.remove(id);
+  sendButtonEvent(user){
+    this.onChanged.emit(user._id);
   }
-  add(){
-    let user = {
-      name: this.name,
-      surname: this.surname,
-      password: this.password,
-      login: this.login,
-      phone: this.phone,
-    } as User;
-    this.usersService.addUser(user);
-  }
-  changeUsers(id, user){
-    let updateUser = {
-      name: user.name,
-      surname: user.surname,
-      login: user.login,
-      phone: user.phone,
+  getBackground(){
+    if(this.index % 2 == 0){
+      return {
+        'background': `#D3D3D3`
+      } 
+    } else {
+      return {
+        'background': `#778899`
+      }
     }
-    this.usersService.updateUsers(id, updateUser);
   }
 }

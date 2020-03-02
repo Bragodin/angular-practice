@@ -23,10 +23,7 @@ export class DashboardComponent implements OnInit {
     ) {}
   ngOnInit() {
     this._store.dispatch(new GetMyUsers());
-    this._store.pipe(select(selectUser)).subscribe(data => {
-     console.log('selectoin get users')
-     console.log(data)
-    });
+    this._store.pipe(select(selectUser)).subscribe(); // unsub
     this._store.dispatch(new GetMyUsers());
     this._store.pipe(select(selectUsers)).subscribe(
       data => {

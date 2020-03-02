@@ -1,6 +1,5 @@
 import { initialUserState, IUserState } from '../state/user.state';
 import { UserActions, EUserActions } from '../actions/user.actions';
-import { IAppState } from '../state/app.state';
 
 export function userReducers(
   state: IUserState = initialUserState,
@@ -33,26 +32,35 @@ export function userReducers(
         users: action.payload
       }
     }
-    // case EUserActions.GetUserSuccess: {
-    //   return {
-    //     ...state,
-    //     ...state
-    //   }
-    // }
-    // case EUserActions.GetMyUserFailure: {
-    //   return {
-    //     ...state,
-    //     activeUser: null
-    //   }
-    // }
-    case EUserActions.PostUserSuccess: {
+    case EUserActions.GetMyUserFailure: {
       return {
         ...state,
         activeUser: null
       }
+    }
+    case EUserActions.PostUserSuccess: {
+      return {
+        ...state,
+        activeUser: action.payload,
+        autorizationUser: action.payload
+      }
     } 
 
-    //Из-за этого говна не подгружает activeUser
+    case EUserActions.LogoutUserSuccess: {
+      return {
+        ...state,    
+        users: null,
+        activeUser: null,
+        autorizationUser: null
+      }
+    }
+    case EUserActions.LoginUserSuccess: {
+      return {
+        ...state,    
+        activeUser: action.payload,
+        autorizationUser: action.payload
+      }
+    } 
     default:
       return state;
   }

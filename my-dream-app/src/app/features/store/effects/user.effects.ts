@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects'; 
 import { switchMap, map, catchError } from 'rxjs/operators';
-import { GetMyUser, EUserActions, GetMyUserSuccess, GetMyUsers, GetMyUsersSuccess, GetMyUserFailure, PostUser, PostUserSuccess, GetUserSuccess, GetAutorizationUser, GetAutorizationUserSuccess } from '../actions/user.actions';
+import { GetMyUser, EUserActions, GetMyUserSuccess, GetMyUsers, GetMyUsersSuccess, GetMyUserFailure, PostUser, PostUserSuccess, GetUserSuccess, GetAutorizationUser, GetAutorizationUserSuccess, LogoutUser, LogoutUserSuccess, LoginUser, LoginUserSuccess } from '../actions/user.actions';
 import { UsersService } from '../../services/users.service';
 import { of } from 'rxjs';
 import { User } from 'src/app/models/user.model';
+import { LoginService } from '../../services/login.service';
 
 @Injectable()
 export class UserEffects {
@@ -29,7 +30,6 @@ export class UserEffects {
         }),
         catchError((err) => of(new GetMyUserFailure(err)))
     );
-
     @Effect()
     getAuthUser$ = this._actions$.pipe(
         ofType<GetAutorizationUser>(EUserActions.GetAutorizationUser),
@@ -41,13 +41,40 @@ export class UserEffects {
     );
     @Effect()
     postUser$ = this._actions$.pipe(
-        ofType<PostUser>(EUserActions.GetAutorizationUser),
+        ofType<PostUser>(EUserActions.PostUser),
         switchMap((action) => { 
-            return this.usersService.addUser(action.payload);
+            return this.loginService.register(action.payload);
         }), 
-        map((users: any) => {   
-            return new PostUserSuccess(users);
+        map((users: any) => {  
+            localStorage.setItem('id', users.user._id);
+            localStorage.setItem('token', users.token);
+            return new PostUserSuccess(users.user);
         })
     );
-    constructor(private _actions$: Actions, private usersService: UsersService) { }
+    @Effect()
+    logoutUser$ = this._actions$.pipe(
+        ofType<LogoutUser>(EUserActions.LogoutUser),
+        switchMap(() => { 
+            return this.loginService.logout();
+        }), 
+        map(() => {  
+            localStorage.removeItem('token');
+            localStorage.removeItem('id');
+            return new LogoutUserSuccess();
+        })
+    );
+    
+    @Effect()
+    loginUser$ = this._actions$.pipe(
+        ofType<LoginUser>(EUserActions.LoginUser),
+        switchMap((action) => { 
+            return this.loginService.login(action.payload);
+        }), 
+        map((user) => { 
+            localStorage.setItem('id', user.user._id);
+            localStorage.setItem('token', user.token);
+            return new LoginUserSuccess(user.user);
+        })
+    );
+    constructor(private _actions$: Actions, private usersService: UsersService, private loginService: LoginService ) { }
 }

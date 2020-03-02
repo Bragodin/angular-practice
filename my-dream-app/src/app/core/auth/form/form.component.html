@@ -11,7 +11,7 @@
     <input  matInput *ngIf='requireAllfilds' name='passwordRepeat' formControlName="passwordRepeat" type="password">
     <label *ngIf='requireAllfilds'>Phone: </label>
     <input matInput *ngIf='requireAllfilds' type="text" name='phone' formControlName="phone">
-    <button  mat-raised-button color="accent" *ngIf='!requireAllfilds; else signIn' [disabled]="authForm.invalid">Sign In</button>
+    <button  mat-raised-button color="accent" *ngIf='!requireAllfilds; else signIn'>Sign In</button>
     <a *ngIf='!requireAllfilds' routerLink="/registration">registration</a>
     <ng-template #signIn>
         <button  mat-raised-button color="accent" type="submit" [disabled]="authForm.invalid">Register</button>

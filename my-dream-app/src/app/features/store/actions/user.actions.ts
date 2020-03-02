@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { IUserState } from '../state/user.state';
 import { User } from 'src/app/models/user.model';
+import { LoginUserModel } from 'src/app/models/login-user.model';
 
 export enum EUserActions{
     GetMyUser = '[User] Get User',
@@ -13,7 +14,11 @@ export enum EUserActions{
     PostUserSuccess = '[User] Post User Success',
     GetUserSuccess = '[User] Get User Success',
     GetAutorizationUser = '[User] Get Auth User',
-    GetAutorizationUserSuccess = '[User] Get Auth User Success'
+    GetAutorizationUserSuccess = '[User] Get Auth User Success',
+    LogoutUser = '[User] Logout User',
+    LogoutUserSuccess = '[User] Logout User Success',
+    LoginUser = '[User] Login User',
+    LoginUserSuccess = '[User] Login User Success'
 }
 
 export class GetMyUser implements Action {
@@ -77,8 +82,25 @@ export class PostUserSuccess implements Action {
     constructor(public payload: User){}
 }
 
+export class LogoutUser implements Action {
+    public readonly type = EUserActions.LogoutUser;
+}
+
+export class LogoutUserSuccess implements Action {
+    public readonly type = EUserActions.LogoutUserSuccess;
+}
+
+export class LoginUser implements Action {
+    public readonly type = EUserActions.LoginUser;
+    constructor(public payload: LoginUserModel){}
+}
+
+export class LoginUserSuccess implements Action {
+    public readonly type = EUserActions.LoginUserSuccess;
+    constructor(public payload: LoginUserModel){}
+}
 
 export type UserActions = GetMyUserSuccess | GetMyUser | UpdateAvatar 
 | GetMyUsers | GetMyUsersSuccess | GetMyUserFailure | 
 GetUserSuccess | GetAutorizationUserSuccess | GetAutorizationUser | PostUser | 
-PostUserSuccess;
+PostUserSuccess | LogoutUserSuccess | LoginUserSuccess;

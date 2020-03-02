@@ -29,7 +29,6 @@ export class ProfileComponent implements OnInit {
   };
   userPets: Pet[];
   id: string;
-  photoUrl: string = '';
   buttonState: boolean = false;
   sub: Subscription;
   constructor(private usersService: UsersService, private activateRoute: ActivatedRoute, private websocketService: WebsocketService, private notificationsService: NotificationsService, private _store: Store<IAppState>) {
@@ -40,7 +39,6 @@ export class ProfileComponent implements OnInit {
     this.sub = this._store.pipe(select(selectUser)).subscribe(user => {
         if(user !== null){
           this.user = user;
-          this.photoUrl = `http://localhost:3000/uploads/${user.avatar}`;
         } else {
           console.log('USER DON\'T UPOLOAD')
         }
@@ -60,11 +58,6 @@ export class ProfileComponent implements OnInit {
     this.buttonState = !this.buttonState;
   }
   ngDoCheck(){
-  }
-  getMyAvatar(){
-    return {
-      'background-image': `url(${this.photoUrl})`
-    }
   }
   addToFriends(){
     const friend = localStorage.getItem('id');

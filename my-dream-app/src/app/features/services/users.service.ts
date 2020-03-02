@@ -11,7 +11,7 @@ export class UsersService {
   users: BehaviorSubject<User[]> = new BehaviorSubject(null);
   syncUsers: any;
   constructor(private http: HttpClient) {
-    this.getUsers();
+    // this.getUsers();
   }
   updateUsers(id, user){
       this.http.put<User[]>(`http://localhost:3000/users/${id}`, user).subscribe(

@@ -19,9 +19,13 @@ export class RequestToFriendComponent implements OnInit {
     });
     this.friendsService.getUsersWirhFriendRequest(id).subscribe(
       data => {
-        console.log(data)
         this.users = data
       }
     );
+  }
+  accept(id){
+    this.friendsService.addToFriends({friend1: localStorage.getItem('id'), friend2: id}).subscribe(
+      data => console.log(data)
+    )
   }
 }
