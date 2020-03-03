@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { UsersService } from '../../features/services/users.service';
 import { Observable } from 'rxjs';
 import { User } from '../../models/user.model';
@@ -16,19 +16,24 @@ import { selectUser, selectUsers } from 'src/app/features/store/selectors/user.s
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   users: User[];
-  private subscription: Subscription;
-  constructor(private friendsService: FriendsService, private _store: Store<IAppState>
+  private sub: Subscription;
+  constructor(private _store: Store<IAppState>
     ) {}
   ngOnInit() {
     this._store.dispatch(new GetMyUsers());
     this._store.pipe(select(selectUser)).subscribe(); // unsub
     this._store.dispatch(new GetMyUsers());
-    this._store.pipe(select(selectUsers)).subscribe(
+    this.sub = this._store.pipe(select(selectUsers)).subscribe(
       data => {
         this.users = data;
       }
     );
+  }
+  ngOnDestroy(){
+    if(this.sub){
+      this.sub.unsubscribe();
+    }
   }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../../../models/user.model';
-import { LoginService } from '../../../features/services/login.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -13,9 +12,9 @@ import { selectPostUser } from 'src/app/features/store/selectors/user.selectors'
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 }) 
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit, OnDestroy {
   value: boolean= true;
-  constructor(private loginService: LoginService,  private router: Router, 
+  constructor( private router: Router, 
     private _store: Store<IAppState>) { }
   register;
   sub: Subscription;

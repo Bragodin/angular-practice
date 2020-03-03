@@ -1,0 +1,9 @@
+:host {
+    display: flex;
+    background: url('../../../assets/chat-bg.jpg');
+    justify-content: center;
+    align-items: center;
+    width: 99vw;
+    height: 95vh;
+    overflow-x: hidden;
+  }

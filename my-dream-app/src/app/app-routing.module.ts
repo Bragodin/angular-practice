@@ -14,6 +14,8 @@ import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { FriendsComponent } from './pages/my-friends/friends/friends.component';
 import { RequestToFriendComponent } from './core/request-to-friend/request-to-friend.component';
 import { MyFriendsComponent } from './core/my-friends/my-friends.component';
+import { MyMessagesComponent } from './pages/my-messages/my-messages.component';
+import { DialogComponent } from './pages/dialog/dialog.component';
 
 const friendsRoutes: Routes = [
   { path: 'myfriends', component: MyFriendsComponent},
@@ -31,7 +33,9 @@ const routes: Routes = [
   { path: 'settings', canActivate: [AuthGuard], component: SettingsComponent },
   { path: 'changeProfile', canActivate: [AuthGuard], component: ChangeUserComponent },
   { path: 'people', canActivate: [AuthGuard], component: PeopleComponent },
-  { path: 'friends', canActivate: [AuthGuard], component: FriendsComponent, children: friendsRoutes}
+  { path: 'friends', canActivate: [AuthGuard], component: FriendsComponent, children: friendsRoutes}, 
+  { path: 'mydialog', canActivate: [AuthGuard], component: DialogComponent },
+  { path: 'mymessages', canActivate: [AuthGuard], component: MyMessagesComponent}
 ];
 
 @NgModule({

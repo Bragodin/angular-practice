@@ -53,6 +53,9 @@ import { MyFriendsComponent } from './core/my-friends/my-friends.component';
 import { UserEffects } from './features/store/effects/user.effects';
 import { FriendsEffects } from './features/store/effects/friends.effects';
 import { AvatarComponent } from './ui/avatar/avatar.component';
+import { MyMessagesComponent } from './pages/my-messages/my-messages.component';
+import { MessageComponent } from './ui/message/message.component';
+import { DialogComponent } from './pages/dialog/dialog.component';
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
 
@@ -81,7 +84,10 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     PopUpComponent,
     FriendItemInListComponent,
     MyFriendsComponent,
-    AvatarComponent
+    AvatarComponent,
+    MyMessagesComponent,
+    MessageComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,

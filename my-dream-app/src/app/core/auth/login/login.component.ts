@@ -42,8 +42,6 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.sub =  this._store.pipe(select(selectLogin)).subscribe(
       data => {
         if(data !== null){
-          // console.log('select login');
-          // console.log(data);
           this.router.navigate([`/profile/${data._id}`]);
         }
       }

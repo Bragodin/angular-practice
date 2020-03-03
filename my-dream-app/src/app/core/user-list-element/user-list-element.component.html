@@ -6,7 +6,8 @@
     <ng-container [ngSwitch]="buttonState">
         <button *ngSwitchCase="'accept'" mat-raised-button color="accent" (click)='sendButtonEvent(user)'>accept</button>
         <button  *ngSwitchCase="'add'" mat-raised-button color="accent" (click)='sendButtonEvent()'>add to friends</button>
-        <button  *ngSwitchCase="'remove'" mat-raised-button color="accent" (click)='sendButtonEvent()'>remove from friends</button>
+        <button  *ngSwitchCase="'remove'" mat-raised-button color="accent" (click)='sendButtonEvent(user)'>remove from friends</button>
+        <button  *ngSwitchCase="'reply'" mat-raised-button color="accent" (click)='sendButtonEvent(user)'>reply</button>
     </ng-container>
     <button mat-raised-button color="accent">send message</button>
 </mat-card>

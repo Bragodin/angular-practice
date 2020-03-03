@@ -1,0 +1,1 @@
+<app-user-list-element  *ngFor='let user of usersWithDialog; let i = index' [index]='i' [user]='user' [buttonState]="'reply'" (onChanged)="openDialog($event)" routerLink = "/mydialog"></app-user-list-element>
