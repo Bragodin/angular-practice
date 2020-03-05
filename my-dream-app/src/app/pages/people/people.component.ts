@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable, Subscription, of } from 'rxjs';
 import { filter, debounceTime, switchMap, catchError } from 'rxjs/operators';
@@ -13,14 +13,14 @@ import { SearchService } from '../../features/services/search.service';
 export class PeopleComponent implements OnInit, OnDestroy {
   amount = new FormControl('', []);
   rightUsers: object;
-  result: object;
+  @Input() result: object;
   sub: Subscription;
   constructor(private searchService: SearchService) { 
   }
   ngOnInit(){
     this.sub = this.amount.valueChanges.pipe(
       debounceTime(400),
-      filter(value => value.length > 1),
+      filter(value => value.length > 0),
       switchMap(term => this.searchService.search(term))
     ).subscribe( result => {
       this.result = result;

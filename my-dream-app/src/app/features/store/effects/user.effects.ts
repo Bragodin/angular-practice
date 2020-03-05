@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects'; 
 import { switchMap, map, catchError } from 'rxjs/operators';
-import { GetMyUser, EUserActions, GetMyUserSuccess, GetMyUsers, GetMyUsersSuccess, GetMyUserFailure, PostUser, PostUserSuccess, GetUserSuccess, GetAutorizationUser, GetAutorizationUserSuccess, LogoutUser, LogoutUserSuccess, LoginUser, LoginUserSuccess } from '../actions/user.actions';
+import { GetMyUser, EUserActions, GetMyUserSuccess, GetMyUsers, GetMyUsersSuccess, GetMyUserFailure, PostUser, PostUserSuccess, GetUserSuccess, GetAutorizationUser, GetAutorizationUserSuccess, LogoutUser, LogoutUserSuccess, LoginUser, LoginUserSuccess, UpdateMyUser, UpdateMyUserSuccess } from '../actions/user.actions';
 import { UsersService } from '../../services/users.service';
 import { of } from 'rxjs';
 import { User } from 'src/app/models/user.model';
@@ -22,8 +22,8 @@ export class UserEffects {
     @Effect()
     getMyUsers$ = this._actions$.pipe(
         ofType<GetMyUsers>(EUserActions.GetMyUsers),
-        switchMap(() => { 
-            return this.usersService.getUsers()
+        switchMap((action) => { 
+            return this.usersService.getUsers(action.payload)
         }), 
         map((users: User[])=> {   
             return new GetMyUsersSuccess(users);
@@ -76,5 +76,18 @@ export class UserEffects {
             return new LoginUserSuccess(user.user);
         })
     );
+    @Effect()
+    updateUser$ = this._actions$.pipe(
+        ofType<UpdateMyUser>(EUserActions.UpdateMyUser),
+        switchMap((action) => { 
+            return this.usersService.updateUsers(localStorage.getItem('id'), action.payload);
+        }), 
+        map((user) => { 
+            console.log('Update user Effect')
+            console.log(user)
+            return new UpdateMyUserSuccess(user);
+        })
+    );
+    
     constructor(private _actions$: Actions, private usersService: UsersService, private loginService: LoginService ) { }
 }

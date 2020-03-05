@@ -7,7 +7,7 @@ import { UserComponent } from './core/user/user.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './core/dashboard/dashboard.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProfileComponent } from './core/profile/profile.component';
 import { LoginComponent } from './core/auth/login/login.component';
 import { RegistrationComponent } from './core/auth/registration/registration.component';
@@ -17,11 +17,11 @@ import { ParamInterceptor } from '../app/interceptors/auth.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './guards/auth.guard';
 import { ChangeUserComponent } from './core/change-user/change-user.component';
-import { SettingsComponent } from './core/settings/settings.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { PeopleComponent } from './core/people/people.component';
+import { PeopleComponent } from './pages/people/people.component';
 import { UserListElementComponent } from './core/user-list-element/user-list-element.component';
 import { HeaderComponent } from './core/header/header.component';
 import { GalleryComponent } from './core/gallery/gallery.component';
@@ -56,6 +56,12 @@ import { AvatarComponent } from './ui/avatar/avatar.component';
 import { MyMessagesComponent } from './pages/my-messages/my-messages.component';
 import { MessageComponent } from './ui/message/message.component';
 import { DialogComponent } from './pages/dialog/dialog.component';
+import { DialogEffects } from './features/store/effects/dialog.effect';
+import { DialogDataComponent } from './pages/dialog/dialog-data.component';
+import { ProfileContainerComponent } from './core/profile/profile-container';
+import { DashboardContainerComponent } from './pages/dashboard/dashbord-container.component';
+import { PeopleConteinerComponent } from './pages/people/people-container.component';
+
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
 
@@ -87,7 +93,11 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     AvatarComponent,
     MyMessagesComponent,
     MessageComponent,
-    DialogComponent
+    DialogComponent,
+    DialogDataComponent,
+    ProfileContainerComponent,
+    DashboardContainerComponent,
+    PeopleConteinerComponent
   ],
   imports: [
     BrowserModule,
@@ -107,7 +117,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     MatListModule,
     MatCommonModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([UserEffects, NotificationsEffects, AuthEffects, FriendsEffects]),
+    EffectsModule.forRoot([UserEffects, NotificationsEffects, AuthEffects, FriendsEffects, DialogEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router'}),
     !environment.production ? StoreDevtoolsModule.instrument() : []
     
@@ -115,6 +125,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
   entryComponents: [
     PopUpComponent
   ],
+  
   providers: [
     {
       provide: HTTP_INTERCEPTORS, 

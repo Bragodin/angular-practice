@@ -5,7 +5,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AlbumService } from 'src/app/features/services/album.service';
-import { UpdateAvatar } from 'src/app/features/store/actions/user.actions';
+import { UpdateAvatar, UpdateMyUser } from 'src/app/features/store/actions/user.actions';
 import { Store } from '@ngrx/store';
 import { IAppState } from 'src/app/features/store/state/app.state';
 
@@ -69,8 +69,9 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
         }
       }
     if(id && user) {
-      this.usersService.updateUsers(id, userUpdate);
-      this.router.navigate([`/profile/${id}`]);
+      // this.usersService.updateUsers(id, userUpdate);
+      // this.router.navigate([`/profile/${id}`]);
+      this._store.dispatch(new UpdateMyUser(userUpdate));
     }
   }
 }

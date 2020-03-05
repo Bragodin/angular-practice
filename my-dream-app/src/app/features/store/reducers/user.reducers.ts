@@ -61,6 +61,18 @@ export function userReducers(
         autorizationUser: action.payload
       }
     } 
+    case EUserActions.SetActiveUser: {
+      return {
+        ...state,    
+        activeUser: action.payload,
+      }
+    } 
+    case EUserActions.UpdateMyUserSuccess: {
+      return {
+        ...state,    
+
+      }
+    } 
     default:
       return state;
   }

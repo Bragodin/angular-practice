@@ -7,7 +7,7 @@ export interface IUserState {
 }
 
 export const initialUserState: IUserState = {
-    activeUser: null,
-    users: null,
-    autorizationUser: null
+    activeUser: {} as User,
+    users: {} as User[],
+    autorizationUser: {} as User
 } 

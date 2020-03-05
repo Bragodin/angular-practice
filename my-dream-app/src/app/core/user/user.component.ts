@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { UsersService } from '../../features/services/users.service';
 import { User } from '../../models/user.model';
 import { Observable } from 'rxjs';
+import { Store, select } from '@ngrx/store';
+import { IAppState } from 'src/app/features/store/state/app.state';
+import { GetMyUsers } from 'src/app/features/store/actions/user.actions';
+import { selectUsers } from 'src/app/features/store/selectors/user.selectors';
 
 @Component({
   selector: 'app-user',
@@ -15,13 +19,24 @@ export class UserComponent implements OnInit {
   login: string ='';
   phone: string = '';
   password: string = '';
-  constructor(private usersService: UsersService) {
-    this.users = this.usersService.getUsers();
+  page: number = 0;
+  constructor(private usersService: UsersService, private _store: Store<IAppState>) {
+    this._store.dispatch(new GetMyUsers(this.page));
+    this.users = this._store.pipe(select(selectUsers));
   }
   ngOnInit() {
   }
   remove(id){
     this.usersService.remove(id);
+  }
+  changePage(n){
+    console.log(n)
+    console.log(this.page)
+    if((this.page + n) >= 0){
+      this.page = this.page + n
+      this._store.dispatch(new GetMyUsers(this.page));
+      this.users = this._store.pipe(select(selectUsers));
+    }
   }
   add(){
     let user = {

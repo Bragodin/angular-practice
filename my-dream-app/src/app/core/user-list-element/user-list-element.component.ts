@@ -1,5 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from 'src/app/models/user.model';
+import { IAppState } from 'src/app/features/store/state/app.state';
+import { Store } from '@ngrx/store';
+import { SetActiveUser } from 'src/app/features/store/actions/user.actions';
+import { Router } from '@angular/router';
 // enum buttonStates {
 //   Accept,
 //   Add,
@@ -22,7 +26,7 @@ export class UserListElementComponent implements OnInit {
   @Input() user: User;
   @Input() buttonState: string;
   @Output() onChanged = new EventEmitter<any>();
-  constructor() {
+  constructor(private _store: Store<IAppState>, private router: Router) {
   }
   ngOnInit() {     
   }
@@ -39,5 +43,10 @@ export class UserListElementComponent implements OnInit {
         'background': `#778899`
       }
     }
+  }
+  openDialog(){
+    this._store.dispatch(new SetActiveUser(this.user));
+    // this._store.dispatch(new )
+    this.router.navigate([`/mydialog`]);    
   }
 }

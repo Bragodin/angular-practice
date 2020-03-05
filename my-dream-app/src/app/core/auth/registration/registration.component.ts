@@ -34,15 +34,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       phone: form.value.phone,
       avatar: 'no_avatar.jpg'
     } as User;
-    // this.sub = this.loginService.register(user).subscribe(
-    //     (data: any) => {
-    //       console.log(data)
-    //       localStorage.setItem('id', data.user._id);
-    //       localStorage.setItem('token', data.token);
-    //       return  this.router.navigate([`/profile/${data.user._id}`])
-    //     },
-    //     error => console.log(error)
-    //   );
       this._store.dispatch(new PostUser(user));
       this.sub = this._store.pipe(select(selectPostUser)).subscribe(data => {
         return this.router.navigate([`/profile/${data._id}`])

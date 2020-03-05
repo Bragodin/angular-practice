@@ -18,7 +18,10 @@ export enum EUserActions{
     LogoutUser = '[User] Logout User',
     LogoutUserSuccess = '[User] Logout User Success',
     LoginUser = '[User] Login User',
-    LoginUserSuccess = '[User] Login User Success'
+    LoginUserSuccess = '[User] Login User Success',
+    SetActiveUser = '[User] Set Active User',
+    UpdateMyUser = '[User] Upload User',
+    UpdateMyUserSuccess = '[User] Upload User Success'
 }
 
 export class GetMyUser implements Action {
@@ -38,7 +41,7 @@ export class GetAutorizationUserSuccess implements Action {
 
 export class GetMyUsers implements Action {
     public readonly type = EUserActions.GetMyUsers;
-    constructor(public payload?: string){}
+    constructor(public payload?: number){}
 }
 
 export class GetMyUsersSuccess implements Action {
@@ -100,7 +103,22 @@ export class LoginUserSuccess implements Action {
     constructor(public payload: LoginUserModel){}
 }
 
+export class SetActiveUser implements Action {
+    public readonly type = EUserActions.SetActiveUser;
+    constructor(public payload: User){}
+}
+
+export class UpdateMyUser implements Action {
+    public readonly type = EUserActions.UpdateMyUser;
+    constructor(public payload: User){}
+}
+
+export class UpdateMyUserSuccess implements Action {
+    public readonly type = EUserActions.UpdateMyUserSuccess;
+    constructor(public payload: any){}
+}
+
 export type UserActions = GetMyUserSuccess | GetMyUser | UpdateAvatar 
 | GetMyUsers | GetMyUsersSuccess | GetMyUserFailure | 
 GetUserSuccess | GetAutorizationUserSuccess | GetAutorizationUser | PostUser | 
-PostUserSuccess | LogoutUserSuccess | LoginUserSuccess;
+PostUserSuccess | LogoutUserSuccess | LoginUserSuccess | SetActiveUser | UpdateMyUserSuccess;

@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit, OnDestroy{
   value: boolean = false;
   sub: Subscription;
   subs: Subscription[] = [];
-  constructor(private loginService: LoginService, private router: Router, private _store: Store<IAppState>) {
+  constructor(private router: Router, private _store: Store<IAppState>) {
     const id = localStorage.getItem('id');
     if(localStorage.getItem('token') && id){
       this.router.navigate([`/profile/${id}`]);
@@ -26,12 +26,6 @@ export class LoginComponent implements OnInit, OnDestroy{
   }
   ngOnInit() {}
   onSubmit(form){
-    // this.sub = this.loginService.login({
-    //   login: form.value.email,
-    //   password: form.value.password
-    // }).subscribe((data: any) => {
-    //   this.router.navigate([`/profile/${data.user._id}`]);
-    // })
     this._store.dispatch(new LoginUser(
       {
         login: form.value.email,

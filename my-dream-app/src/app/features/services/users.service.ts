@@ -14,15 +14,16 @@ export class UsersService {
     // this.getUsers();
   }
   updateUsers(id, user){
-      this.http.put<User[]>(`http://localhost:3000/users/${id}`, user).subscribe(
-        data => console.log(data)
-      );
-      this.syncUsers.find((elem, i) => {
-      if(elem._id === id){
-        this.syncUsers.splice(i, 1, user);
-      }
-    });
-   return this.users;
+  //     this.http.put<User[]>(`http://localhost:3000/users/${id}`, user).subscribe(
+  //       data => console.log(data)
+  //     );
+  //     this.syncUsers.find((elem, i) => {
+  //     if(elem._id === id){
+  //       this.syncUsers.splice(i, 1, user);
+  //     }
+  //   });
+  //  return this.users;
+    return this.http.put<User[]>(`http://localhost:3000/users/${id}`, user);
   }
   addUser(user: User){
     this.http.post<User[]>('http://localhost:3000/users', user).subscribe(data => {
@@ -36,9 +37,9 @@ export class UsersService {
     this.syncUsers = this.syncUsers.filter((user: User) => user._id !== id);
     this.users.next(this.syncUsers);
   }
-  getUsers()
+  getUsers(page)
   {
-    this.http.get<User[]>('http://localhost:3000/users').subscribe(data => {
+    this.http.get<User[]>(`http://localhost:3000/users/?page=${page}`).subscribe(data => {
       this.users.next(data);
       this.syncUsers = data;
   });

@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 export class MainComponent implements OnInit {
   constructor(private websocketService: WebsocketService, private _store: Store<any>, private router: Router){
     if(localStorage.getItem('token')){
-      this.websocketService.connection();
+      // this.websocketService.connection();
       this._store.dispatch(new GetMyUser(localStorage.getItem('id')));
       this._store.dispatch(new GetNotifications());
       this._store.dispatch(new GetAutorizationUser(localStorage.getItem('id')));

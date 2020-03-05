@@ -1,22 +1,16 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { UsersService } from '../../features/services/users.service';
-import { Observable } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../../models/user.model';
-import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { FriendsService } from 'src/app/features/services/friends.service';
 import { Store, select } from '@ngrx/store';
 import { IAppState } from 'src/app/features/store/state/app.state';
-import { map } from 'rxjs/operators';
 import { GetMyUsers } from 'src/app/features/store/actions/user.actions';
 import { selectUser, selectUsers } from 'src/app/features/store/selectors/user.selectors';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  selector: 'app-dashboard-container',
+  template: `<app-dashboard [users]='users'></app-dashboard>`
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardContainerComponent implements OnInit, OnDestroy {
   users: User[];
   private sub: Subscription;
   constructor(private _store: Store<IAppState>

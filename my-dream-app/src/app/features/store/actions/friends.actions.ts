@@ -1,7 +1,5 @@
 import { Action } from '@ngrx/store';
-import { IUserState } from '../state/user.state';
 import { User } from 'src/app/models/user.model';
-import { LoginUserModel } from 'src/app/models/login-user.model';
 
 export enum EFriendsActions{
     GetMyFriends = '[Friends] Get Frineds',
