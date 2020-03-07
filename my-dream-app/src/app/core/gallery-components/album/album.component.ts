@@ -59,8 +59,8 @@ export class AlbumComponent implements OnInit, OnDestroy {
     );
     this.subscriptions.push(this.sub);
   }
-  removePhoto(item, image){
-    item.photosName = item.photosName.filter( elem => elem !== image);
+  removePhoto(image){
+    this.item.photosName = this.item.photosName.filter( elem => elem !== image);
     this.sub = this.albumService.deltePhoto(image.name).subscribe( data => this.onDelete.emit());
     this.subscriptions.push(this.sub);
   }

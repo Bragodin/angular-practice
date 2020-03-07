@@ -3,6 +3,8 @@ import { User } from 'src/app/models/user.model';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { Store, select } from '@ngrx/store';
 import { selectFriends } from 'src/app/features/store/selectors/friends.selectors';
+import { DeleteFriend } from 'src/app/features/store/actions/friends.actions';
+import { Friends } from 'src/app/models/friend.model';
 
 @Component({
   selector: 'app-my-friends',
@@ -19,7 +21,14 @@ export class MyFriendsComponent implements OnInit {
         if(data.friends !== null){
           return this.friends = data.friends.map(elem => elem.friend);
         }
-      }
-    ); // узнать о правильности
+      } 
+    ); 
+  }
+  remove(userId){
+    let data: Friends = {
+      myId: localStorage.getItem('id'),
+      userId: userId
+    }
+    this._store.dispatch(new DeleteFriend(data));
   }
 }

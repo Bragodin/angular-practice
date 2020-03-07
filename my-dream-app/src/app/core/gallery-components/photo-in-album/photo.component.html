@@ -1,0 +1,7 @@
+
+    <mat-card class="photo" (click)="openBottomSheet()">
+        <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" class="remove__button" (click)='removePhoto(image)' *ngIf='myProfilePage'>
+            <mat-icon >clear</mat-icon>
+        </button>
+        <img width={{width}} height={{height}} src='http://localhost:3000/uploads/{{image.name}}' alt="photo don't uploaded">
+    </mat-card>

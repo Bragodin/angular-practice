@@ -32,3 +32,6 @@
     margin-top: 30px;
     margin-bottom: 50px;
 }
+.user__avatar {
+    max-height: 300px;
+}

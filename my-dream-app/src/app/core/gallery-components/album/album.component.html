@@ -1,9 +1,8 @@
 <h4>Total photos: {{item.photosName.length}}</h4>
-<div class='gallery__images' *ngFor='let image of item.photosName'>
-    <img width='200' height='200' src='http://localhost:3000/uploads/{{image.name}}' alt="">
-    <button mat-icon-button color="accent" aria-label="Example icon-button with a heart icon" (click)='removePhoto(item, image)' *ngIf='myProfilePage'>
-        <mat-icon>clear</mat-icon>
-    </button>
+<div class="images-container">
+    <div class='gallery__images' *ngFor='let image of item.photosName'>
+        <app-photo [image]='image' [width]='200' [height]='200' [myProfilePage]='myProfilePage' (removePhotoEvent)='removePhoto($event)'></app-photo>
+    </div>
 </div>
 <div class="change-photo__buttons">
     <img *ngFor="let url of urls" [src]="url" height="210" width="250" >

@@ -24,11 +24,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { PeopleComponent } from './pages/people/people.component';
 import { UserListElementComponent } from './core/user-list-element/user-list-element.component';
 import { HeaderComponent } from './core/header/header.component';
-import { GalleryComponent } from './core/gallery/gallery.component';
+import { GalleryComponent } from './core/gallery-components/gallery/gallery.component';
 import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
-import { AlbumComponent } from './core/album/album.component';
+import { AlbumComponent } from './core/gallery-components/album/album.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { WebsocketService } from './features/services/websoket.service';
 import { FriendsComponent } from './pages/my-friends/friends/friends.component';
@@ -38,7 +38,7 @@ import { UploadButtonComponent } from './ui/upload-button/upload-button.componen
 import { NotificationComponent } from './ui/notification/notification.component';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { PopUpComponent } from './core/pop-up/pop-up.component';
-import { MatCommonModule } from '@angular/material';
+import { MatCommonModule, MAT_BOTTOM_SHEET_DATA } from '@angular/material';
 import { MatListModule } from '@angular/material/list';
 import { StoreModule } from '@ngrx/store';
 import { appReducers } from './features/store/reducers/app.reducers';
@@ -48,7 +48,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { environment } from 'src/environments/environment';
 import { NotificationsEffects } from './features/store/effects/notifications.effects';
-import { FriendItemInListComponent } from './core/friend-item-in-list/friend-item-in-list.component';
 import { MyFriendsComponent } from './core/my-friends/my-friends.component';
 import { UserEffects } from './features/store/effects/user.effects';
 import { FriendsEffects } from './features/store/effects/friends.effects';
@@ -61,6 +60,8 @@ import { DialogDataComponent } from './pages/dialog/dialog-data.component';
 import { ProfileContainerComponent } from './core/profile/profile-container';
 import { DashboardContainerComponent } from './pages/dashboard/dashbord-container.component';
 import { PeopleConteinerComponent } from './pages/people/people-container.component';
+import { PhotoComponent } from './core/gallery-components/photo-in-album/photo.component';
+import { ActivePhotoComponent } from './core/gallery-components/active-photo/active-photo.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
@@ -88,7 +89,6 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     UploadButtonComponent,
     NotificationComponent,
     PopUpComponent,
-    FriendItemInListComponent,
     MyFriendsComponent,
     AvatarComponent,
     MyMessagesComponent,
@@ -97,7 +97,9 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     DialogDataComponent,
     ProfileContainerComponent,
     DashboardContainerComponent,
-    PeopleConteinerComponent
+    PeopleConteinerComponent,
+    PhotoComponent,
+    ActivePhotoComponent
   ],
   imports: [
     BrowserModule,
@@ -123,10 +125,15 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     
   ],
   entryComponents: [
-    PopUpComponent
+    PopUpComponent,
+    ActivePhotoComponent
   ],
   
   providers: [
+    {
+      provide: MAT_BOTTOM_SHEET_DATA,
+      useValue: {} 
+    },
     {
       provide: HTTP_INTERCEPTORS, 
       useClass: ParamInterceptor,

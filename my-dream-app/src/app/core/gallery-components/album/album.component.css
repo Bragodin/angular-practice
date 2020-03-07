@@ -1,0 +1,12 @@
+/* .gallery h3 {
+    display: inline;
+} */
+.gallery__images {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; 
+}
+.images-container {
+    display: flex;
+    justify-content: space-around;
+}

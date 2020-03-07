@@ -23,6 +23,12 @@ export function dialogReducers(
           id: action.payload._id
         };
       }  
+    case EDialogActions.PostMessageSuccess: {
+      return {
+        ...state,
+        messages: state.messages.concat(action.payload)
+      };
+    } 
     default:
       return state;
   }

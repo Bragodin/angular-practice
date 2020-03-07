@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects'; 
 import { switchMap, map, catchError, withLatestFrom } from 'rxjs/operators';
-import { GetMyDialog, EDialogActions, GetMyDialogSuccess, PostDialog, PostDialogSuccess } from '../actions/dialog.actions';
+import { GetMyDialog, EDialogActions, GetMyDialogSuccess, PostDialog, PostDialogSuccess, PostMessage, PostMessageSuccess } from '../actions/dialog.actions';
 import { DialogService } from '../../services/dialog.service';
 import { select, Store } from '@ngrx/store';
 import { IAppState } from '../state/app.state';
 import { selectUser } from '../selectors/user.selectors';
+import { WebsocketService } from '../../services/websoket.service';
+import { selectDialogId } from '../selectors/dialog.selectors';
 
 @Injectable()
 export class DialogEffects {
@@ -26,8 +28,7 @@ export class DialogEffects {
     getDialog$ = this._actions$.pipe(
         ofType<GetMyDialog>(EDialogActions.GetMyDialog),
         switchMap((action) => {
-            const dialog = this.dialogService.getDialog(action.payload);
-            return dialog;
+            return this.dialogService.getDialog(action.payload);
         }),
         withLatestFrom(this._store.pipe(select(selectUser))),
         map(([dialog, user])=> {   
@@ -38,6 +39,30 @@ export class DialogEffects {
             }
         })        
     );
-    constructor(private _actions$: Actions, private dialogService: DialogService , private _store: Store<IAppState>) { 
+
+    @Effect()
+    postMessage$ = this._actions$.pipe(
+        ofType<PostMessage>(EDialogActions.PostMessage),
+        withLatestFrom(this._store.pipe(select(selectDialogId))),
+        switchMap(([action, dialogId]) => {
+            const messageData = {
+                myid: action.payload_myId, 
+                userid: action.payload_activeUseerId,
+                message: action.payload_name,
+                dialogId: dialogId
+            }
+            const dialog = this.websocketService.sendMessage(messageData);
+            return [dialog];
+        }),
+        map((dialog)=> {   
+            const message = {
+                dialogId: dialog.dialogId,
+                message: dialog.message
+            }
+            return new PostMessageSuccess(message);
+        })        
+    );
+
+    constructor(private _actions$: Actions, private dialogService: DialogService , private _store: Store<IAppState>, private websocketService: WebsocketService) { 
     }
 }

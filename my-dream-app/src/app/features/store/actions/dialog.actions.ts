@@ -1,14 +1,15 @@
 import { Action } from '@ngrx/store';
-import { IUserState } from '../state/user.state';
-import { User } from 'src/app/models/user.model';
-import { LoginUserModel } from 'src/app/models/login-user.model';
 import { Dialog } from 'src/app/models/dialog.model';
+import { Message } from '../../../models/message.model';
 
-export enum EDialogActions{
+export enum EDialogActions {
     GetMyDialog = '[Dialog] Get Dialog',
     GetMyDialogSuccess = '[Dialog] Get Dialog Success',
     PostDialog = '[Dialog] Post Dialog',
-    PostDialogSuccess = '[Dialog] Post Dialog Success'
+    PostDialogSuccess = '[Dialog] Post Dialog Success',
+    PostMessage = '[Dialog] Post Message To Dialog',
+    PostMessageSuccess = '[Dialog] Post Message To Dialog Success',
+    DeleteFriend = "DeleteFriend"
 }
 
 export class GetMyDialog implements Action {
@@ -18,7 +19,7 @@ export class GetMyDialog implements Action {
 
 export class GetMyDialogSuccess implements Action {
     public readonly type = EDialogActions.GetMyDialogSuccess;
-    constructor(public payload: any){}
+    constructor(public payload: Dialog){}
 }
 
 export class PostDialog implements Action {
@@ -31,5 +32,13 @@ export class PostDialogSuccess implements Action {
     constructor(public payload: any){}
 }
 
+export class PostMessage implements Action {
+    public readonly type = EDialogActions.PostMessage;
+    constructor(public payload_myId: string, public payload_activeUseerId: string, public payload_name: string){}
+}
+export class PostMessageSuccess implements Action {
+    public readonly type = EDialogActions.PostMessageSuccess;
+    constructor(public payload: any){}
+}
 
-export type DialogActions = GetMyDialogSuccess | PostDialogSuccess;
+export type DialogActions = GetMyDialogSuccess | PostDialogSuccess | PostMessageSuccess;

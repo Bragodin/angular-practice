@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects'; 
-import { switchMap, map, catchError } from 'rxjs/operators';
-import { EFriendsActions, GetMyFriends, GetMyFriendsSuccess } from '../actions/friends.actions';
+import { switchMap, map, catchError, withLatestFrom } from 'rxjs/operators';
+import { EFriendsActions, GetMyFriends, GetMyFriendsSuccess, DeleteFriend, DeleteFriendSuccess } from '../actions/friends.actions';
 import { FriendsService } from '../../services/friends.service';
+import { Store, select } from '@ngrx/store';
+import { IAppState } from '../state/app.state';
+
 @Injectable()
 export class FriendsEffects {
     @Effect()
@@ -15,6 +18,22 @@ export class FriendsEffects {
             return new GetMyFriendsSuccess(friends);
         })        
     );
-    constructor(private _actions$: Actions, private friendsService: FriendsService ) { 
+
+    @Effect()
+    deleteFriend$ = this._actions$.pipe(
+        ofType<DeleteFriend>(EFriendsActions.DeleteFriend),
+        switchMap((action) => {
+            return this.friendsService.removeFromFriends(action.payload.myId, action.payload.userId);
+        }),
+        map((user: any)=> {
+            if(user.friend1 === localStorage.getItem('id')){
+                return new DeleteFriendSuccess(user.friend2);
+            }
+            else {
+                return new DeleteFriendSuccess(user.friend1);
+            }
+        })        
+    );
+    constructor(private _actions$: Actions, private friendsService: FriendsService, private _store: Store<IAppState> ) { 
     }
 }

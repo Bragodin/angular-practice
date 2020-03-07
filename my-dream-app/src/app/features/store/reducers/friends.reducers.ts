@@ -14,6 +14,15 @@ export function friendsReducers(
         friends: action.payload
       };
     }  
+    case EFriendsActions.DeleteFriendSuccess: {
+      const userFiltered = state.friends.filter(elem => elem.friend._id !== action.payload);
+      console.log(action.payload)
+      console.log(userFiltered)
+      return {
+        ...state,
+        friends: userFiltered
+      };
+    }  
     default:
       return state;
   }

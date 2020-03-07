@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { AlbumService } from '../../features/services/album.service';
+import { AlbumService } from '../../../features/services/album.service';
 import { Album } from 'src/app/models/album.model';
-import { Photo } from '../../models/photo.model';
+import { Photo } from '../../../models/photo.model';
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 
