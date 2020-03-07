@@ -1,6 +1,5 @@
 export interface Message {
-    myId: string;
-    userId: string;
-    message: string;
+    _id?: string;
     dialogId: string;
+    message: string;
 }

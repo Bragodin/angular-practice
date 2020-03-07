@@ -21,6 +21,9 @@ export class ProfileComponent implements OnInit {
   @Input() sub: Subscription;
   constructor(private activateRoute: ActivatedRoute, private websocketService: WebsocketService, private notificationsService: NotificationsService) {
     this.id = activateRoute.snapshot.params['id'];
+    console.log('friends req and my pr page')
+    console.log(this.myProfilePage)
+    console.log(this.firendRequest)
   }
   ngOnInit() {}
   ngOnDestroy(){

@@ -9,7 +9,7 @@ export enum EDialogActions {
     PostDialogSuccess = '[Dialog] Post Dialog Success',
     PostMessage = '[Dialog] Post Message To Dialog',
     PostMessageSuccess = '[Dialog] Post Message To Dialog Success',
-    DeleteFriend = "DeleteFriend"
+    GetMessage = "[Dialog] Get Message"
 }
 
 export class GetMyDialog implements Action {
@@ -41,4 +41,10 @@ export class PostMessageSuccess implements Action {
     constructor(public payload: any){}
 }
 
-export type DialogActions = GetMyDialogSuccess | PostDialogSuccess | PostMessageSuccess;
+export class GetMessage implements Action {
+    public readonly type = EDialogActions.GetMessage;
+    constructor(public payload: any){
+    }
+}
+
+export type DialogActions = GetMyDialogSuccess | PostDialogSuccess | PostMessageSuccess | GetMessage;

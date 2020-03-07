@@ -5,6 +5,9 @@ import { ActivatedRoute} from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { NotificationsService } from 'src/app/features/services/notifications.service';
+import { Store, select } from '@ngrx/store';
+import { IAppState } from 'src/app/features/store/state/app.state';
+import { selectUser } from 'src/app/features/store/selectors/user.selectors';
 
 @Component({
   selector: 'app-my-profile',
@@ -21,10 +24,11 @@ export class MyProfileComponent implements OnInit {
   constructor(
     private albumService: AlbumService,
     private route: ActivatedRoute,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    // private _store: Store<IAppState>
     ) { }
   ngOnInit() {
-    const myId = localStorage.getItem('id'); 
+    console.log(this.isMyProfile)
     this.getAlbums();
     // this.notificationsService.getUserNotifications(this.id).subscribe( data => {
     //   this.userWithFriendRequest = data.friendsNotification.find(elem => elem === myId);

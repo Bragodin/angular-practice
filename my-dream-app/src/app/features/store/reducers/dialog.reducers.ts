@@ -29,6 +29,12 @@ export function dialogReducers(
         messages: state.messages.concat(action.payload)
       };
     } 
+    case EDialogActions.GetMessage: {
+      return {
+        ...state,
+        messages: state.messages.concat(action.payload)
+      };
+    }
     default:
       return state;
   }
