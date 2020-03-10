@@ -10,10 +10,11 @@ import { IAppState } from 'src/app/features/store/state/app.state';
 import { Store, select } from '@ngrx/store';
 import { selectUser } from 'src/app/features/store/selectors/user.selectors';
 import { GetMyUser } from 'src/app/features/store/actions/user.actions';
+import { PostFriend } from 'src/app/features/store/actions/friends.actions';
 
 @Component({
   selector: 'app-profile-container',
-  template: `<app-profile [user]='user' [userPets]='userPets' [id]='id' [buttonState]='buttonState' [sub]='sub'></app-profile>`,
+  template: `<app-profile (onAdd)='addFriend($event)' [user]='user' [userPets]='userPets' [id]='id' [buttonState]='buttonState' [sub]='sub'></app-profile>`,
 })
 export class ProfileContainerComponent implements OnInit {
   @Input() myProfilePage: boolean;
@@ -47,5 +48,8 @@ export class ProfileContainerComponent implements OnInit {
     if(this.sub){
       this.sub.unsubscribe();
     }
+  }
+  addFriend(friends){
+    this._store.dispatch(new PostFriend(friends));
   }
 }

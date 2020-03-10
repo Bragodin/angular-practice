@@ -31,7 +31,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AlbumComponent } from './core/gallery-components/album/album.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { WebsocketService } from './features/services/websoket.service';
-import { FriendsComponent } from './pages/my-friends/friends/friends.component';
+import { FriendsComponent } from './pages/friends/friends.component';
 import { RequestToFriendComponent } from './core/request-to-friend/request-to-friend.component';
 import { MatCardModule } from '@angular/material/card';
 import { UploadButtonComponent } from './ui/upload-button/upload-button.component';
@@ -62,6 +62,8 @@ import { DashboardContainerComponent } from './pages/dashboard/dashbord-containe
 import { PeopleConteinerComponent } from './pages/people/people-container.component';
 import { PhotoComponent } from './core/gallery-components/photo-in-album/photo.component';
 import { ActivePhotoComponent } from './core/gallery-components/active-photo/active-photo.component';
+import { LoginContainer } from './core/auth/login/login-container';
+import { PaginationComponent } from './core/pagination/pagination.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
@@ -99,7 +101,9 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     DashboardContainerComponent,
     PeopleConteinerComponent,
     PhotoComponent,
-    ActivePhotoComponent
+    ActivePhotoComponent,
+    LoginContainer,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,
@@ -122,7 +126,6 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     EffectsModule.forRoot([UserEffects, NotificationsEffects, AuthEffects, FriendsEffects, DialogEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router'}),
     !environment.production ? StoreDevtoolsModule.instrument() : []
-    
   ],
   entryComponents: [
     PopUpComponent,

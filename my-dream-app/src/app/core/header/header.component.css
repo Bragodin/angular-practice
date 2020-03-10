@@ -1,12 +1,20 @@
 .active-link {
     color: pink;
 }
-.logout__button{
-    margin-left: 300px;
-}
 .toolbar__row button{
     margin-right: 20px;
 }
+.notification{
+    margin-left: auto;
+}
+.toolbar__row{
+    display: flex;
+    flex-wrap: wrap;
+}
 .toolbar {
     max-width: 100%;
+    min-height: auto;
+    position: fixed;
+    top: 0px;
+    z-index: 2;
 }

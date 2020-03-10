@@ -4,8 +4,10 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { IAppState } from 'src/app/features/store/state/app.state';
-import { PostUser } from 'src/app/features/store/actions/user.actions';
+import { PostUser, GetMyUser, GetAutorizationUser } from 'src/app/features/store/actions/user.actions';
 import { selectPostUser } from 'src/app/features/store/selectors/user.selectors';
+import { GetNotifications } from 'src/app/features/store/actions/notifications.actions';
+import { GetMyFriends } from 'src/app/features/store/actions/friends.actions';
 
 @Component({
   selector: 'app-registration',
@@ -14,10 +16,9 @@ import { selectPostUser } from 'src/app/features/store/selectors/user.selectors'
 }) 
 export class RegistrationComponent implements OnInit, OnDestroy {
   value: boolean= true;
-  constructor( private router: Router, 
-    private _store: Store<IAppState>) { }
-  register;
+  constructor( private router: Router, private _store: Store<IAppState>) { }
   sub: Subscription;
+  id: string = localStorage.getItem('id');
   ngOnInit() {
   }
   ngOnDestroy() {
@@ -36,7 +37,9 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     } as User;
       this._store.dispatch(new PostUser(user));
       this.sub = this._store.pipe(select(selectPostUser)).subscribe(data => {
-        return this.router.navigate([`/profile/${data._id}`])
+        if(data !== null && localStorage.getItem('token')){
+          return this.router.navigate([`/profile/${data._id}`])
+        }
       });
   }
 }

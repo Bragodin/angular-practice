@@ -46,7 +46,6 @@ export class UserListElementComponent implements OnInit {
   }
   openDialog(){
     this._store.dispatch(new SetActiveUser(this.user));
-    // this._store.dispatch(new )
-    this.router.navigate([`/mydialog`]);    
+    // this._store.dispatch(new ) 
   }
 }

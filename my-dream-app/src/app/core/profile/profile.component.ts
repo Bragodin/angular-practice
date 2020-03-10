@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { User } from '../../models/user.model';
 import { ActivatedRoute} from '@angular/router';
 import { Pet } from '../../models/pet.model';
 import { WebsocketService } from '../../features/services/websoket.service';
 import { NotificationsService } from 'src/app/features/services/notifications.service';
 import { Subscription } from 'rxjs';
+import { Friendship } from 'src/app/models/friendship.model';
 
 @Component({
   selector: 'app-profile',
@@ -19,11 +20,10 @@ export class ProfileComponent implements OnInit {
   @Input() id: string;
   @Input() buttonState: boolean = false;
   @Input() sub: Subscription;
+  @Output() onAdd = new EventEmitter<Friendship>();
+
   constructor(private activateRoute: ActivatedRoute, private websocketService: WebsocketService, private notificationsService: NotificationsService) {
     this.id = activateRoute.snapshot.params['id'];
-    console.log('friends req and my pr page')
-    console.log(this.myProfilePage)
-    console.log(this.firendRequest)
   }
   ngOnInit() {}
   ngOnDestroy(){
@@ -34,10 +34,11 @@ export class ProfileComponent implements OnInit {
   showPets(){
     this.buttonState = !this.buttonState;
   }
-  addToFriends(){
+  addFriend(){   
     const friend = localStorage.getItem('id');
     this.sub = this.notificationsService.addToFriends(this.id, friend).subscribe( data => {
       this.websocketService.sendNotification(this.id, localStorage.getItem('id'));
     });
+    // this.onAdd.emit({friend1: this.id, friend2: friend});
   }
 }

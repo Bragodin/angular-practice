@@ -1,11 +1,11 @@
-<div class="profile"> 
+<div class="profile container"> 
    <app-avatar [photoName]='user.avatar'></app-avatar>
    <div class="profile__information">
       <h3>{{user.name}}  {{user.surname}}</h3>
       <h4>{{user.login}}</h4>
       <h4>{{user.phone}}</h4>
       <button mat-raised-button color="accent" *ngIf='!buttonState; else pets' (click)='showPets()'>Show User Pets</button>
-      <button mat-raised-button color="accent" *ngIf='!firendRequest && !myProfilePage' (click)='addToFriends()'>Add to friends</button>
+      <button mat-raised-button color="accent" *ngIf='!firendRequest && !myProfilePage' (click)='addFriend()'>Add to friends</button>
       <ng-template #pets>
          <button mat-raised-button color="accent" (click)='showPets()'>Hide User Pets</button>
          <h3>{{user.name}}s pets:</h3>

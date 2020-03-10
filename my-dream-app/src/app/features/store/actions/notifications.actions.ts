@@ -1,9 +1,11 @@
 import { Action } from '@ngrx/store';
 import { INotificationsState } from '../state/notification.state';
+import { User } from 'src/app/models/user.model';
 
 export enum ENotificationsActions{
     GetNotifications = '[Notifications] Get Notifications',
-    GetNotificationsSuccess = '[Notifications] Get Notifications Success'
+    GetNotificationsSuccess = '[Notifications] Get Notifications Success',
+    DeleteNotification = '[Notifications] Delete Notification'
 }
 
 export class GetNotifications implements Action {
@@ -12,7 +14,12 @@ export class GetNotifications implements Action {
 
 export class GetNotificationsSuccess implements Action {
     public readonly type = ENotificationsActions.GetNotificationsSuccess;
-    constructor(public payload: INotificationsState){}
+    constructor(public payload: any){}
 }
 
-export type NotificationsActions = GetNotifications | GetNotificationsSuccess;
+export class DeleteNotification implements Action {
+    public readonly type = ENotificationsActions.DeleteNotification;
+    constructor(public payload: any){}
+}
+
+export type NotificationsActions = GetNotifications | GetNotificationsSuccess | DeleteNotification;

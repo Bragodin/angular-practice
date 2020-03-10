@@ -20,8 +20,6 @@ export class FriendsComponent implements OnInit, OnDestroy {
     }
   }
   ngOnInit() { 
-    const id = localStorage.getItem('id');
-    this._store.dispatch(new GetMyFriends(id));
     // this._store.pipe(select(selectFriends)).subscribe(
     //   data => console.log(data)
     // );

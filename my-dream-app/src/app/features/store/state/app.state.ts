@@ -4,6 +4,7 @@ import { INotificationsState, initialNotificationsState } from './notification.s
 import { initialUserState, IUserState } from './user.state';
 import { IFriendsState, initialFriendsState } from './friends.state';
 import { IDialogState, initialDialogState } from './dialog.state';
+import { IPaginationState, initialPaginationState } from './pagination.state';
 
 export interface IAppState {
     router?: RouterReducerState;
@@ -11,7 +12,8 @@ export interface IAppState {
     notifications: INotificationsState;
     user: IUserState;
     friends: IFriendsState;
-    dialog: IDialogState 
+    dialog: IDialogState;
+    pagination: IPaginationState;
 }
 
 export const initialAppState: IAppState = {
@@ -19,7 +21,8 @@ export const initialAppState: IAppState = {
     notifications: initialNotificationsState,
     user: initialUserState,
     friends: initialFriendsState,
-    dialog: initialDialogState
+    dialog: initialDialogState,
+    pagination: initialPaginationState
 }
 
 export function getInitialState(): IAppState {

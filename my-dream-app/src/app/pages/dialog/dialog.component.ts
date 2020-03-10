@@ -18,9 +18,16 @@ export class DialogComponent implements OnInit {
   @Output() onSend = new EventEmitter<string>();
   
   constructor() { }
-  ngOnInit() {
-  }
+  ngOnInit() {}
   sendMessage(){
     this.onSend.emit(this.name);
+  }
+  isMyMessage(messageUser){
+    if(localStorage.getItem('id') === messageUser){
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 }

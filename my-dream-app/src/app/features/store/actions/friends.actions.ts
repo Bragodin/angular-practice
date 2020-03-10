@@ -7,7 +7,9 @@ export enum EFriendsActions{
     GetMyFriends = '[Friends] Get Frineds',
     GetMyFriendsSuccess = '[Friends] Get Frineds Success',
     DeleteFriend = '[Friend] Delete Friend',
-    DeleteFriendSuccess = '[Friend] Delete Friend Success'
+    DeleteFriendSuccess = '[Friend] Delete Friend Success',
+    PostFriend = '[Friend] post Friend',
+    PostFriendSuccess = '[Friend] Post Friend Success'
 }
 
 export class GetMyFriends implements Action {
@@ -31,4 +33,14 @@ export class DeleteFriendSuccess implements Action {
     constructor(public payload: string){}
 }
 
-export type FriendsActions = GetMyFriendsSuccess | GetMyFriendsSuccess | DeleteFriendSuccess | DeleteFriend;
+export class PostFriend implements Action {
+    public readonly type = EFriendsActions.PostFriend;
+    constructor(public payload: Friendship){}
+}
+
+export class PostFriendSuccess implements Action {
+    public readonly type = EFriendsActions.PostFriendSuccess;
+    constructor(public payload: User){}
+}
+
+export type FriendsActions = GetMyFriendsSuccess | GetMyFriendsSuccess | DeleteFriendSuccess | DeleteFriend | PostFriendSuccess;

@@ -7,7 +7,7 @@
         <button mat-stroked-button  *ngIf='loggedIn' routerLink = "/dashboard" routerLinkActive ='active-link'>all users</button>
         <button mat-stroked-button  *ngIf='loggedIn' routerLink = "/people" routerLinkActive ='active-link'>find people</button>
         <button mat-stroked-button  *ngIf='loggedIn' routerLink = "/settings" routerLinkActive ='active-link'>settings</button>
-        <app-notification [notificationState]='notificationState'></app-notification>
-        <button class='logout__button' mat-stroked-button  *ngIf='loggedIn' (click)='logOut()'>LogOut</button>
+        <app-notification [notificationState]='notificationState' class="notification"></app-notification>
+        <button mat-stroked-button  *ngIf='loggedIn' (click)='logOut()'>LogOut</button>
 </mat-toolbar-row>
 </mat-toolbar>

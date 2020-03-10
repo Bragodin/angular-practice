@@ -7,5 +7,5 @@ export interface User {
     phone: string;
     avatar?: string;
     pets?: [];
-    tokens?: []
+    tokens?: [];
 }

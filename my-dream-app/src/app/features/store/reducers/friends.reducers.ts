@@ -15,12 +15,17 @@ export function friendsReducers(
       };
     }  
     case EFriendsActions.DeleteFriendSuccess: {
-      const userFiltered = state.friends.filter(elem => elem.friend._id !== action.payload);
-      console.log(action.payload)
-      console.log(userFiltered)
+      const index = state.friends.findIndex(elem => elem.friend._id === action.payload);
+      state.friends.splice(index, 1);
       return {
         ...state,
-        friends: userFiltered
+        friends: state.friends
+      };
+    }  
+    case EFriendsActions.PostFriendSuccess: {
+      return {
+        ...state,
+        ...state.friends.push({friend: action.payload})
       };
     }  
     default:

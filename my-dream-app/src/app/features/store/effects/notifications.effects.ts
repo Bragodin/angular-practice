@@ -12,8 +12,8 @@ export class NotificationsEffects {
         ofType<GetNotifications>(ENotificationsActions.GetNotifications),
         switchMap(() => {
             return this.notificationsService.getUserNotifications(localStorage.getItem('id'))}),
-        map((notification: any)=> {   
-            return new GetNotificationsSuccess(notification[0]);
+        map((notification)=> {
+            return new GetNotificationsSuccess(notification);
         })        
     );
     constructor(private _actions$: Actions, private notificationsService: NotificationsService) { 

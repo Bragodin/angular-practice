@@ -1,5 +1,6 @@
 import { NotificationsActions, ENotificationsActions } from '../actions/notifications.actions';
 import { initialNotificationsState, INotificationsState } from '../state/notification.state';
+import { User } from 'src/app/models/user.model';
 
 export function notificationsReducers(
   state = initialNotificationsState,
@@ -9,7 +10,15 @@ export function notificationsReducers(
     case ENotificationsActions.GetNotificationsSuccess: {
       return {
         ...state,
-        ...action.payload
+        friendsNotification: action.payload 
+      };
+    }
+    case ENotificationsActions.DeleteNotification: {      
+      const index = state.friendsNotification.findIndex((elem) => elem === action.payload);
+      state.friendsNotification.splice(index, 1);
+      return {
+        ...state,
+        friendsNotification: state.friendsNotification
       };
     }
     default:

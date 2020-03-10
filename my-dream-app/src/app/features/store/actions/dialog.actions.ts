@@ -34,7 +34,7 @@ export class PostDialogSuccess implements Action {
 
 export class PostMessage implements Action {
     public readonly type = EDialogActions.PostMessage;
-    constructor(public payload_myId: string, public payload_activeUseerId: string, public payload_name: string){}
+    constructor(public payload: any){}
 }
 export class PostMessageSuccess implements Action {
     public readonly type = EDialogActions.PostMessageSuccess;

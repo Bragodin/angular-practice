@@ -9,7 +9,9 @@ export class MessageComponent implements OnInit {
 
   constructor() { }
   @Input() message: string;
+  @Input() isMyMessage: boolean;
   ngOnInit() {
+    
   }
 
 }

@@ -8,6 +8,7 @@ import { DialogService } from 'src/app/features/services/dialog.service';
 import { GetMyDialog, PostMessage } from 'src/app/features/store/actions/dialog.actions';
 import { User } from 'src/app/models/user.model';
 import { selectMessages } from 'src/app/features/store/selectors/dialog.selectors';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -19,8 +20,10 @@ export class DialogDataComponent implements OnInit {
   sub: Subscription;
   activeUser: User;
   messages: any;
-
-  constructor(private _store: Store<IAppState>, private dialogService: DialogService) { }
+  id: string;
+  constructor(private _store: Store<IAppState>, private activateRoute: ActivatedRoute) {
+    this.id = activateRoute.snapshot.params['id'];
+  }
 
   ngOnInit() {
     this._store.pipe(select(selectMessages)).subscribe(
@@ -29,12 +32,16 @@ export class DialogDataComponent implements OnInit {
     this._store.pipe(select(selectUser)).subscribe(
       data => {
         this.activeUser = data;
-        this._store.dispatch(new GetMyDialog([localStorage.getItem('id'), this.activeUser._id]))
+        this._store.dispatch(new GetMyDialog([localStorage.getItem('id'), this.id]))
         }
       );
   }
   sendMessage(name){
-    console.log(name)
-    this._store.dispatch(new PostMessage(localStorage.getItem('id'), this.activeUser._id, name));
+    let message = {
+      myid: localStorage.getItem('id'), 
+      userid: this.id,
+      message: name,
+    }
+    this._store.dispatch(new PostMessage(message));
   }
 }

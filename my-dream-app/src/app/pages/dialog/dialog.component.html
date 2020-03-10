@@ -1,9 +1,11 @@
 <div class="dialog">
-  <!-- <div class="messages"> -->
-    <app-message *ngFor='let message of messages' [message]='message.message'></app-message>
-  <!-- </div> -->
-  <form class="example-form">
-    <mat-form-field class="example-full-width">
+  <div class="messages">
+    <div class="message" *ngFor='let message of messages' [className]="isMyMessage(message.ownerId) ? 'active' : 'inactive'">
+      <app-message [message]='message.message' [isMyMessage]='isMyMessage(message.ownerId)'></app-message>
+    </div>
+  </div>
+  <form class="example-form" class='dialog__form'>
+    <mat-form-field>
       <mat-label>Message</mat-label>
       <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}" #message maxlength="256" placeholder="My message...">
       <mat-hint><strong>Don't disclose personal info</strong></mat-hint>

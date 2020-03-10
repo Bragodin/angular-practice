@@ -46,17 +46,17 @@ export class DialogEffects {
         withLatestFrom(this._store.pipe(select(selectDialogId))),
         switchMap(([action, dialogId]) => {
             const messageData = {
-                myid: action.payload_myId, 
-                userid: action.payload_activeUseerId,
-                message: action.payload_name,
+                ...action.payload,
                 dialogId: dialogId
             }
+            console.log(messageData)
             const dialog = this.websocketService.sendMessage(messageData);
             return [dialog];
         }),
         map((dialog)=> {   
             const message = {
                 dialogId: dialog.dialogId,
+                ownerId: dialog.myid,
                 message: dialog.message
             }
             return new PostMessageSuccess(message);

@@ -1,4 +1,4 @@
-<div class="gallery" *ngFor='let item of albums'>
+<div class="gallery container" *ngFor='let item of albums'>
     <h3>{{item.name}}</h3>
     <app-album [item]='item' (onDelete)="onDelete()" [myProfilePage]='myProfilePage'></app-album>
 </div>

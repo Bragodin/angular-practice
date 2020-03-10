@@ -18,7 +18,7 @@ export class DashboardContainerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._store.dispatch(new GetMyUsers());
     this._store.pipe(select(selectUser)).subscribe(); // unsub
-    this._store.dispatch(new GetMyUsers());
+    // this._store.dispatch(new GetMyUsers());
     this.sub = this._store.pipe(select(selectUsers)).subscribe(
       data => {
         this.users = data;

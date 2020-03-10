@@ -3,11 +3,12 @@
     <h4>{{user.name}}</h4>
     <h4>{{user.surname}}</h4>
     <h5>{{user.phone}}</h5>
-    <ng-container [ngSwitch]="buttonState">
+    <!-- <ng-container [ngSwitch]="buttonState">
         <button *ngSwitchCase="'accept'" mat-raised-button color="accent" (click)='sendButtonEvent(user)'>accept</button>
         <button  *ngSwitchCase="'add'" mat-raised-button color="accent" (click)='sendButtonEvent(user)'>add to friends</button>
         <button  *ngSwitchCase="'remove'" mat-raised-button color="accent" (click)='sendButtonEvent(user)'>remove from friends</button>
         <button  *ngSwitchCase="'reply'" mat-raised-button color="accent" (click)='sendButtonEvent(user)'>reply</button>
-    </ng-container>
-    <button mat-raised-button color="accent" (click)='openDialog()'>send message</button>
+    </ng-container> -->
+    <button mat-raised-button color="accent" (click)='sendButtonEvent(user)'>{{buttonState}}</button>
+    <button mat-raised-button color="accent" (click)='openDialog()' routerLink = "/mydialog/{{user._id}}">send message</button>
 </mat-card>

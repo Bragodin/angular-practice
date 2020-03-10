@@ -1,51 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { LoginService } from '../../../features/services/login.service';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router} from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { IAppState } from 'src/app/features/store/state/app.state';
-import { LoginUser } from 'src/app/features/store/actions/user.actions';
-import { selectLogin } from 'src/app/features/store/selectors/user.selectors';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy{
-  login: string;
-  password: string;
-  value: boolean = false;
-  sub: Subscription;
-  subs: Subscription[] = [];
-  constructor(private router: Router, private _store: Store<IAppState>) {
-    const id = localStorage.getItem('id');
-    if(localStorage.getItem('token') && id){
-      this.router.navigate([`/profile/${id}`]);
-    }
+export class LoginComponent implements OnInit{
+  @Input() value: boolean = false;
+  @Output() onSubmitEvent = new EventEmitter()
+  constructor(private router: Router) {
   }
   ngOnInit() {}
   onSubmit(form){
-    this._store.dispatch(new LoginUser(
-      {
-        login: form.value.email,
-        password: form.value.password
-      })
-    );
+    this.onSubmitEvent.emit(form);
 
-    this.sub =  this._store.pipe(select(selectLogin)).subscribe(
-      data => {
-        if(data !== null){
-          this.router.navigate([`/profile/${data._id}`]);
-        }
-      }
-    )
-    this.subs.push(this.sub);
-  }
-  ngOnDestroy() {
-    this.subs.forEach((sub: Subscription) => sub.unsubscribe())
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
   }
 }

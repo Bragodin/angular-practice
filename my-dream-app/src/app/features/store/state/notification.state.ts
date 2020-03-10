@@ -1,5 +1,3 @@
-import { Notification } from '../../../models/notification.model';
-
 export interface INotificationsState {
     _id?: string;
     ownerId: string;
