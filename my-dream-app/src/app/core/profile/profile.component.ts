@@ -21,11 +21,12 @@ export class ProfileComponent implements OnInit {
   @Input() buttonState: boolean = false;
   @Input() sub: Subscription;
   @Output() onAdd = new EventEmitter<Friendship>();
-
+  avatar: string;
   constructor(private activateRoute: ActivatedRoute, private websocketService: WebsocketService, private notificationsService: NotificationsService) {
     this.id = activateRoute.snapshot.params['id'];
   }
-  ngOnInit() {}
+  ngOnInit() {
+  }
   ngOnDestroy(){
     if(this.sub){
       this.sub.unsubscribe();

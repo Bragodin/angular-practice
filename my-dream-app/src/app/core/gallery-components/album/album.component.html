@@ -1,4 +1,4 @@
-<h4>Total photos: {{item.photosName.length}}</h4>
+<h4>Total photos: {{albumLength}}</h4>
 <div class="images-container">
     <div class='gallery__images' *ngFor='let image of item.photosName'>
         <app-photo [image]='image' [width]='200' [height]='200' [myProfilePage]='myProfilePage' (removePhotoEvent)='removePhoto($event)'></app-photo>

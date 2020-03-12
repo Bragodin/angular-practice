@@ -26,7 +26,7 @@ export class UserListElementComponent implements OnInit {
   @Input() user: User;
   @Input() buttonState: string;
   @Output() onChanged = new EventEmitter<any>();
-  constructor(private _store: Store<IAppState>, private router: Router) {
+  constructor(private _store: Store<IAppState>) {
   }
   ngOnInit() {     
   }
@@ -46,6 +46,5 @@ export class UserListElementComponent implements OnInit {
   }
   openDialog(){
     this._store.dispatch(new SetActiveUser(this.user));
-    // this._store.dispatch(new ) 
   }
 }

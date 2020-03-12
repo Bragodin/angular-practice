@@ -8,7 +8,6 @@ import { User } from '../../models/user.model';
 })
 export class DashboardComponent implements OnInit {
   @Input() users: User[];
-  count: number = 5;
   constructor() {}
   ngOnInit() {
   }

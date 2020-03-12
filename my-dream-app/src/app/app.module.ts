@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { MainComponent } from './core/main/main.component';
-import { UserComponent } from './core/user/user.component';
 import { HttpClientModule }    from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { CommonModule } from '@angular/common';
@@ -65,6 +64,7 @@ import { ActivePhotoComponent } from './core/gallery-components/active-photo/act
 import { LoginContainer } from './core/auth/login/login-container';
 import { PaginationComponent } from './core/pagination/pagination.component';
 import { MatSelectModule } from '@angular/material/select';
+import { AlbumsEffects } from './features/store/effects/albums.effects';
 
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
@@ -73,7 +73,6 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
   declarations: [
     AppComponent,
     MainComponent,
-    UserComponent,
     DashboardComponent,
     ProfileComponent,
     LoginComponent,
@@ -125,7 +124,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     MatCommonModule,
     MatSelectModule,
     StoreModule.forRoot(appReducers),
-    EffectsModule.forRoot([UserEffects, NotificationsEffects, AuthEffects, FriendsEffects, DialogEffects]),
+    EffectsModule.forRoot([UserEffects, NotificationsEffects, AuthEffects, FriendsEffects, DialogEffects, AlbumsEffects ]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router'}),
     !environment.production ? StoreDevtoolsModule.instrument() : []
   ],

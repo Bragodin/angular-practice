@@ -3,6 +3,9 @@ import { Album } from 'src/app/models/album.model';
 import { Subscription, Observable } from 'rxjs';
 import { AlbumService } from 'src/app/features/services/album.service';
 import { User } from 'src/app/models/user.model';
+import { IAppState } from 'src/app/features/store/state/app.state';
+import { Store } from '@ngrx/store';
+import { DeleteAlbums } from 'src/app/features/store/actions/albums.actions';
 
 @Component({
   selector: 'app-album',
@@ -12,22 +15,26 @@ import { User } from 'src/app/models/user.model';
 
 export class AlbumComponent implements OnInit, OnDestroy {
   imagePath: object;
-  urls: any[] = new Array<string>();;
+  urls: any[] = new Array<string>();
   photoName: string;
   files: any;
   usersService: Observable<User[]>;
   sub: Subscription;
+  albumLength: number;
   @Output() onDelete = new EventEmitter<boolean>();
-  @Input() item: any;
+  @Input() item: Album;
   @Input() myProfilePage: boolean;
   private subscriptions: Subscription[] = [];
-  constructor(private albumService: AlbumService) { }
+  constructor(private albumService: AlbumService, private _store: Store<IAppState>) {
+  }
   ngOnInit() {
+    
+    if(this.item.photosName){
+      this.albumLength = this.item.photosName.length;
+    }
   }
   ngOnDestroy(){
-    this.subscriptions.forEach( elem => {
-      elem.unsubscribe();
-    });
+ 
   }
   addPhoto(event){
     let target = event.target || event.srcElement;
@@ -65,12 +72,12 @@ export class AlbumComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.sub);
   }
   removeAlbum(item){
-    this.sub = this.albumService.removeAlbum(item._id).subscribe( 
-      data => { 
-        this.onDelete.emit();
-      },
-      error => { console.log(error) }      
-    );
-    this.subscriptions.push(this.sub);
+    this._store.dispatch(new DeleteAlbums(item._id));
+    // this.sub = this.albumService.removeAlbum(item._id).subscribe( 
+    //   data => { 
+    //     this.onDelete.emit();
+    //   },
+    //   error => { console.log(error) }      
+    // );
   }
 }

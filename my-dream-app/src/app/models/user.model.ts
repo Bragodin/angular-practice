@@ -8,4 +8,5 @@ export interface User {
     avatar?: string;
     pets?: [];
     tokens?: [];
+    totalCount?: number;
 }

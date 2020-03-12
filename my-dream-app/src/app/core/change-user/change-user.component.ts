@@ -24,7 +24,7 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
   sub: Subscription;
   imgURL: any;
 
-  constructor(private usersService: UsersService,  private router: Router, private albumService: AlbumService, private _store: Store<IAppState>) { }
+  constructor(private router: Router, private albumService: AlbumService, private _store: Store<IAppState>) { }
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,

@@ -5,6 +5,10 @@ import { ActivatedRoute} from '@angular/router';
 import { Observable } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { NotificationsService } from 'src/app/features/services/notifications.service';
+import { IAppState } from 'src/app/features/store/state/app.state';
+import { Store, select } from '@ngrx/store';
+import { GetAlbums } from 'src/app/features/store/actions/albums.actions';
+import { selectAlbums } from 'src/app/features/store/selectors/albums.selectors';
 
 @Component({
   selector: 'app-my-profile',
@@ -22,28 +26,22 @@ export class MyProfileComponent implements OnInit {
     private albumService: AlbumService,
     private route: ActivatedRoute,
     private notificationsService: NotificationsService,
-    // private _store: Store<IAppState>
+    private _store: Store<IAppState>
     ) { }
   ngOnInit() {
+    this.albums$ = this._store.pipe(select(selectAlbums));
     this.getAlbums();
-    // this.notificationsService.getUserNotifications(this.id).subscribe( data => {
-    //   this.userWithFriendRequest = data.friendsNotification.find(elem => elem === myId);
-    //   console.log(this.firendRequest);
-    //   if(this.userWithFriendRequest){
-    //     this.firendRequest = true;
-    //   }
-    // });
   }
   getAlbums(){
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
-      this.albums$ = this.albumService.getUserAlbums(this.id);
     });
+    this._store.dispatch(new GetAlbums(this.id));
   }
   get isMyProfile(): boolean {
       return localStorage.getItem('id') === this.id;
   }
   onDelete(){
-    this.albums$ = this.albumService.getUserAlbums(this.id);
+    // this.albums$ = this.albumService.getUserAlbums(this.id);
   }
 }

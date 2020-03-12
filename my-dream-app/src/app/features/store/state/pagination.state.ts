@@ -3,5 +3,5 @@ export interface IPaginationState {
 }
 
 export const initialPaginationState: IPaginationState = {
-    usersPage: 0
+    usersPage: 1
 } 

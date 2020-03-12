@@ -8,10 +8,7 @@ export enum EPaginationsActions {
 
 export class GetUsersPage implements Action {
     public readonly type = EPaginationsActions.GetUsersPage;
-    constructor(public payload?: number){
-        console.log('payload')
-        console.log(payload)
-    }
+    constructor(public payload?: number){}
 }
 
 export class PostUsersPage implements Action {

@@ -1,11 +1,9 @@
+import { Album } from 'src/app/models/album.model';
+
 export interface IAlbumState {
-    name: string;
-    userId: string;
-    photos: string[];
+    albums: Album[]
 }
 
 export const initialAlbumState: IAlbumState = {
-    name: null,
-    userId: null,
-    photos: null
+    albums: [{}] as Album[]
 } 

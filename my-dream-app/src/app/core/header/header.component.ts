@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit, OnDestroy, DoCheck {
   notificationState: boolean = false;
   notifications$ = this._store.pipe(select(selectNotifications));
   sub: Subscription;
-  constructor(private loginService: LoginService, private router: Router, private generalStateService: GeneralStateService, private _store: Store<IAppState>) { 
+  constructor(private router: Router, private _store: Store<IAppState>) { 
   }
   ngOnDestroy() {
     if(this.sub){

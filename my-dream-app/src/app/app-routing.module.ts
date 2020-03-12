@@ -1,7 +1,6 @@
 import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { UserComponent } from './core/user/user.component';
 import { RegistrationComponent } from './core/auth/registration/registration.component';
 import { AuthGuard } from './guards/auth.guard';
 import { SettingsComponent } from './pages/settings/settings.component';
@@ -22,7 +21,6 @@ const friendsRoutes: Routes = [
 ];
 
 const routes: Routes = [
-  { path: 'users', canActivate: [AuthGuard], component: UserComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'dashboard', canActivate: [AuthGuard], component: DashboardContainerComponent },
   { path: 'profile/:id', canActivate: [AuthGuard], component: MyProfileComponent },

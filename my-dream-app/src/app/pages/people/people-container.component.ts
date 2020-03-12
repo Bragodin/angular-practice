@@ -15,7 +15,7 @@ export class PeopleConteinerComponent implements OnInit {
   constructor(private _store: Store<IAppState>) { 
   }
   ngOnInit(){
-    this._store.dispatch(new GetMyUsers());
+    this._store.dispatch(new GetMyUsers({page: 5, count: 5}));
     this._store.pipe(select(selectUsers)).subscribe(
         data => this.result = data
     );

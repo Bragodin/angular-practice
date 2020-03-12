@@ -4,6 +4,9 @@ import { Album } from 'src/app/models/album.model';
 import { Photo } from '../../../models/photo.model';
 import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
+import { IAppState } from 'src/app/features/store/state/app.state';
+import { Store } from '@ngrx/store';
+import { PostAlbum } from 'src/app/features/store/actions/albums.actions';
 
 @Component({
   selector: 'app-gallery',
@@ -16,7 +19,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   @Output() delete = new EventEmitter<boolean>();
   albumName = new FormControl('', []);
   addAlbumState: boolean = false;
-  constructor(private albumService: AlbumService) { }
+  constructor(private albumService: AlbumService, private _store: Store<IAppState>) { }
   ngOnInit() {
   }
   ngOnDestroy(){
@@ -34,16 +37,18 @@ export class GalleryComponent implements OnInit, OnDestroy {
         name: this.albumName.value.toString(),
         userId: id,
         photosName: []
-      }
-      this.albumService.addAlbum(album).subscribe(
-        data => {
-          console.log(album)
-          console.log(data)
-        },
-        error => {
-          console.log(error)
-        }
-      );
+    }
+    this._store.dispatch(new PostAlbum(album));
+    console.log('POST ALBUMMMMMMM')
+    //   this.albumService.addAlbum(album).subscribe(
+    //     data => {
+    //       console.log(album)
+    //       console.log(data)
+    //     },
+    //     error => {
+    //       console.log(error)
+    //     }
+    //   );
     }
     this.delete.emit();
   }

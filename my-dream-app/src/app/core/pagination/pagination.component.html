@@ -1,9 +1,9 @@
-<section class="buttons-for-users">
+<section class="pagination">
     <button mat-raised-button color="accent" (click)='changePage(false)'>Previou</button>
     <ul>
-        <li *ngFor=''><a></a></li>
+        <!-- <li *ngFor='let i of totalCount'><a>{{i}}</a></li> -->
     </ul>
-    <mat-form-field>
+    <mat-form-field class="select">
         <mat-label>Select an option</mat-label>
         <mat-select [(value)]="selected">
           <mat-option value="5">5</mat-option>

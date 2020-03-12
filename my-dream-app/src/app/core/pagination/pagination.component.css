@@ -1,4 +1,8 @@
-.buttons-for-users {
+.pagination {
     display: flex;
     justify-content: space-around;
+    align-items: center;
+}
+.select {
+    width: 40px;
 }

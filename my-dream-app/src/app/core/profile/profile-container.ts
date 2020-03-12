@@ -26,13 +26,11 @@ export class ProfileContainerComponent implements OnInit {
   sub: Subscription;
   constructor(private usersService: UsersService, private activateRoute: ActivatedRoute, private websocketService: WebsocketService, private notificationsService: NotificationsService, private _store: Store<IAppState>) {
     this.id = activateRoute.snapshot.params['id'];
-    console.log('prof cont')
-    console.log(this.myProfilePage)
   }
   ngOnInit() {
     this._store.dispatch(new GetMyUser(this.id));
     this.sub = this._store.pipe(select(selectUser)).subscribe(user => {
-        if(user !== null){
+        if(user !== null && user){
           this.user = user;
         } else {
           console.log('USER DON\'T UPOLOAD')
