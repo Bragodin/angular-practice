@@ -8,6 +8,6 @@ export interface IUserState {
 
 export const initialUserState: IUserState = {
     activeUser: {} as User,
-    users: {} as User[],
+    users: [{}] as User[],
     autorizationUser: {} as User
 } 

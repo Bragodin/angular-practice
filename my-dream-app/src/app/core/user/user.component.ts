@@ -6,6 +6,7 @@ import { Store, select } from '@ngrx/store';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { GetMyUsers } from 'src/app/features/store/actions/user.actions';
 import { selectUsers } from 'src/app/features/store/selectors/user.selectors';
+import { PostUsersPage } from 'src/app/features/store/actions/pagination.actions';
 
 @Component({
   selector: 'app-user',
@@ -21,7 +22,7 @@ export class UserComponent implements OnInit {
   password: string = '';
   page: number = 0;
   constructor(private usersService: UsersService, private _store: Store<IAppState>) {
-    this._store.dispatch(new GetMyUsers(this.page));
+    this._store.dispatch(new GetMyUsers({page: this.page, count: 5}));
     this.users = this._store.pipe(select(selectUsers));
   }
   ngOnInit() {
@@ -30,11 +31,10 @@ export class UserComponent implements OnInit {
     this.usersService.remove(id);
   }
   changePage(n){
-    console.log(n)
     console.log(this.page)
     if((this.page + n) >= 0){
-      this.page = this.page + n
-      this._store.dispatch(new GetMyUsers(this.page));
+      this.page = this.page + n;
+      // this._store.dispatch(new PostUsersPage(this.page));
       this.users = this._store.pipe(select(selectUsers));
     }
   }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WebsocketService } from 'src/app/features/services/websoket.service';
 import { GetNotifications } from 'src/app/features/store/actions/notifications.actions';
 import { Store } from '@ngrx/store';
-import { GetMyUser, GetAutorizationUser } from 'src/app/features/store/actions/user.actions';
+import { GetMyUser, GetAutorizationUser, GetMyUsers } from 'src/app/features/store/actions/user.actions';
 import { Router } from '@angular/router';
 import { GetMyFriends } from 'src/app/features/store/actions/friends.actions';
 

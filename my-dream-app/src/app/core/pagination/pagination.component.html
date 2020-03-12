@@ -1,7 +1,15 @@
 <section class="buttons-for-users">
-    <button mat-raised-button color="accent" (click)='changePage(-count)'>Previou</button>
+    <button mat-raised-button color="accent" (click)='changePage(false)'>Previou</button>
     <ul>
         <li *ngFor=''><a></a></li>
     </ul>
-    <button mat-raised-button color="accent" (click)='changePage(count)'>Next</button>
+    <mat-form-field>
+        <mat-label>Select an option</mat-label>
+        <mat-select [(value)]="selected">
+          <mat-option value="5">5</mat-option>
+          <mat-option value="10">10</mat-option>
+          <mat-option value="15">15</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="accent" (click)='changePage(true)'>Next</button>
 </section>

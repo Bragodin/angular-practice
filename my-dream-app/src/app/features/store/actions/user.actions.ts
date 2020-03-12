@@ -2,6 +2,7 @@ import { Action } from '@ngrx/store';
 import { IUserState } from '../state/user.state';
 import { User } from 'src/app/models/user.model';
 import { LoginUserModel } from 'src/app/models/login-user.model';
+import { Page } from 'src/app/models/pagination.model';
 
 export enum EUserActions{
     GetMyUser = '[User] Get User',
@@ -41,7 +42,7 @@ export class GetAutorizationUserSuccess implements Action {
 
 export class GetMyUsers implements Action {
     public readonly type = EUserActions.GetMyUsers;
-    constructor(public payload?: number){}
+    constructor(public payload?: Page){}
 }
 
 export class GetMyUsersSuccess implements Action {

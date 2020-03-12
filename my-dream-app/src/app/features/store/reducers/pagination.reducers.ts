@@ -6,7 +6,7 @@ export function paginationReducers(
   action: PaginationsActions
 ): IPaginationState {
   switch (action.type) {
-    case EPaginationsActions.PostPage: {
+    case EPaginationsActions.PostUsersPage: {
       return {
         ...state,
         usersPage: action.payload

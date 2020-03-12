@@ -64,6 +64,7 @@ import { PhotoComponent } from './core/gallery-components/photo-in-album/photo.c
 import { ActivePhotoComponent } from './core/gallery-components/active-photo/active-photo.component';
 import { LoginContainer } from './core/auth/login/login-container';
 import { PaginationComponent } from './core/pagination/pagination.component';
+import { MatSelectModule } from '@angular/material/select';
 
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
 
@@ -122,6 +123,7 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     MatDialogModule,
     MatListModule,
     MatCommonModule,
+    MatSelectModule,
     StoreModule.forRoot(appReducers),
     EffectsModule.forRoot([UserEffects, NotificationsEffects, AuthEffects, FriendsEffects, DialogEffects]),
     StoreRouterConnectingModule.forRoot({ stateKey: 'router'}),

@@ -13,9 +13,11 @@
     word-break:break-all;
     /* overflow:auto */
 }
-.message p{
+
+.message p {
     overflow-wrap: break-word;
 }
+
 .myMessage {
     background: pink;
 }

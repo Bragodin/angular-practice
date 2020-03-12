@@ -1,18 +1,22 @@
 import { Action } from '@ngrx/store';
 
-export enum EPaginationsActions{
-    GetPage = '[Pagination] Get Page',
-    PostPage = '[Pagination] Post Page',
+export enum EPaginationsActions {
+  GetPage = '[Pagination] Get Page',
+  GetUsersPage = "[Pagination] Get Page",
+  PostUsersPage = "[Pagination] Post Page"
 }
 
-export class GetPage implements Action {
-    public readonly type = EPaginationsActions.GetPage;
+export class GetUsersPage implements Action {
+    public readonly type = EPaginationsActions.GetUsersPage;
+    constructor(public payload?: number){
+        console.log('payload')
+        console.log(payload)
+    }
+}
+
+export class PostUsersPage implements Action {
+    public readonly type = EPaginationsActions.PostUsersPage;
     constructor(public payload?: number){}
 }
 
-export class PostPage implements Action {
-    public readonly type = EPaginationsActions.PostPage;
-    constructor(public payload?: number){}
-}
-
-export type PaginationsActions = GetPage | PostPage;
+export type PaginationsActions = GetUsersPage | PostUsersPage;

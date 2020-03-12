@@ -36,13 +36,14 @@ export class UsersService {
     this.syncUsers = this.syncUsers.filter((user: User) => user._id !== id);
     this.users.next(this.syncUsers);
   }
-  getUsers(page)
+  getUsers(page, count)
   {
-    this.http.get<User[]>(`http://localhost:3000/users/?page=${page}`).subscribe(data => {
-      this.users.next(data);
-      this.syncUsers = data;
-  });
-    return this.users;
+  //   this.http.get<User[]>(`http://localhost:3000/users/?page=${page}`).subscribe(data => {
+  //     this.users.next(data);
+  //     this.syncUsers = data;
+  // });
+  //   return this.users;
+    return this.http.get<User[]>(`http://localhost:3000/users/?page=${page}&count=${count}`);
   }
   getUserPets(id){
     return this.http.get<User>(`http://localhost:3000/users/${id}/pets`);

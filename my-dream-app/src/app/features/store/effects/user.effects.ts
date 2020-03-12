@@ -23,7 +23,7 @@ export class UserEffects {
     getMyUsers$ = this._actions$.pipe(
         ofType<GetMyUsers>(EUserActions.GetMyUsers),
         switchMap((action) => { 
-            return this.usersService.getUsers(action.payload)
+            return this.usersService.getUsers(action.payload.page, action.payload.count);
         }), 
         map((users: User[])=> {   
             return new GetMyUsersSuccess(users);

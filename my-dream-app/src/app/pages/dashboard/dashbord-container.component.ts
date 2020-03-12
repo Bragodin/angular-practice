@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { User } from '../../models/user.model';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { GetMyUsers } from 'src/app/features/store/actions/user.actions';
@@ -8,26 +8,24 @@ import { selectUser, selectUsers } from 'src/app/features/store/selectors/user.s
 
 @Component({
   selector: 'app-dashboard-container',
-  template: `<app-dashboard [users]='users'></app-dashboard>`
+  template: `<app-dashboard [users]='users'></app-dashboard>
+             <app-pagination (onChangePage)='onChangePage($event)'></app-pagination>`
 })
 export class DashboardContainerComponent implements OnInit, OnDestroy {
-  users: User[];
+  users: Observable<User[]>;
   private sub: Subscription;
-  constructor(private _store: Store<IAppState>
-    ) {}
+  constructor(private _store: Store<IAppState>) {}
   ngOnInit() {
-    this._store.dispatch(new GetMyUsers());
+    this._store.dispatch(new GetMyUsers({page: 0, count: 5}));
     this._store.pipe(select(selectUser)).subscribe(); // unsub
-    // this._store.dispatch(new GetMyUsers());
-    this.sub = this._store.pipe(select(selectUsers)).subscribe(
-      data => {
-        this.users = data;
-      }
-    );
+    this.users = this._store.pipe(select(selectUsers));
   }
   ngOnDestroy(){
     if(this.sub){
       this.sub.unsubscribe();
     }
+  }
+  onChangePage(page){
+    this._store.dispatch(new GetMyUsers({page: page.page, count: page.count}));
   }
 }
