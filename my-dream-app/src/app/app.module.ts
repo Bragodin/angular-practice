@@ -65,10 +65,10 @@ import { LoginContainer } from './core/auth/login/login-container';
 import { PaginationComponent } from './core/pagination/pagination.component';
 import { MatSelectModule } from '@angular/material/select';
 import { AlbumsEffects } from './features/store/effects/albums.effects';
+import { FriendNotificationComponent } from './ui/friend-notification/friend-notification.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
-
-
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -103,7 +103,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     PhotoComponent,
     ActivePhotoComponent,
     LoginContainer,
-    PaginationComponent
+    PaginationComponent,
+    FriendNotificationComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 <div class="gallery container" *ngFor='let item of albums'>
     <h3>{{item.name}}</h3>
-    <app-album [item]='item' (onDelete)="onDelete()" [myProfilePage]='myProfilePage'></app-album>
+    <app-album [item]='item' [myProfilePage]='myProfilePage'></app-album>
 </div>
 <ng-container *ngIf='myProfilePage'>
     <button mat-raised-button color="warn" *ngIf='!addAlbumState; else addAlbum' (click)='changeAddAlbumState()'>Add Album</button>

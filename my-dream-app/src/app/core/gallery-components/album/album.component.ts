@@ -5,7 +5,7 @@ import { AlbumService } from 'src/app/features/services/album.service';
 import { User } from 'src/app/models/user.model';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { Store } from '@ngrx/store';
-import { DeleteAlbums } from 'src/app/features/store/actions/albums.actions';
+import { DeleteAlbums, PostPhotos, DeletePhotos } from 'src/app/features/store/actions/albums.actions';
 
 @Component({
   selector: 'app-album',
@@ -21,14 +21,12 @@ export class AlbumComponent implements OnInit, OnDestroy {
   usersService: Observable<User[]>;
   sub: Subscription;
   albumLength: number;
-  @Output() onDelete = new EventEmitter<boolean>();
   @Input() item: Album;
   @Input() myProfilePage: boolean;
   private subscriptions: Subscription[] = [];
-  constructor(private albumService: AlbumService, private _store: Store<IAppState>) {
+  constructor(private _store: Store<IAppState>) {
   }
   ngOnInit() {
-    
     if(this.item.photosName){
       this.albumLength = this.item.photosName.length;
     }
@@ -56,28 +54,26 @@ export class AlbumComponent implements OnInit, OnDestroy {
     for(let i = 0; i < files.length; i++){
       formData.append('profiles', files[i]);
     }
-    this.sub = this.albumService.sendPhotos(formData, item).subscribe(data => this.onDelete.emit());
-    this.subscriptions.push(this.sub);
+    this._store.dispatch(new PostPhotos({formData: formData, item: item}));
   }
-  uppdateAlbum(item){
-    this.sub = this.albumService.updateAlbum(item._id, item).subscribe(
-      data => {this.onDelete.emit();},
-      error => { console.log(error) }
-    );
-    this.subscriptions.push(this.sub);
-  }
-  removePhoto(image){
+  // uppdateAlbum(item){
+  //   this._store.dispatch(new UpdateAlbum({id: item._id, item: item}));
+
+  //   this.sub = this.albumService.updateAlbum(item._id, item).subscribe(
+  //     data => {this.onDelete.emit();},
+  //     error => { console.log(error) }
+  //   );
+  //   this.subscriptions.push(this.sub);
+  // }
+  removePhoto(image, itemId){
+    console.log(itemId)
     this.item.photosName = this.item.photosName.filter( elem => elem !== image);
-    this.sub = this.albumService.deltePhoto(image.name).subscribe( data => this.onDelete.emit());
-    this.subscriptions.push(this.sub);
+    // this.sub = this.albumService.deltePhoto(image.name).subscribe( data => this.onDelete.emit());
+    // this.subscriptions.push(this.sub);
+
+    this._store.dispatch(new DeletePhotos({ image: image.name, albumId: itemId}));
   }
   removeAlbum(item){
     this._store.dispatch(new DeleteAlbums(item._id));
-    // this.sub = this.albumService.removeAlbum(item._id).subscribe( 
-    //   data => { 
-    //     this.onDelete.emit();
-    //   },
-    //   error => { console.log(error) }      
-    // );
   }
 }

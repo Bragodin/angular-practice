@@ -1,15 +1,15 @@
 <section class="pagination">
-    <button mat-raised-button color="accent" (click)='changePage(false)'>Previou</button>
-    <ul>
-        <!-- <li *ngFor='let i of totalCount'><a>{{i}}</a></li> -->
+    <button mat-raised-button [ngStyle]="getButtonPrevStyle()" color="accent" (click)='changePage(false)'>Previou</button>
+    <ul class="pagination__pages">
+        <li class="pagination__pages_page" *ngFor='let item of totalCountArray'><a (click)='setPageValue(item)' [ngStyle]="getActivePage(item)">{{item}}</a></li>
     </ul>
     <mat-form-field class="select">
         <mat-label>Select an option</mat-label>
-        <mat-select [(value)]="selected">
+        <mat-select [(value)]="selected" (selectionChange)='changeSelect()'>
           <mat-option value="5">5</mat-option>
           <mat-option value="10">10</mat-option>
           <mat-option value="15">15</mat-option>
         </mat-select>
     </mat-form-field>
-    <button mat-raised-button color="accent" (click)='changePage(true)'>Next</button>
+    <button mat-raised-button [ngStyle]="getButtonNextStyle()" color="accent" (click)='changePage(true)'>Next</button>
 </section>

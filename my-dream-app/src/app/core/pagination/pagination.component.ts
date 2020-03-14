@@ -12,27 +12,88 @@ import { Page } from 'src/app/models/pagination.model';
 })
 export class PaginationComponent implements OnInit {
   selected = '5';
-  @Input() page: number;
+  page: number = 1;
   @Input() totalCount: number;
+  totalCountArray = [];
+  count: number = +this.selected;
+  maxPage: number = Math.ceil(this.totalCount / this.count);
   constructor(private _state: Store<IAppState>) { }
-  count: number = 5;
   @Output() onChangePage = new EventEmitter<Page>();
   ngOnInit() {
-    this._state.pipe(select(selectUserPage)).subscribe(
-      page => this.page = page
-    );
+    
+  }
+  ngOnChanges(){
+    this.calculatePage();
+  }
+  calculatePage(){
+    this.totalCountArray = [];
+    this.count = +this.selected;
+    console.log('total count: ')
+    console.log(this.totalCount)
+    this.maxPage = Math.ceil(this.totalCount / this.count);
+    this.totalCountArray.push(1);
+    if(this.page  !== 2 && this.page  !== 1){
+      this.totalCountArray.push('...');
+    }
+    for(let i = this.page - 1; i <= this.page + 1; i++){
+      if(i !== 0 && i !== 1 && i !== this.maxPage && this.page !== this.maxPage){
+        this.totalCountArray.push(i);
+      }
+    }
+    if(this.maxPage - (this.page + 1) > 1){
+      this.totalCountArray.push('...');
+    }
+    if(this.page === this.maxPage && this.maxPage !== 2){
+     this.totalCountArray.push(this.maxPage - 1); 
+    }
+    if(this.maxPage !== 1){
+      this.totalCountArray.push(this.maxPage);
+    }
+  }
+  setPageValue(value){
+    if(value !== '...'){
+      this.page = value;
+      console.log(this.page)
+      this.calculatePage();
+      this.onChangePage.emit({page: this.page, count: this.count});
+    }
+  }
+  changeSelect(){
+    this.calculatePage();
+    this.onChangePage.emit({page: this.page, count: this.count});
   }
   changePage(isNext){
     this.count = +this.selected;
-    console.log(this.count);
-    // isNext && this.page >= 1 && this.page < this.totalCount + 1? this.page++:this.page--;
-    let maxPage = this.totalCount / this.count;
-    if(isNext && this.page < maxPage){
+    this.maxPage = Math.ceil(this.totalCount / this.count);
+    this.calculatePage();
+    if(isNext && this.page < this.maxPage){
       this.page++;
     } else if(!isNext && this.page > 1) {
       this.page--;
     }
-    // this._state.dispatch(new PostUsersPage(this.page));
     this.onChangePage.emit({page: this.page, count: this.count});
+  }
+  getButtonNextStyle(){
+   if(this.page === this.maxPage){
+    return {
+      'background': `#778899`,
+      'pointer-events': `none`
+    }
+   }
+  }
+  getButtonPrevStyle(){
+    if(this.page === 1){
+      return {
+        'background': `#778899`,
+        'pointer-events': `none`
+      }
+     }
+  }
+  getActivePage(value){
+    if(this.page === value){
+      return {
+        'color': `pink`
+      }
+     }
   }
 }

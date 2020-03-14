@@ -6,8 +6,9 @@ import { Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AlbumService } from 'src/app/features/services/album.service';
 import { UpdateAvatar, UpdateMyUser } from 'src/app/features/store/actions/user.actions';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { IAppState } from 'src/app/features/store/state/app.state';
+import { autorithationUsers } from 'src/app/features/store/selectors/user.selectors';
 
 @Component({
   selector: 'app-change-user',
@@ -19,7 +20,7 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
   surname: string;
   login: string;
   password: string;
-  phone: String;
+  phone: string;
   file: object;
   sub: Subscription;
   imgURL: any;
@@ -30,6 +31,15 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
     Validators.email,
   ]);
   ngOnInit() {
+    this._store.pipe(select(autorithationUsers)).subscribe(
+      data => {
+        this.name = data.name;
+        this.surname = data.surname;
+        this.login = data.login;
+        this.phone = data.phone;
+        this.imgURL = `http://localhost:3000/uploads/${data.avatar}`
+      }
+    )
   }
   ngOnDestroy(){
     if(this.sub){
@@ -50,28 +60,32 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
     const formData = new FormData();  
     formData.append('profiles', this.file[0]);
     this.sub = this.albumService.sendAvatar(formData, id).subscribe(
-      data => this._store.dispatch(new UpdateAvatar(data.avatar))
+      data => {
+        this._store.dispatch(new UpdateAvatar(data.avatar))
+        alert('Photo is update')
+      }
     );
   }
   changeUsers(){
     let id = localStorage.getItem('id');
-    const user: any = {
+    const user: User = {
       name: this.name,
       surname: this.surname,
       login: this.login,
       password: this.password,
       phone: this.phone
     }
-      let userUpdate: any = {};
-      for(let item in user){
-        if(user[item] !== undefined){
-          userUpdate[item] = user[item];
-        }
+    let userUpdate: any = {};
+    for(let item in user){
+      if(user[item] !== undefined){
+        userUpdate[item] = user[item];
       }
+    }
     if(id && user) {
       // this.usersService.updateUsers(id, userUpdate);
       // this.router.navigate([`/profile/${id}`]);
       this._store.dispatch(new UpdateMyUser(userUpdate));
+      this.router.navigate([`/profile/${id}`]);
     }
   }
 }

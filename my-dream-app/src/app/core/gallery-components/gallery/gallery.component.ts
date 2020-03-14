@@ -27,9 +27,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
   changeAddAlbumState(){
     this.addAlbumState = !this.addAlbumState;
   }
-  onDelete(){
-    this.delete.emit();
-  }
   submit(){
     const id = localStorage.getItem('id');
     if(id){
@@ -39,16 +36,6 @@ export class GalleryComponent implements OnInit, OnDestroy {
         photosName: []
     }
     this._store.dispatch(new PostAlbum(album));
-    console.log('POST ALBUMMMMMMM')
-    //   this.albumService.addAlbum(album).subscribe(
-    //     data => {
-    //       console.log(album)
-    //       console.log(data)
-    //     },
-    //     error => {
-    //       console.log(error)
-    //     }
-    //   );
     }
     this.delete.emit();
   }

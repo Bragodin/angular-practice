@@ -6,3 +6,16 @@
 .select {
     width: 40px;
 }
+.pagination__pages_page {
+    list-style-type: none;
+    margin: 10px; 
+}
+.pagination__pages{
+    display: flex;
+}
+.pagination__pages_page a{
+    cursor: pointer;
+}
+.pagination__pages_page a:hover{
+    color: salmon;
+}

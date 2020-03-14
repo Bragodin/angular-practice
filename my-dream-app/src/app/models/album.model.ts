@@ -1,6 +1,8 @@
+import { Photo } from './photo.model';
+
 export interface Album {
     _id?: string; 
     name: string;
     userId: string;
-    photosName: string[];
+    photosName: Photo[];
 }

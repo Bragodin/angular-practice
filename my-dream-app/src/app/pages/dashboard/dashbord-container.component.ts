@@ -21,11 +21,13 @@ export class DashboardContainerComponent implements OnInit, OnDestroy {
     this._store.pipe(select(selectUser)).subscribe(); // unsub
     this._store.pipe(select(selectUsers)).subscribe(
       data => {
-        this.totalCount = +data[0].totalCount;      
-        return this.users = data;
+        if(data[0].totalCount){
+          this.totalCount = data[0].totalCount;
+          console.log(this.totalCount)
+          return this.users = data;
+        }
       }
     )
-
   }
   ngOnDestroy(){
     if(this.sub){

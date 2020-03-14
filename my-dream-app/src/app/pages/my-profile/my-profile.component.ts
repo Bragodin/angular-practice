@@ -9,6 +9,7 @@ import { IAppState } from 'src/app/features/store/state/app.state';
 import { Store, select } from '@ngrx/store';
 import { GetAlbums } from 'src/app/features/store/actions/albums.actions';
 import { selectAlbums } from 'src/app/features/store/selectors/albums.selectors';
+import { GetMyUser } from 'src/app/features/store/actions/user.actions';
 
 @Component({
   selector: 'app-my-profile',
@@ -23,7 +24,6 @@ export class MyProfileComponent implements OnInit {
   firendRequest: boolean;
   userWithFriendRequest: any;
   constructor(
-    private albumService: AlbumService,
     private route: ActivatedRoute,
     private notificationsService: NotificationsService,
     private _store: Store<IAppState>
@@ -35,13 +35,11 @@ export class MyProfileComponent implements OnInit {
   getAlbums(){
     this.route.paramMap.subscribe(params => {
       this.id = params.get('id');
+      this._store.dispatch(new GetMyUser(this.id));
+      this._store.dispatch(new GetAlbums(this.id));
     });
-    this._store.dispatch(new GetAlbums(this.id));
   }
   get isMyProfile(): boolean {
-      return localStorage.getItem('id') === this.id;
-  }
-  onDelete(){
-    // this.albums$ = this.albumService.getUserAlbums(this.id);
+    return localStorage.getItem('id') === this.id;
   }
 }

@@ -8,7 +8,7 @@
     <ng-template #alienAlbums>
         <h3>Albums:</h3>
     </ng-template> 
-    <app-gallery [albums]='albums$ | async' (delete)="onDelete()" [myProfilePage]='isMyProfile'></app-gallery>
+    <app-gallery [albums]='albums$ | async' [myProfilePage]='isMyProfile'></app-gallery>
 </div>
 
 

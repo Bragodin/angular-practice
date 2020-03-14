@@ -1,5 +1,7 @@
-mat-card {
+.user-card{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
+    outline: none;
 }

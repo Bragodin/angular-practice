@@ -1,7 +1,6 @@
 import { Component, OnInit, DoCheck, OnDestroy } from '@angular/core';
 import { LoginService } from '../../features/services/login.service';
 import { Router} from '@angular/router';
-import { GeneralStateService } from '../../features/services/general-state.service';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { Store, select } from '@ngrx/store';
 import { selectNotifications } from 'src/app/features/store/selectors/notifications.selectors';
@@ -16,9 +15,6 @@ import { selectLogout } from 'src/app/features/store/selectors/user.selectors';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy, DoCheck {
-  // name: String = '';
-  // surname: String = '';
-  // users: User[];
   token: string = localStorage.getItem('token');
   notificationState: boolean = false;
   notifications$ = this._store.pipe(select(selectNotifications));
@@ -31,9 +27,6 @@ export class HeaderComponent implements OnInit, OnDestroy, DoCheck {
     }
   }
   ngOnInit() {
-    // this.generalStateService.notificationsState.subscribe(data =>{
-    //   this.notificationState = true;
-    // })
     if(this.router.url === '/login'){                   //     переделать условие
       this._store.dispatch(new GetNotifications());    
     }

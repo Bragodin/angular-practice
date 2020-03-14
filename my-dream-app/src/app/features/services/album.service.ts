@@ -13,7 +13,7 @@ export class AlbumService {
     return this.http.get<Album[]>(`http://localhost:3000/album/${id}`);
   }
   sendPhotos(file, item){
-    return this.http.post(`http://localhost:3000/files/?userId=${item.userId}&albumId=${item._id}`, file); 
+    return this.http.post(`http://localhost:3000/files/?userId=${item.userId}&albumId=${item._id}`, file);
   }
   updateAlbum(id, album): Observable<Album> {
     console.log(album)

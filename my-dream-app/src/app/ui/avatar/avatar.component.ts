@@ -9,11 +9,15 @@ export class AvatarComponent implements OnInit {
 
   constructor() { }
   @Input() photoName: string;
+  @Input() notification: boolean;
   ngOnInit() {
   }
   getMyAvatar(){
     return {
       'background-image': `url(http://localhost:3000/uploads/${this.photoName})`
     }
+  }
+  get isNotification(){
+    return this.notification;
   }
 }

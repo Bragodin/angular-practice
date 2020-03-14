@@ -1,4 +1,4 @@
-<mat-card [ngStyle]="getBackground()">
+<mat-card class='user-card' [ngStyle]="getBackground()" routerLink = "/profile/{{user._id}}">
     <app-avatar [photoName]='user.avatar'></app-avatar>
     <h4>{{user.name}}</h4>
     <h4>{{user.surname}}</h4>
