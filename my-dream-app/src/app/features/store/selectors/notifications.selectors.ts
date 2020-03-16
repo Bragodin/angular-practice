@@ -8,3 +8,8 @@ export const selectNotifications = createSelector(
     notificationsState,
     (state: INotificationsState) => state
 )
+
+export const selectFriendsNotifications = createSelector(
+    notificationsState,
+    (state: INotificationsState) => state.friendsNotification
+)

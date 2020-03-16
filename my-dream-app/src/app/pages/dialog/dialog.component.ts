@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 
-
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',

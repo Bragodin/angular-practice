@@ -1,21 +1,15 @@
-:host{
-  position: absolute;
-  background: url('../../../assets/chat-bg.jpg');
-  width: 100%;
-  height: 100%;
-  padding-bottom: 200px;
-}
 .dialog{
+  background: url('../../../assets/chat-bg.jpg') fixed;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  overflow-y: hidden;
-}
-.message-form{
-  width: 100%;
   position: fixed;
   bottom: 0px;
+  height: 100%;
+  width: 100%;
+  overflow: scroll;
+}
+.message-form{
   background: #ffffff;
   margin-bottom: 100px;
 }
@@ -27,6 +21,7 @@
 .messages {
   display: flex;
   flex-direction: column;
+  margin-bottom: 200px;
 }
 .active{
   margin-left: 500px;

@@ -9,28 +9,35 @@ import { Subscription } from 'rxjs';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { Store, select } from '@ngrx/store';
 import { selectUser } from 'src/app/features/store/selectors/user.selectors';
-import { GetMyUser } from 'src/app/features/store/actions/user.actions';
+import { GetMyUser, SetActiveUser } from 'src/app/features/store/actions/user.actions';
 import { PostFriend } from 'src/app/features/store/actions/friends.actions';
-import { selectFriends } from 'src/app/features/store/selectors/friends.selectors';
+import { selectFriendsNotifications } from 'src/app/features/store/selectors/notifications.selectors';
+
 
 @Component({
   selector: 'app-profile-container',
-  template: `<app-profile (onAdd)='addFriend($event)' [user]='user' [userPets]='userPets' [id]='id' [myProfilePage]='myProfilePage' [buttonState]='buttonState'  [sub]='sub'></app-profile>`,
+  template: `<app-profile (onAccept)='accept($event)' (onAdd)='addFriend($event)' [user]='user' [userPets]='userPets' [id]='id' [myProfilePage]='myProfilePage' [friendsNotificationState] ='friendsNotificationState' [buttonState]='buttonState'  [sub]='sub'></app-profile>`,
 })
 export class ProfileContainerComponent implements OnInit {
   @Input() myProfilePage: boolean;
-  @Input() firendRequest: boolean;
   user: User;
   userPets: Pet[];
   friends: User[];
   id: string;
   buttonState: boolean = false;
   sub: Subscription;
+  subs: Subscription[] = [];
+  friendsNotification: string[];
+  friendsNotificationState: boolean;
   constructor(private usersService: UsersService, private activateRoute: ActivatedRoute, private websocketService: WebsocketService, private notificationsService: NotificationsService, private _store: Store<IAppState>) {
     this.id = activateRoute.snapshot.params['id'];
   }
+  ngOnChanges(){
+   this.friendsNotificationState = this.friendsNotificationState
+  }
   ngOnInit() {
     this._store.dispatch(new GetMyUser(this.id));
+    
     this.sub = this._store.pipe(select(selectUser)).subscribe(user => {
         if(user !== null && user){
           this.user = user;
@@ -39,6 +46,12 @@ export class ProfileContainerComponent implements OnInit {
         }
       }
     );
+    this.subs.push(this.sub);
+    this.sub = this._store.pipe(select(selectFriendsNotifications)).subscribe(friendsNotification => {
+      this.friendsNotification = friendsNotification;
+      this.isfHaveFriendNotification();
+    });
+    this.subs.push(this.sub);
     // this._store.pipe(select(selectFriends)).subscribe(
     //   data => {
     //     this.friends = data
@@ -53,13 +66,21 @@ export class ProfileContainerComponent implements OnInit {
     //   this.isAddToFriends();
     //   console.log(this.isAddToFriends())
     // }
-    console.log('My Profile Page')
-    console.log(this.myProfilePage)
+    // console.log('freiend req state button')
+    // console.log(this.friendsNotificationState)
+  }
+  isfHaveFriendNotification(){
+    let isHaveReq = this.friendsNotification.find((elem: any) => { 
+      return elem._id === this.id
+    });
+    if(isHaveReq){
+      this.friendsNotificationState = true;
+    } else {
+      this.friendsNotificationState = false;
+    }
   }
   ngOnDestroy(){
-    if(this.sub){
-      this.sub.unsubscribe();
-    }
+    this.subs.forEach(elem => elem.unsubscribe());
   }
   addFriend(friends){
     this._store.dispatch(new PostFriend(friends));
@@ -75,4 +96,7 @@ export class ProfileContainerComponent implements OnInit {
   //     return false;
   //   }
   // }
+  accept(friends){
+    this._store.dispatch(new PostFriend(friends));
+  }
 }

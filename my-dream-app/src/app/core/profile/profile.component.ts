@@ -21,11 +21,14 @@ export class ProfileComponent implements OnInit {
   @Input() buttonState: boolean = false;
   @Input() sub: Subscription;
   @Output() onAdd = new EventEmitter<Friendship>();
+  @Output() onAccept = new EventEmitter<any>();
+  @Input() friendsNotificationState: boolean;
   avatar: string;
   constructor(private activateRoute: ActivatedRoute, private websocketService: WebsocketService, private notificationsService: NotificationsService) {
     this.id = activateRoute.snapshot.params['id'];
   }
   ngOnInit() {
+    console.log(this.friendsNotificationState)
   }
   ngOnDestroy(){
     if(this.sub){
@@ -42,5 +45,8 @@ export class ProfileComponent implements OnInit {
     });
     
     // this.onAdd.emit({friend1: this.id, friend2: friend});
+  }
+  accept(){
+    this.onAccept.emit({friend1: localStorage.getItem('id'), friend2: this.id})
   }
 }

@@ -14,6 +14,7 @@ export class PopUpComponent {
   constructor(private _bottomSheetRef: MatDialogRef<PopUpComponent>, private _store: Store<IAppState>, private router: Router) {}
   friendsNotifications;
   messagesNotifications;
+  notificationsState: boolean = false;
   onChose(value){
     this.router.navigate([value]);
     this._bottomSheetRef.close();
@@ -24,6 +25,7 @@ export class PopUpComponent {
       data => {
         this.friendsNotifications = data.friendsNotification;
         this.messagesNotifications = data.messageNotification;
+        
       }
     );
   }

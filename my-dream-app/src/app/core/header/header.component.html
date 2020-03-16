@@ -8,5 +8,5 @@
         <button mat-stroked-button  *ngIf='loggedIn' routerLink = "/settings" routerLinkActive ='active-link'>settings</button>
         <app-notification [notificationState]='notificationState' class="notification"></app-notification>
         <button mat-stroked-button  *ngIf='loggedIn' (click)='logOut()'>LogOut</button>
-</mat-toolbar-row>
+    </mat-toolbar-row>
 </mat-toolbar>

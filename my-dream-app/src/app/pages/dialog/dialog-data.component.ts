@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { WebsocketService } from 'src/app/features/services/websoket.service';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { Store, select } from '@ngrx/store';
 import { selectUser } from 'src/app/features/store/selectors/user.selectors';
 import { Subscription } from 'rxjs';
-import { DialogService } from 'src/app/features/services/dialog.service';
 import { GetMyDialog, PostMessage } from 'src/app/features/store/actions/dialog.actions';
 import { User } from 'src/app/models/user.model';
 import { selectMessages } from 'src/app/features/store/selectors/dialog.selectors';
@@ -13,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-dialog-container',
-  template: `<app-dialog [name]='name' (onSend)='sendMessage($event)' [sub] = 'sub' [activeUser]='activeUser' [messages]='messages'></app-dialog>`,
+  template: `<app-dialog [name]='name' (onSend)='sendMessage($event)' [sub]='sub' [activeUser]='activeUser' [messages]='messages'></app-dialog>`,
 })
 export class DialogDataComponent implements OnInit {
   name: string;

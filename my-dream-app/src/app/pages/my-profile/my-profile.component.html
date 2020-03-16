@@ -3,7 +3,7 @@
     <ng-template #alienProfile>
         <h3>Profile:</h3>
     </ng-template> 
-    <app-profile-container [myProfilePage]='isMyProfile' [firendRequest]='firendRequest'></app-profile-container>
+    <app-profile-container [myProfilePage]='isMyProfile' ></app-profile-container>
     <h3 *ngIf='isMyProfile else alienAlbums'>My Albums:</h3> 
     <ng-template #alienAlbums>
         <h3>Albums:</h3>

@@ -1,4 +1,4 @@
-<div class="dialog">
+<div class="dialog" #scrollMe [scrollTop]="scrollMe.scrollHeight">
   <div class="messages">
     <div class="message" *ngFor='let message of messages' [className]="isMyMessage(message.ownerId) ? 'active' : 'inactive'">
       <app-message [message]='message.message' [isMyMessage]='isMyMessage(message.ownerId)'></app-message>
@@ -8,10 +8,10 @@
     <form class="example-form" class='dialog__form'>
       <mat-form-field>
         <mat-label>Message</mat-label>
-        <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}" #message maxlength="256" placeholder="My message...">
+          <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}" #message maxlength="256" placeholder="My message...">
         <mat-hint><strong>Don't disclose personal info</strong></mat-hint>
       </mat-form-field>
       <button mat-raised-button color="accent" type="submit" (click)='sendMessage()'>Send</button>
     </form>
   </div>
-</div>
+</div>  
