@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects'; 
 import { switchMap, map, catchError } from 'rxjs/operators';
-import { GetMyUser, EUserActions, GetMyUserSuccess, GetMyUsers, GetMyUsersSuccess, GetMyUserFailure, PostUser, PostUserSuccess, GetUserSuccess, GetAutorizationUser, GetAutorizationUserSuccess, LogoutUser, LogoutUserSuccess, LoginUser, LoginUserSuccess, UpdateMyUser, UpdateMyUserSuccess } from '../actions/user.actions';
+import { GetMyUser, EUserActions, GetMyUserSuccess, GetMyUsers, GetMyUsersSuccess, GetMyUserFailure, PostUser, PostUserSuccess, GetUserSuccess, GetAutorizationUser, GetAutorizationUserSuccess, LogoutUser, LogoutUserSuccess, LoginUser, LoginUserSuccess, UpdateMyUser, UpdateMyUserSuccess, DeleteMyUser } from '../actions/user.actions';
 import { UsersService } from '../../services/users.service';
 import { of } from 'rxjs';
 import { User } from 'src/app/models/user.model';
@@ -83,11 +83,23 @@ export class UserEffects {
             return this.usersService.updateUsers(localStorage.getItem('id'), action.payload);
         }), 
         map((user) => { 
-            console.log('Update user Effect')
-            console.log(user)
             return new UpdateMyUserSuccess(user);
         })
     );
-    
+    @Effect()
+    removeUser$ = this._actions$.pipe(
+        ofType<DeleteMyUser>(EUserActions.DeleteMyUser),
+        switchMap((action) => { 
+            return this.usersService.remove(action.payload);
+        }), 
+        map(user => {
+            if(user){
+                localStorage.removeItem('token');
+                localStorage.removeItem('id');
+                return new LogoutUserSuccess();
+            }
+        })   
+    );
+
     constructor(private _actions$: Actions, private usersService: UsersService, private loginService: LoginService ) { }
 }

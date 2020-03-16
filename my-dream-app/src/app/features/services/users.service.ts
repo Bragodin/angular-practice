@@ -32,9 +32,11 @@ export class UsersService {
     return this.users;
   }
   remove(id: string){
-    this.http.delete(`http://localhost:3000/users/${id}`).subscribe();
-    this.syncUsers = this.syncUsers.filter((user: User) => user._id !== id);
-    this.users.next(this.syncUsers);
+    // this.http.delete(`http://localhost:3000/users/${id}`).subscribe();
+    // this.syncUsers = this.syncUsers.filter((user: User) => user._id !== id);
+    // this.users.next(this.syncUsers);
+
+    return this.http.delete(`http://localhost:3000/users/${id}`);
   }
   getUsers(page, count)
   {

@@ -13,8 +13,8 @@ import { GetMyFriends } from 'src/app/features/store/actions/friends.actions';
 })
 export class MainComponent implements OnInit {
   constructor(private _store: Store<any>, private router: Router){
-    if(localStorage.getItem('token')){
-      const id = localStorage.getItem('id');
+    const id = localStorage.getItem('id');
+    if(id){
       this._store.dispatch(new GetMyUser(id));
       this._store.dispatch(new GetNotifications());
       this._store.dispatch(new GetAutorizationUser(id));

@@ -48,8 +48,7 @@ export function userReducers(
 
     case EUserActions.LogoutUserSuccess: {
       return {
-        ...state,    
-        users: null,
+        ...state,   
         activeUser: null,
         autorizationUser: null
       }
@@ -73,6 +72,14 @@ export function userReducers(
 
       }
     } 
+    // case EUserActions.DeleteMyUserSuccess: {
+    //   console.log('delete reduser')
+    //   console.log(action.payload)
+    //   return {
+    //     ...state,    
+
+    //   }
+    // } 
     default:
       return state;
   }

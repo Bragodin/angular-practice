@@ -56,7 +56,7 @@ export class HeaderComponent implements OnInit, OnDestroy, DoCheck {
     // this.router.navigate([`/login`]);
   }
   ngDoCheck(){
-    this.token = localStorage.getItem('token');
+    // this.token = localStorage.getItem('token');
   }
   getRoute(){
     return `/profile/${localStorage.getItem('id')}`

@@ -13,8 +13,10 @@ export class AvatarComponent implements OnInit {
   ngOnInit() {
   }
   getMyAvatar(){
-    return {
-      'background-image': `url(http://localhost:3000/uploads/${this.photoName})`
+    if(this.photoName){
+      return {
+        'background-image': `url(http://localhost:3000/uploads/${this.photoName})`
+      }
     }
   }
   get isNotification(){

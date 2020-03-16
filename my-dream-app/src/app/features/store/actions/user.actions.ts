@@ -22,7 +22,8 @@ export enum EUserActions{
     LoginUserSuccess = '[User] Login User Success',
     SetActiveUser = '[User] Set Active User',
     UpdateMyUser = '[User] Upload User',
-    UpdateMyUserSuccess = '[User] Upload User Success'
+    UpdateMyUserSuccess = '[User] Upload User Success',
+    DeleteMyUser = '[User] Delete User'
 }
 
 export class GetMyUser implements Action {
@@ -117,6 +118,11 @@ export class UpdateMyUser implements Action {
 export class UpdateMyUserSuccess implements Action {
     public readonly type = EUserActions.UpdateMyUserSuccess;
     constructor(public payload: any){}
+}
+
+export class DeleteMyUser implements Action {
+    public readonly type = EUserActions.DeleteMyUser;
+    constructor(public payload: string){}
 }
 
 export type UserActions = GetMyUserSuccess | GetMyUser | UpdateAvatar 
