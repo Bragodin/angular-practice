@@ -8,16 +8,27 @@ import { selectUsers } from 'src/app/features/store/selectors/user.selectors';
 
 @Component({
   selector: 'app-people-container',
-  template: `<app-people [result]='result'></app-people>`
+  template: `<app-people [result]='result'></app-people>
+             <app-pagination (onChangePage)='onChangePage($event)' [totalCount]='totalCount'></app-pagination>`
 })
 export class PeopleConteinerComponent implements OnInit {
   result: object;
+  totalCount: number;
   constructor(private _store: Store<IAppState>) { 
   }
   ngOnInit(){
-    this._store.dispatch(new GetMyUsers({page: 5, count: 5}));
+    this._store.dispatch(new GetMyUsers({page: 1, count: 5}));
     this._store.pipe(select(selectUsers)).subscribe(
-        data => this.result = data
-    );
+        data => {
+          if(data && data[0]){
+            this.totalCount = data[0].totalCount;
+            return this.result = data;
+          }
+        }
+    )
+  }
+  onChangePage(page){
+    console.log(page)
+    this._store.dispatch(new GetMyUsers({page: page.page, count: page.count}));
   }
 }

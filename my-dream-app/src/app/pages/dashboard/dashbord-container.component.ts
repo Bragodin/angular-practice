@@ -21,9 +21,8 @@ export class DashboardContainerComponent implements OnInit, OnDestroy {
     this._store.pipe(select(selectUser)).subscribe(); // unsub
     this._store.pipe(select(selectUsers)).subscribe(
       data => {
-        if(data && data[0].totalCount){
+        if(data && data[0]){
           this.totalCount = data[0].totalCount;
-          console.log(this.totalCount)
           return this.users = data;
         }
       }

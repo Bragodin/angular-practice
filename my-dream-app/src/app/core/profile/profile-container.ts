@@ -15,7 +15,7 @@ import { selectFriends } from 'src/app/features/store/selectors/friends.selector
 
 @Component({
   selector: 'app-profile-container',
-  template: `<app-profile (onAdd)='addFriend($event)' [user]='user' [userPets]='userPets' [id]='id' [buttonState]='buttonState'  [sub]='sub'></app-profile>`,
+  template: `<app-profile (onAdd)='addFriend($event)' [user]='user' [userPets]='userPets' [id]='id' [myProfilePage]='myProfilePage' [buttonState]='buttonState'  [sub]='sub'></app-profile>`,
 })
 export class ProfileContainerComponent implements OnInit {
   @Input() myProfilePage: boolean;
@@ -53,6 +53,8 @@ export class ProfileContainerComponent implements OnInit {
     //   this.isAddToFriends();
     //   console.log(this.isAddToFriends())
     // }
+    console.log('My Profile Page')
+    console.log(this.myProfilePage)
   }
   ngOnDestroy(){
     if(this.sub){

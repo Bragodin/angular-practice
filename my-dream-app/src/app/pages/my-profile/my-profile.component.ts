@@ -10,6 +10,7 @@ import { Store, select } from '@ngrx/store';
 import { GetAlbums } from 'src/app/features/store/actions/albums.actions';
 import { selectAlbums } from 'src/app/features/store/selectors/albums.selectors';
 import { GetMyUser } from 'src/app/features/store/actions/user.actions';
+import { selectUser } from 'src/app/features/store/selectors/user.selectors';
 
 @Component({
   selector: 'app-my-profile',
