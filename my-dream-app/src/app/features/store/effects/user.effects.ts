@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects'; 
 import { switchMap, map, catchError } from 'rxjs/operators';
-import { GetMyUser, EUserActions, GetMyUserSuccess, GetMyUsers, GetMyUsersSuccess, GetMyUserFailure, PostUser, PostUserSuccess, GetUserSuccess, GetAutorizationUser, GetAutorizationUserSuccess, LogoutUser, LogoutUserSuccess, LoginUser, LoginUserSuccess, UpdateMyUser, UpdateMyUserSuccess, DeleteMyUser } from '../actions/user.actions';
+import { GetMyUser, EUserActions, GetMyUserSuccess, GetMyUsers, GetMyUsersSuccess, GetMyUserFailure, PostUser, PostUserSuccess, GetUserSuccess, GetAutorizationUser, GetAutorizationUserSuccess, LogoutUser, LogoutUserSuccess, LoginUser, LoginUserSuccess, UpdateMyUser, UpdateMyUserSuccess, DeleteMyUser, LoginUserFailure } from '../actions/user.actions';
 import { UsersService } from '../../services/users.service';
 import { of } from 'rxjs';
 import { User } from 'src/app/models/user.model';
@@ -49,6 +49,10 @@ export class UserEffects {
             localStorage.setItem('id', users.user._id);
             localStorage.setItem('token', users.token);
             return new PostUserSuccess(users.user);
+        }),
+        catchError(err => {
+            alert('Something went wrong');
+            return of(new LoginUserFailure());
         })
     );
     @Effect()
@@ -74,6 +78,12 @@ export class UserEffects {
             localStorage.setItem('id', user.user._id);
             localStorage.setItem('token', user.token);
             return new LoginUserSuccess(user.user);
+        }),
+        catchError(err => {
+            if(err.error.error === 'Unable user'){
+                alert('User don\'t  found')
+            }
+            return of(new LoginUserFailure());
         })
     );
     @Effect()

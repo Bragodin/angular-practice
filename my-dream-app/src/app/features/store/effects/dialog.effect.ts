@@ -57,7 +57,8 @@ export class DialogEffects {
             const message = {
                 dialogId: dialog.dialogId,
                 ownerId: dialog.myid,
-                message: dialog.message
+                message: dialog.message,
+                recipient: dialog.userid
             }
             return new PostMessageSuccess(message);
         })        

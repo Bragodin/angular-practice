@@ -15,8 +15,13 @@ export class PopUpComponent {
   friendsNotifications;
   messagesNotifications;
   notificationsState: boolean = false;
-  onChose(value){
+  onChoseFriendReq(value){
     this.router.navigate([value]);
+    this._bottomSheetRef.close();
+  }
+
+  onChoseMessage(user){
+    this.router.navigate([`/mydialog/${user._id}`]);
     this._bottomSheetRef.close();
   }
 
@@ -25,7 +30,6 @@ export class PopUpComponent {
       data => {
         this.friendsNotifications = data.friendsNotification;
         this.messagesNotifications = data.messageNotification;
-        
       }
     );
   }

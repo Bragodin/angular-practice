@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Album } from 'src/app/models/album.model';
 import { Subscription, Observable } from 'rxjs';
-import { AlbumService } from 'src/app/features/services/album.service';
 import { User } from 'src/app/models/user.model';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { Store } from '@ngrx/store';
@@ -32,7 +31,6 @@ export class AlbumComponent implements OnInit, OnDestroy {
     }
   }
   ngOnDestroy(){
- 
   }
   addPhoto(event){
     let target = event.target || event.srcElement;
@@ -56,21 +54,9 @@ export class AlbumComponent implements OnInit, OnDestroy {
     }
     this._store.dispatch(new PostPhotos({formData: formData, item: item}));
   }
-  // uppdateAlbum(item){
-  //   this._store.dispatch(new UpdateAlbum({id: item._id, item: item}));
-
-  //   this.sub = this.albumService.updateAlbum(item._id, item).subscribe(
-  //     data => {this.onDelete.emit();},
-  //     error => { console.log(error) }
-  //   );
-  //   this.subscriptions.push(this.sub);
-  // }
   removePhoto(image, itemId){
     console.log(itemId)
     this.item.photosName = this.item.photosName.filter( elem => elem !== image);
-    // this.sub = this.albumService.deltePhoto(image.name).subscribe( data => this.onDelete.emit());
-    // this.subscriptions.push(this.sub);
-
     this._store.dispatch(new DeletePhotos({ image: image.name, albumId: itemId}));
   }
   removeAlbum(item){

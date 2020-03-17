@@ -1,5 +1,4 @@
 import { Component, OnInit, DoCheck, OnDestroy } from '@angular/core';
-import { LoginService } from '../../features/services/login.service';
 import { Router} from '@angular/router';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { Store, select } from '@ngrx/store';
@@ -45,9 +44,10 @@ export class HeaderComponent implements OnInit, OnDestroy, DoCheck {
   }
   logOut(){
     this._store.dispatch(new LogoutUser());
+    this.router.navigate([`/login`]);
     this._store.pipe(select(selectLogout)).subscribe(
       data => {
-        this.router.navigate([`/login`]);
+          this.router.navigate([`/login`]);
       }
     );
     // this.loginService.logout();

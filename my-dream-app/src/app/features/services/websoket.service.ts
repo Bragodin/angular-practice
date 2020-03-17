@@ -28,7 +28,8 @@ export class WebsocketService {
       // this._store.pipe(select(selectFriendsNotification));
       });
       this.socket.on('showMessage', (data) => {
-        this._store.dispatch(new GetMessage({dialogId: this.dialogId, message: data.msg}))
+        this._store.dispatch(new GetNotifications());
+        this._store.dispatch(new GetMessage({dialogId: this.dialogId, message: data.msg}));
       })
   }
   sendNotification(userId, myId) {

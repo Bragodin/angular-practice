@@ -6,11 +6,6 @@
 </div>
 <div class="change-photo__buttons">
     <img *ngFor="let url of urls" [src]="url" height="210" width="250" >
-    <!-- <div class="input_button">
-        <label >Add Photos
-            <input  #fileInput type="file" *ngIf='myProfilePage' accept='image/*' name="photo" (change)="addPhoto($event, fileInput.files, item)" class="fileInput" multiple/>
-        </label>
-    </div> -->
     <app-upload-button #fileInput type="file" *ngIf='myProfilePage' accept='image/*' name="photo" (change)="addPhoto($event)"></app-upload-button>
     <button mat-fab color="accent" (click)='sendPhotos(item)' *ngIf='myProfilePage'>Send</button>
     <button mat-fab color="warn" (click)='removeAlbum(item)' *ngIf='myProfilePage'><mat-icon>clear</mat-icon></button>

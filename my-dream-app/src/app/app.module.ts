@@ -66,6 +66,7 @@ import { PaginationComponent } from './core/pagination/pagination.component';
 import { MatSelectModule } from '@angular/material/select';
 import { AlbumsEffects } from './features/store/effects/albums.effects';
 import { FriendNotificationComponent } from './ui/friend-notification/friend-notification.component';
+import { MessageNotificationComponent } from './ui/message-notification/message-notification.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
  
@@ -104,7 +105,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     ActivePhotoComponent,
     LoginContainer,
     PaginationComponent,
-    FriendNotificationComponent
+    FriendNotificationComponent,
+    MessageNotificationComponent
   ],
   imports: [
     BrowserModule,

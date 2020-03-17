@@ -16,6 +16,7 @@ import { autorithationUsers } from 'src/app/features/store/selectors/user.select
   styleUrls: ['./change-user.component.css']
 })
 export class ChangeUserComponent implements OnInit, OnDestroy {
+  
   name: string;
   surname: string;
   login: string;
@@ -37,7 +38,7 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
         this.surname = data.surname;
         this.login = data.login;
         this.phone = data.phone;
-        this.imgURL = `http://localhost:3000/uploads/${data.avatar}`
+        this.imgURL = `http://localhost:3000/uploads/${data.avatar}`;
       }
     )
   }

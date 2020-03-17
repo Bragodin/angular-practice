@@ -12,6 +12,7 @@ import { selectUser } from 'src/app/features/store/selectors/user.selectors';
 import { GetMyUser, SetActiveUser } from 'src/app/features/store/actions/user.actions';
 import { PostFriend } from 'src/app/features/store/actions/friends.actions';
 import { selectFriendsNotifications } from 'src/app/features/store/selectors/notifications.selectors';
+import { GetNotifications } from 'src/app/features/store/actions/notifications.actions';
 
 
 @Component({
@@ -36,8 +37,8 @@ export class ProfileContainerComponent implements OnInit {
    this.friendsNotificationState = this.friendsNotificationState
   }
   ngOnInit() {
+    this._store.dispatch(new GetNotifications());
     this._store.dispatch(new GetMyUser(this.id));
-    
     this.sub = this._store.pipe(select(selectUser)).subscribe(user => {
         if(user !== null && user){
           this.user = user;
@@ -52,22 +53,6 @@ export class ProfileContainerComponent implements OnInit {
       this.isfHaveFriendNotification();
     });
     this.subs.push(this.sub);
-    // this._store.pipe(select(selectFriends)).subscribe(
-    //   data => {
-    //     this.friends = data
-    //     console.log(this.isAddToFriends())
-    //   }
-    // );
-    // this.usersService.getUserPets(this.id).subscribe( user => {
-    //   this.userPets = user[0].pets 
-    // });
-    
-    // if(this.friends){
-    //   this.isAddToFriends();
-    //   console.log(this.isAddToFriends())
-    // }
-    // console.log('freiend req state button')
-    // console.log(this.friendsNotificationState)
   }
   isfHaveFriendNotification(){
     let isHaveReq = this.friendsNotification.find((elem: any) => { 
@@ -85,17 +70,6 @@ export class ProfileContainerComponent implements OnInit {
   addFriend(friends){
     this._store.dispatch(new PostFriend(friends));
   }
-  // isAddToFriends(){
-  //   if(this.user._id !== localStorage.getItem('id')){
-  //     const isFriends = this.friends.find(elem => elem._id === this.user._id);
-  //     if(!isFriends){
-  //       return true; 
-  //     } 
-  //     else return false;
-  //   } else {
-  //     return false;
-  //   }
-  // }
   accept(friends){
     this._store.dispatch(new PostFriend(friends));
   }

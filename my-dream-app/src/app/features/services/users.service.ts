@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class UsersService {
-  users: BehaviorSubject<User[]> = new BehaviorSubject(null);
+  // users: BehaviorSubject<User[]> = new BehaviorSubject(null);
   syncUsers: any;
   constructor(private http: HttpClient) {
     // this.getUsers();
@@ -24,13 +24,13 @@ export class UsersService {
   //  return this.users;
     return this.http.put<User[]>(`http://localhost:3000/users/${id}`, user);
   }
-  addUser(user: User){
-    this.http.post<User[]>('http://localhost:3000/users', user).subscribe(data => {
-      this.syncUsers.push(user);
-      this.users.next(this.syncUsers);
-    });
-    return this.users;
-  }
+  // addUser(user: User){
+  //   this.http.post<User[]>('http://localhost:3000/users', user).subscribe(data => {
+  //     this.syncUsers.push(user);
+  //     this.users.next(this.syncUsers);
+  //   });
+  //   return this.users;
+  // }
   remove(id: string){
     // this.http.delete(`http://localhost:3000/users/${id}`).subscribe();
     // this.syncUsers = this.syncUsers.filter((user: User) => user._id !== id);

@@ -1,4 +1,4 @@
 <mat-nav-list>
-	<app-friend-notification (onChose)='onChose($event)' *ngFor='let user of friendsNotifications' [user]='user' [text]="'wants to add you as a friend'"></app-friend-notification>
-	<app-friend-notification (onChose)='onChose($event)' *ngFor='let user of messagesNotifications' [user]='user' [text]="'send message for you'"></app-friend-notification>
+	<app-friend-notification (onChose)='onChoseFriendReq($event)' *ngFor='let user of friendsNotifications' [user]='user' [text]="'wants to add you as a friend'"></app-friend-notification>
+	<app-message-notification (onChose)='onChoseMessage(user)' *ngFor='let user of messagesNotifications' [user]='user' [text]="'send message for you'"></app-message-notification>
 </mat-nav-list>

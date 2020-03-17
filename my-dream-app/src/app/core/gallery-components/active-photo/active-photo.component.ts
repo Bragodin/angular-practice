@@ -11,7 +11,6 @@ export class ActivePhotoComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {
     console.log(data)
   }
-
   ngOnInit() {
   }
 

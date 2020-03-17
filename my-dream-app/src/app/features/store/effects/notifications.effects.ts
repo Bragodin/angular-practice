@@ -5,13 +5,16 @@ import { NotificationsService } from '../../services/notifications.service';
 import { switchMap, map, catchError } from 'rxjs/operators';
 import { INotificationsState } from '../state/notification.state';
 import { Notification } from '../../../models/notification.model';
+
 @Injectable()
 export class NotificationsEffects {
     @Effect()
     getNotifications$ = this._actions$.pipe(
         ofType<GetNotifications>(ENotificationsActions.GetNotifications),
         switchMap(() => {
-            return this.notificationsService.getUserNotifications(localStorage.getItem('id'))}),
+            console.log(localStorage.getItem('id'))
+            return this.notificationsService.getUserNotifications(localStorage.getItem('id'))
+        }),
         map((notification)=> {
             return new GetNotificationsSuccess(notification);
         })        

@@ -10,7 +10,7 @@ export enum EUserActions{
     UpdateAvatar = '[User] Update User Avatar',
     GetMyUsers = '[User] Get Users',
     GetMyUsersSuccess = '[User] Get Users Success',
-    GetMyUserFailure = '[User] Get Users Failure',
+    GetMyUserFailure = '[User] Get User Failure',
     PostUser = '[User] Post User',
     PostUserSuccess = '[User] Post User Success',
     GetUserSuccess = '[User] Get User Success',
@@ -18,6 +18,7 @@ export enum EUserActions{
     GetAutorizationUserSuccess = '[User] Get Auth User Success',
     LogoutUser = '[User] Logout User',
     LogoutUserSuccess = '[User] Logout User Success',
+    LoginUserFailure = '[User] Logout User Failure',
     LoginUser = '[User] Login User',
     LoginUserSuccess = '[User] Login User Success',
     SetActiveUser = '[User] Set Active User',
@@ -29,6 +30,11 @@ export enum EUserActions{
 export class GetMyUser implements Action {
     public readonly type = EUserActions.GetMyUser;
     constructor(public payload: string){}
+}
+
+export class LoginUserFailure implements Action {
+    public readonly type = EUserActions.LoginUserFailure;
+    constructor(public payload?: string){}
 }
 
 export class GetAutorizationUser implements Action {
@@ -128,4 +134,4 @@ export class DeleteMyUser implements Action {
 export type UserActions = GetMyUserSuccess | GetMyUser | UpdateAvatar 
 | GetMyUsers | GetMyUsersSuccess | GetMyUserFailure | 
 GetUserSuccess | GetAutorizationUserSuccess | GetAutorizationUser | PostUser | 
-PostUserSuccess | LogoutUserSuccess | LoginUserSuccess | SetActiveUser | UpdateMyUserSuccess;
+PostUserSuccess | LogoutUserSuccess | LoginUserSuccess | SetActiveUser | UpdateMyUserSuccess | LoginUserFailure;

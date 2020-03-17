@@ -71,7 +71,14 @@ export function userReducers(
         ...state,    
 
       }
-    } 
+    }
+    case EUserActions.LoginUserFailure: {
+      return {
+        ...state,    
+        activeUser: null,
+        autorizationUser: null
+      }
+    }
     // case EUserActions.DeleteMyUserSuccess: {
     //   console.log('delete reduser')
     //   console.log(action.payload)

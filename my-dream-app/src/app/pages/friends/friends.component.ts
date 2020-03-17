@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FriendsService } from 'src/app/features/services/friends.service';
 import { Subscription } from 'rxjs';
 import { Store, select } from '@ngrx/store';
@@ -11,14 +11,8 @@ import { selectFriends } from 'src/app/features/store/selectors/friends.selector
   templateUrl: './friends.component.html',
   styleUrls: ['./friends.component.css']
 })
-export class FriendsComponent implements OnInit, OnDestroy {
-  sub: Subscription;
-  constructor(private friendsService: FriendsService, private _store: Store<IAppState>) { }
-  ngOnDestroy(){
-    if(this.sub){
-      this.sub.unsubscribe();
-    }
-  }
+export class FriendsComponent implements OnInit {
+  constructor() { }
   ngOnInit() { 
     // this._store.pipe(select(selectFriends)).subscribe(
     //   data => console.log(data)

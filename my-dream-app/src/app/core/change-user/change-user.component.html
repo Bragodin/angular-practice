@@ -2,10 +2,6 @@
     <div class="photo">
         <img [src]="imgURL" height="210" width="250" *ngIf="imgURL">
     </div>
-    <!-- <div class="change-photo__buttons">
-            <input #fileInput type="file" accept='image/*' name="photo" (change)="addPhoto($event, fileInput.files)" class="fileInput"/>
-        <button (click)='sendAvatar()'>Send Photo</button>
-    </div> -->
     <app-upload-button #fileInput type="file" accept='image/*' name="photo" (change)="addPhoto($event)"></app-upload-button>
     <button mat-raised-button color="accent" (click)='sendAvatar()'>Send Photo</button>
 </div>

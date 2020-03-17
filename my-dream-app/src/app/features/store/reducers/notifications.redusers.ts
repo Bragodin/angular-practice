@@ -10,7 +10,8 @@ export function notificationsReducers(
     case ENotificationsActions.GetNotificationsSuccess: {
       return {
         ...state,
-        friendsNotification: action.payload 
+        friendsNotification: action.payload.friendsNotification,
+        messageNotification: action.payload.messageNotification
       };
     }
     case ENotificationsActions.DeleteNotification: {      
@@ -18,7 +19,8 @@ export function notificationsReducers(
       state.friendsNotification.splice(index, 1);
       return {
         ...state,
-        friendsNotification: state.friendsNotification
+        friendsNotification: state.friendsNotification,
+        // messageNotification: state.messageNotification
       };
     }
     default:

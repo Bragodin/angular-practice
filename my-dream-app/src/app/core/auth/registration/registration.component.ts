@@ -6,8 +6,6 @@ import { Store, select } from '@ngrx/store';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { PostUser, GetMyUser, GetAutorizationUser, LoginUser } from 'src/app/features/store/actions/user.actions';
 import { selectPostUser } from 'src/app/features/store/selectors/user.selectors';
-import { GetNotifications } from 'src/app/features/store/actions/notifications.actions';
-import { GetMyFriends } from 'src/app/features/store/actions/friends.actions';
 
 @Component({
   selector: 'app-registration',
@@ -36,12 +34,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
       avatar: 'no_avatar.jpg'
     } as User;
       this._store.dispatch(new PostUser(user));
-      this._store.dispatch(new LoginUser(
-        {
-          login: user.login,
-          password: user.password
-        })
-      );
       this.sub = this._store.pipe(select(selectPostUser)).subscribe(data => {
         if(data !== null && localStorage.getItem('token')){
           return this.router.navigate([`/profile/${data._id}`])

@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +8,7 @@ import { Router} from '@angular/router';
 export class LoginComponent implements OnInit{
   @Input() value: boolean = false;
   @Output() onSubmitEvent = new EventEmitter()
-  constructor(private router: Router) {
+  constructor() {
   }
   ngOnInit() {}
   onSubmit(form){

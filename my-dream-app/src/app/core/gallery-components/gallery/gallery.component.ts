@@ -1,8 +1,5 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
-import { AlbumService } from '../../../features/services/album.service';
 import { Album } from 'src/app/models/album.model';
-import { Photo } from '../../../models/photo.model';
-import { Subscription } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { Store } from '@ngrx/store';
@@ -19,7 +16,7 @@ export class GalleryComponent implements OnInit, OnDestroy {
   @Output() delete = new EventEmitter<boolean>();
   albumName = new FormControl('', []);
   addAlbumState: boolean = false;
-  constructor(private albumService: AlbumService, private _store: Store<IAppState>) { }
+  constructor(private _store: Store<IAppState>) { }
   ngOnInit() {
   }
   ngOnDestroy(){

@@ -28,7 +28,7 @@ export class ProfileComponent implements OnInit {
     this.id = activateRoute.snapshot.params['id'];
   }
   ngOnInit() {
-    console.log(this.friendsNotificationState)
+    alert('PROFILE UPLOAD')
   }
   ngOnDestroy(){
     if(this.sub){
@@ -43,7 +43,6 @@ export class ProfileComponent implements OnInit {
     this.sub = this.notificationsService.addToFriends(this.id, friend).subscribe( data => {
       this.websocketService.sendNotification(this.id, localStorage.getItem('id'));
     });
-    
     // this.onAdd.emit({friend1: this.id, friend2: friend});
   }
   accept(){

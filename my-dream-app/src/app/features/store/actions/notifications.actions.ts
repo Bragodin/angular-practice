@@ -2,10 +2,11 @@ import { Action } from '@ngrx/store';
 import { INotificationsState } from '../state/notification.state';
 import { User } from 'src/app/models/user.model';
 
-export enum ENotificationsActions{
+export enum ENotificationsActions {
     GetNotifications = '[Notifications] Get Notifications',
     GetNotificationsSuccess = '[Notifications] Get Notifications Success',
-    DeleteNotification = '[Notifications] Delete Notification'
+    DeleteNotification = '[Notifications] Delete Notification',
+    DeleteMeggaseNotification = "DeleteMeggaseNotification"
 }
 
 export class GetNotifications implements Action {
@@ -21,5 +22,10 @@ export class DeleteNotification implements Action {
     public readonly type = ENotificationsActions.DeleteNotification;
     constructor(public payload: any){}
 }
+
+// export class DeleteMeggaseNotification implements Action {
+//     public readonly type = ENotificationsActions.DeleteMeggaseNotification;
+//     constructor(public payload: any){}
+// }
 
 export type NotificationsActions = GetNotifications | GetNotificationsSuccess | DeleteNotification;
