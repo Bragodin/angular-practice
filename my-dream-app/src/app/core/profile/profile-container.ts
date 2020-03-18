@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { User } from '../../models/user.model';
 import { UsersService } from '../../features/services/users.service';
-import { ActivatedRoute} from '@angular/router';
+import { ActivatedRoute, Router} from '@angular/router';
 import { Pet } from '../../models/pet.model';
 import { WebsocketService } from '../../features/services/websoket.service';
 import { NotificationsService } from 'src/app/features/services/notifications.service';
@@ -30,15 +30,15 @@ export class ProfileContainerComponent implements OnInit {
   subs: Subscription[] = [];
   friendsNotification: string[];
   friendsNotificationState: boolean;
-  constructor(private usersService: UsersService, private activateRoute: ActivatedRoute, private websocketService: WebsocketService, private notificationsService: NotificationsService, private _store: Store<IAppState>) {
+  constructor(private activateRoute: ActivatedRoute, private websocketService: WebsocketService, private _store: Store<IAppState>) {
     this.id = activateRoute.snapshot.params['id'];
   }
   ngOnChanges(){
-   this.friendsNotificationState = this.friendsNotificationState
+   this.friendsNotificationState = this.friendsNotificationState;
   }
-  ngOnInit() {
-    this._store.dispatch(new GetNotifications());
+  ngOnInit() {           
     this._store.dispatch(new GetMyUser(this.id));
+    this._store.dispatch(new GetNotifications(localStorage.getItem('id')));    
     this.sub = this._store.pipe(select(selectUser)).subscribe(user => {
         if(user !== null && user){
           this.user = user;

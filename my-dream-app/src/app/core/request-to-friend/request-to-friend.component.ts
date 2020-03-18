@@ -17,7 +17,7 @@ export class RequestToFriendComponent implements OnInit {
   users: any;
   ngOnInit() {
     const id = localStorage.getItem('id');
-    this._store.dispatch(new GetNotifications()); 
+    this._store.dispatch(new GetNotifications(id)); 
     this._store.pipe(select(selectNotifications)).subscribe(
       data => this.users = data.friendsNotification
     )

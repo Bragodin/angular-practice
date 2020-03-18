@@ -12,8 +12,9 @@ import { selectFriends } from 'src/app/features/store/selectors/friends.selector
   styleUrls: ['./friends.component.css']
 })
 export class FriendsComponent implements OnInit {
-  constructor() { }
+  constructor(private _store: Store<IAppState>) { }
   ngOnInit() { 
+    this._store.dispatch(new GetMyFriends(localStorage.getItem('id')));
     // this._store.pipe(select(selectFriends)).subscribe(
     //   data => console.log(data)
     // );

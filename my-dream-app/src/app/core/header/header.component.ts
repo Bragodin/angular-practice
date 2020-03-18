@@ -6,7 +6,7 @@ import { selectNotifications } from 'src/app/features/store/selectors/notificati
 import { GetNotifications } from 'src/app/features/store/actions/notifications.actions';
 import { Subscription } from 'rxjs';
 import { LogoutUser } from 'src/app/features/store/actions/user.actions';
-import { selectLogout } from 'src/app/features/store/selectors/user.selectors';
+import { selectLogout, autorithationUsers } from 'src/app/features/store/selectors/user.selectors';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +15,7 @@ import { selectLogout } from 'src/app/features/store/selectors/user.selectors';
 })
 export class HeaderComponent implements OnInit, OnDestroy, DoCheck {
   token: string = localStorage.getItem('token');
+  id: string = localStorage.getItem('id');
   notificationState: boolean = false;
   notifications$ = this._store.pipe(select(selectNotifications));
   sub: Subscription;
@@ -27,8 +28,9 @@ export class HeaderComponent implements OnInit, OnDestroy, DoCheck {
   }
   ngOnInit() {
     if(this.router.url === '/login'){                   //     переделать условие
-      this._store.dispatch(new GetNotifications());    
+      this._store.dispatch(new GetNotifications(this.id));    
     }
+    
     this.sub = this.notifications$.subscribe(
       data => {
         if(data.friendsNotification.length || data.messageNotification.length){
@@ -44,12 +46,16 @@ export class HeaderComponent implements OnInit, OnDestroy, DoCheck {
   }
   logOut(){
     this._store.dispatch(new LogoutUser());
-    this.router.navigate([`/login`]);
-    this._store.pipe(select(selectLogout)).subscribe(
+    this._store.pipe(select(autorithationUsers)).subscribe(
       data => {
+        if(data === null){
           this.router.navigate([`/login`]);
+        }
       }
     );
+    // setTimeout(() => {
+    //   this.router.navigate([`/login`]);  
+    // }, 1000);
     // this.loginService.logout();
     // localStorage.removeItem('token');
     // localStorage.removeItem('id');
@@ -59,6 +65,6 @@ export class HeaderComponent implements OnInit, OnDestroy, DoCheck {
     // this.token = localStorage.getItem('token');
   }
   getRoute(){
-    return `/profile/${localStorage.getItem('id')}`
+    return `/profile/${this.id}`
   }
 }

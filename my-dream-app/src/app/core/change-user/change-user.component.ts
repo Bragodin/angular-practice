@@ -34,11 +34,13 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this._store.pipe(select(autorithationUsers)).subscribe(
       data => {
-        this.name = data.name;
-        this.surname = data.surname;
-        this.login = data.login;
-        this.phone = data.phone;
-        this.imgURL = `http://localhost:3000/uploads/${data.avatar}`;
+        if(data){
+          this.name = data.name;
+          this.surname = data.surname;
+          this.login = data.login;
+          this.phone = data.phone;
+          this.imgURL = `http://localhost:3000/uploads/${data.avatar}`;
+        }
       }
     )
   }

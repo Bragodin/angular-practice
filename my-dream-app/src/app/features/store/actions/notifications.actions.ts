@@ -1,6 +1,4 @@
 import { Action } from '@ngrx/store';
-import { INotificationsState } from '../state/notification.state';
-import { User } from 'src/app/models/user.model';
 
 export enum ENotificationsActions {
     GetNotifications = '[Notifications] Get Notifications',
@@ -11,6 +9,7 @@ export enum ENotificationsActions {
 
 export class GetNotifications implements Action {
     public readonly type = ENotificationsActions.GetNotifications;
+    constructor(public payload: string){}
 }
 
 export class GetNotificationsSuccess implements Action {

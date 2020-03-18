@@ -24,7 +24,6 @@ export class MyProfileComponent implements OnInit {
   userWithFriendRequest: any;
   constructor(
     private route: ActivatedRoute,
-    private notificationsService: NotificationsService,
     private _store: Store<IAppState>
     ) { }
   ngOnInit() {

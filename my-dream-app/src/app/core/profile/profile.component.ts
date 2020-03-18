@@ -28,7 +28,6 @@ export class ProfileComponent implements OnInit {
     this.id = activateRoute.snapshot.params['id'];
   }
   ngOnInit() {
-    alert('PROFILE UPLOAD')
   }
   ngOnDestroy(){
     if(this.sub){

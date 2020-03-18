@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UsersService {
   // users: BehaviorSubject<User[]> = new BehaviorSubject(null);
-  syncUsers: any;
+  // syncUsers: any;
   constructor(private http: HttpClient) {
     // this.getUsers();
   }
@@ -38,8 +38,7 @@ export class UsersService {
 
     return this.http.delete(`http://localhost:3000/users/${id}`);
   }
-  getUsers(page, count)
-  {
+  getUsers(page, count){
   //   this.http.get<User[]>(`http://localhost:3000/users/?page=${page}`).subscribe(data => {
   //     this.users.next(data);
   //     this.syncUsers = data;

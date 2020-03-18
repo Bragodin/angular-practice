@@ -11,9 +11,8 @@ export class NotificationsEffects {
     @Effect()
     getNotifications$ = this._actions$.pipe(
         ofType<GetNotifications>(ENotificationsActions.GetNotifications),
-        switchMap(() => {
-            console.log(localStorage.getItem('id'))
-            return this.notificationsService.getUserNotifications(localStorage.getItem('id'))
+        switchMap((action) => {
+            return this.notificationsService.getUserNotifications(action.payload)
         }),
         map((notification)=> {
             return new GetNotificationsSuccess(notification);

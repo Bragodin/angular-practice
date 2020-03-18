@@ -16,7 +16,6 @@ export class AlbumService {
     return this.http.post(`http://localhost:3000/files/?userId=${item.userId}&albumId=${item._id}`, file);
   }
   updateAlbum(id, album): Observable<Album> {
-    console.log(album)
     return this.http.put<Album>(`http://localhost:3000/album/${id}`, album);
   }
   deltePhoto(image): Observable<Photo>{

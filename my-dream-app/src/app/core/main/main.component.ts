@@ -16,7 +16,7 @@ export class MainComponent implements OnInit {
     const id = localStorage.getItem('id');
     if(id){
       this._store.dispatch(new GetMyUser(id));
-      this._store.dispatch(new GetNotifications());
+      this._store.dispatch(new GetNotifications(id));
       this._store.dispatch(new GetAutorizationUser(id));
       this._store.dispatch(new GetMyFriends(id));
     } else {
