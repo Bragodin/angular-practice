@@ -28,11 +28,12 @@ export class PaginationComponent implements OnInit {
   calculatePage(){
     this.totalCountArray = [];
     this.count = +this.selected;
-    console.log('total count: ')
-    console.log(this.totalCount)
     this.maxPage = Math.ceil(this.totalCount / this.count);
     this.totalCountArray.push(1);
-    if(this.page  !== 2 && this.page  !== 1){
+    while(this.page > this.maxPage){
+      this.page--;
+    }
+    if(this.page - 1  !== 1 && this.page !== 1 && this.page !== this.maxPage && this.page - 2 !== 1){
       this.totalCountArray.push('...');
     }
     for(let i = this.page - 1; i <= this.page + 1; i++){
@@ -40,7 +41,7 @@ export class PaginationComponent implements OnInit {
         this.totalCountArray.push(i);
       }
     }
-    if(this.maxPage - (this.page + 1) > 1){
+    if(this.page + 2 !== this.maxPage && this.page + 1 !== this.maxPage && this.page!== this.maxPage && this.page - 2 !== this.maxPage && this.page - 1 !== this.maxPage){
       this.totalCountArray.push('...');
     }
     if(this.page === this.maxPage && this.maxPage !== 2){
@@ -53,23 +54,24 @@ export class PaginationComponent implements OnInit {
   setPageValue(value){
     if(value !== '...'){
       this.page = value;
-      console.log(this.page)
       this.calculatePage();
       this.onChangePage.emit({page: this.page, count: this.count});
     }
   }
   changeSelect(){
+    this.count = +this.selected;
     this.calculatePage();
     this.onChangePage.emit({page: this.page, count: this.count});
   }
   changePage(isNext){
     this.count = +this.selected;
     this.maxPage = Math.ceil(this.totalCount / this.count);
-    this.calculatePage();
     if(isNext && this.page < this.maxPage){
       this.page++;
+      this.calculatePage();
     } else if(!isNext && this.page > 1) {
       this.page--;
+      this.calculatePage();
     }
     this.onChangePage.emit({page: this.page, count: this.count});
   }
