@@ -12,7 +12,11 @@ export class NotificationsService {
     return this.http.get<Notification>(`http://localhost:3000/notifications/${id}`);
   }
   addToFriends(id, friend){
-    console.log(friend);
     return this.http.put<Notification>(`http://localhost:3000/notifications/${id}`, {friend: friend});
+  }
+  removeMessageNotification(myId, userId){
+    let a = this.http.put<Notification>(`http://localhost:3000/notifications/message/${myId}`, {userId: userId});
+    a.subscribe(data => console.log(data))
+    return a;
   }
 }

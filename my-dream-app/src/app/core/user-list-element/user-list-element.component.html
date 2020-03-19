@@ -9,6 +9,6 @@
         <button  *ngSwitchCase="'remove'" mat-raised-button color="accent" (click)='sendButtonEvent(user)'>remove from friends</button>
         <button  *ngSwitchCase="'reply'" mat-raised-button color="accent" (click)='sendButtonEvent(user)'>reply</button>
     </ng-container> -->
-    <button mat-raised-button color="accent" (click)='sendButtonEvent(user)'>{{buttonState}}</button>
+    <button mat-raised-button color="accent" (click)='$event.stopPropagation(); sendButtonEvent(user)'>{{buttonState}}</button>
     <button mat-raised-button color="accent" (click)='openDialog()' routerLink = "/mydialog/{{user._id}}">send message</button>
 </mat-card>

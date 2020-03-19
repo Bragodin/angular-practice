@@ -43,17 +43,18 @@ export class UserEffects {
     postUser$ = this._actions$.pipe(
         ofType<PostUser>(EUserActions.PostUser),
         switchMap((action) => { 
-            return this.loginService.register(action.payload);
+            return this.loginService.register(action.payload).pipe(
+                map((users: any) => {  
+                    localStorage.setItem('id', users.user._id);
+                    localStorage.setItem('token', users.token);
+                    return new PostUserSuccess(users.user);
+                }),
+                catchError(err => {
+                    alert('Something went wrong');
+                    return of(new LoginUserFailure());
+                })
+            );
         }), 
-        map((users: any) => {  
-            localStorage.setItem('id', users.user._id);
-            localStorage.setItem('token', users.token);
-            return new PostUserSuccess(users.user);
-        }),
-        catchError(err => {
-            alert('Something went wrong');
-            return of(new LoginUserFailure());
-        })
     );
     @Effect()
     logoutUser$ = this._actions$.pipe(
@@ -72,19 +73,21 @@ export class UserEffects {
     loginUser$ = this._actions$.pipe(
         ofType<LoginUser>(EUserActions.LoginUser),
         switchMap((action) => { 
-            return this.loginService.login(action.payload);
+            return this.loginService.login(action.payload).pipe(
+                map((user) => { 
+                    localStorage.setItem('id', user.user._id);
+                    localStorage.setItem('token', user.token);
+                    return new LoginUserSuccess(user.user);
+                }),
+                catchError(err => {
+                    if(err.error.error === 'Unable user'){
+                        alert('User don\'t  found')
+                    }
+                    return of(new LoginUserFailure());
+                })
+            );
         }), 
-        map((user) => { 
-            localStorage.setItem('id', user.user._id);
-            localStorage.setItem('token', user.token);
-            return new LoginUserSuccess(user.user);
-        }),
-        catchError(err => {
-            if(err.error.error === 'Unable user'){
-                alert('User don\'t  found')
-            }
-            return of(new LoginUserFailure());
-        })
+        
     );
     @Effect()
     updateUser$ = this._actions$.pipe(

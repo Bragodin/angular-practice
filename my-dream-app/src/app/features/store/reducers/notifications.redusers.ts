@@ -23,6 +23,28 @@ export function notificationsReducers(
         // messageNotification: state.messageNotification
       };
     }
+    case ENotificationsActions.PostMessageNotification: {    
+      console.log('post message reducer')
+      console.log(state)
+      console.log(action.payload)
+      const isHaveNotif = state.messageNotification.find((elem: any)=> elem._id === action.payload._id);
+      if(isHaveNotif){
+        return {
+          ...state
+        };
+      } else {
+        return {
+          ...state,
+          messageNotification: state.messageNotification.concat(action.payload)
+        };
+      }
+    }
+    case ENotificationsActions.DeleteMessageNotificationSuccess: {     
+      return {
+        ...state,
+        
+      };
+    }
     default:
       return state;
   }

@@ -1,16 +1,18 @@
 import { Injectable } from "@angular/core";
 import { Socket } from 'ngx-socket-io';
 import { Store, select } from '@ngrx/store';
-import { GetNotifications } from '../store/actions/notifications.actions';
+import { GetNotifications, PostMessageNotification } from '../store/actions/notifications.actions';
 import { selectNotifications } from '../store/selectors/notifications.selectors';
 import { IAppState } from '../store/state/app.state';
 import { selectDialogId } from '../store/selectors/dialog.selectors';
 import { GetMessage } from '../store/actions/dialog.actions';
 import { Subscription } from 'rxjs';
+import { User } from 'src/app/models/user.model';
 
 @Injectable()
 export class WebsocketService {
   dialogId: string;
+  activeUser: User;
   private subs: Subscription[] = [];
   id: string = localStorage.getItem('id');
   constructor(private socket: Socket, private _store: Store<IAppState>) {
@@ -29,7 +31,8 @@ export class WebsocketService {
       // this._store.pipe(select(selectFriendsNotification));
       });
       this.socket.on('showMessage', (data) => {
-        this._store.dispatch(new GetNotifications(this.id));
+        // this._store.dispatch(new GetNotifications(this.id));
+        this._store.dispatch(new PostMessageNotification({_id: data.recipient}));
         this._store.dispatch(new GetMessage({dialogId: this.dialogId, message: data.msg}));
       })
   }

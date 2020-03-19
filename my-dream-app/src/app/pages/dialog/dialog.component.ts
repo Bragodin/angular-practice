@@ -17,7 +17,9 @@ export class DialogComponent implements OnInit {
   @Output() onSend = new EventEmitter<string>();
   
   constructor() { }
-  ngOnInit() {}
+  ngOnInit() {
+    
+  }
   sendMessage(){
     this.onSend.emit(this.name);
   }

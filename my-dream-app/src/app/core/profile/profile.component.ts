@@ -14,7 +14,6 @@ import { Friendship } from 'src/app/models/friendship.model';
 })
 export class ProfileComponent implements OnInit {
   @Input() myProfilePage: boolean;
-  @Input() firendRequest: boolean;
   @Input() user: User;
   @Input() userPets: Pet[];
   @Input() id: string;
@@ -22,6 +21,7 @@ export class ProfileComponent implements OnInit {
   @Input() sub: Subscription;
   @Output() onAdd = new EventEmitter<Friendship>();
   @Output() onAccept = new EventEmitter<any>();
+  @Input() isFriend: boolean;
   @Input() friendsNotificationState: boolean;
   avatar: string;
   constructor(private activateRoute: ActivatedRoute, private websocketService: WebsocketService, private notificationsService: NotificationsService) {
@@ -45,6 +45,7 @@ export class ProfileComponent implements OnInit {
     // this.onAdd.emit({friend1: this.id, friend2: friend});
   }
   accept(){
+    this.friendsNotificationState = false;
     this.onAccept.emit({friend1: localStorage.getItem('id'), friend2: this.id})
   }
 }

@@ -13,17 +13,19 @@ import { GetMyUser, SetActiveUser } from 'src/app/features/store/actions/user.ac
 import { PostFriend } from 'src/app/features/store/actions/friends.actions';
 import { selectFriendsNotifications } from 'src/app/features/store/selectors/notifications.selectors';
 import { GetNotifications } from 'src/app/features/store/actions/notifications.actions';
+import { selectFriends } from 'src/app/features/store/selectors/friends.selectors';
 
 
 @Component({
   selector: 'app-profile-container',
-  template: `<app-profile (onAccept)='accept($event)' (onAdd)='addFriend($event)' [user]='user' [userPets]='userPets' [id]='id' [myProfilePage]='myProfilePage' [friendsNotificationState] ='friendsNotificationState' [buttonState]='buttonState'  [sub]='sub'></app-profile>`,
+  template: `<app-profile (onAccept)='accept($event)' (onAdd)='addFriend($event)' [user]='user' [userPets]='userPets' [id]='id' [myProfilePage]='myProfilePage' [friendsNotificationState] ='friendsNotificationState' [buttonState]='buttonState' [isFriend]='isFriend' [sub]='sub'></app-profile>`,
 })
 export class ProfileContainerComponent implements OnInit {
   @Input() myProfilePage: boolean;
   user: User;
   userPets: Pet[];
   friends: User[];
+  isFriend: boolean;
   id: string;
   buttonState: boolean = false;
   sub: Subscription;
@@ -36,7 +38,19 @@ export class ProfileContainerComponent implements OnInit {
   ngOnChanges(){
    this.friendsNotificationState = this.friendsNotificationState;
   }
-  ngOnInit() {           
+  ngOnInit() {     
+    this._store.pipe(select(selectFriends)).subscribe(
+      data => {
+        if(data && data.friends !== null){
+          const result = data.friends.find(elem => elem.friend._id === this.id);
+          if(result){
+            this.isFriend = true;
+          } else {
+             this.isFriend = false;
+          }
+        }
+      }
+    );     
     this._store.dispatch(new GetMyUser(this.id));
     this._store.dispatch(new GetNotifications(localStorage.getItem('id')));    
     this.sub = this._store.pipe(select(selectUser)).subscribe(user => {

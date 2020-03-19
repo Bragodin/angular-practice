@@ -12,7 +12,6 @@ import { selectNotifications } from 'src/app/features/store/selectors/notificati
   styleUrls: ['./request-to-friend.component.css']
 })
 export class RequestToFriendComponent implements OnInit {
-
   constructor(private _store: Store<IAppState>) { }
   users: any;
   ngOnInit() {
