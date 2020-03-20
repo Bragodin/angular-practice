@@ -8,6 +8,7 @@ import { friendsReducers } from './friends.reducers';
 import { dialogReducers } from './dialog.reducers';
 import { paginationReducers } from './pagination.reducers';
 import { albumsReducers } from './album.reducers';
+import { errorsReducers } from './errors.reducers';
 
 export const appReducers: ActionReducerMap<IAppState, any> = {
     router: routerReducer,
@@ -17,5 +18,6 @@ export const appReducers: ActionReducerMap<IAppState, any> = {
     friends: friendsReducers,
     dialog: dialogReducers,
     pagination: paginationReducers,
-    albums: albumsReducers
+    albums: albumsReducers,
+    errors: errorsReducers
 }

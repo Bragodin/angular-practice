@@ -13,8 +13,48 @@
 }
 .toolbar {
     max-width: 100%;
-    min-height: auto;
+    height: auto;
     position: fixed;
     top: 0px;
     z-index: 2;
 }
+
+@media screen and (max-width: 990px){
+    .toolbar {
+        position: static;
+        min-height: 100px;
+  }
+  .toolbar__row button{
+    margin-top: 10px;
+}
+}
+
+@media screen and (max-width: 480px){
+    .toolbar {
+        position: static;
+        min-height: 150px;
+  }
+}
+
+@media screen and (max-width: 404px){
+    .toolbar {
+        position: static;
+        min-height: 150px;
+  }
+  .notification{
+    display: none;
+    }
+}
+
+@media screen and (max-width: 355px){
+    .toolbar {
+        position: static;
+        min-height: 350px;
+    }
+    .toolbar__row{
+        display: flex;
+    }
+}
+
+
+

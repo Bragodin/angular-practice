@@ -5,7 +5,6 @@ import { EFriendsActions, GetMyFriends, GetMyFriendsSuccess, DeleteFriend, Delet
 import { FriendsService } from '../../services/friends.service';
 import { Store, select } from '@ngrx/store';
 import { IAppState } from '../state/app.state';
-import { Friendship } from 'src/app/models/friendship.model';
 import { selectUser } from '../selectors/user.selectors';
 import { DeleteNotification } from '../actions/notifications.actions';
 
@@ -29,21 +28,15 @@ export class FriendsEffects {
             return this.friendsService.removeFromFriends(action.payload.myId, action.payload.userId);
         }),
         map((user: any)=> {
-            console.log('user')
-            console.log(user)
             if(user.friend1 === localStorage.getItem('id')){
-                console.log('user.friend1')
-                console.log(user.friend1)
                 return new DeleteFriendSuccess(user.friend2);
             }
             else { 
-                console.log('user.friend1')
-                console.log(user.friend1)
                 return new DeleteFriendSuccess(user.friend1);
             }
         })        
     );
-
+    
     @Effect()
     postFriend$ = this._actions$.pipe(
         ofType<PostFriend>(EFriendsActions.PostFriend),

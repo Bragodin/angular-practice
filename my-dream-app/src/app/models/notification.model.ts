@@ -1,7 +1,9 @@
+import { User } from './user.model';
+
 export interface Notification {
     _id?: string;
     ownerId: string;
-    friendsNotification: string[];    
-    messageNotification: string[];    
-    likes?: string[]
+    friendsNotification: any[];    
+    messageNotification: any[];    
+    likes?: string[];
 }

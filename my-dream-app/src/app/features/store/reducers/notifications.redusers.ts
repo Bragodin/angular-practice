@@ -1,6 +1,5 @@
 import { NotificationsActions, ENotificationsActions } from '../actions/notifications.actions';
 import { initialNotificationsState, INotificationsState } from '../state/notification.state';
-import { User } from 'src/app/models/user.model';
 
 export function notificationsReducers(
   state = initialNotificationsState,
@@ -15,12 +14,11 @@ export function notificationsReducers(
       };
     }
     case ENotificationsActions.DeleteNotification: {      
-      const index = state.friendsNotification.findIndex((elem) => elem === action.payload);
+      const index = state.friendsNotification.findIndex((elem: any) => elem === action.payload);
       state.friendsNotification.splice(index, 1);
       return {
         ...state,
-        friendsNotification: state.friendsNotification,
-        // messageNotification: state.messageNotification
+        friendsNotification: state.friendsNotification
       };
     }
     case ENotificationsActions.PostMessageNotification: {    
@@ -41,8 +39,15 @@ export function notificationsReducers(
     }
     case ENotificationsActions.DeleteMessageNotificationSuccess: {     
       return {
+        ...state   
+      };
+    }
+    case ENotificationsActions.DeleteFriendNotificationSuccess: {
+      const index = state.friendsNotification.findIndex((elem: any) => elem === action.payload);
+      state.friendsNotification.splice(index, 1);
+      return {
         ...state,
-        
+        friendsNotification: state.friendsNotification
       };
     }
     default:

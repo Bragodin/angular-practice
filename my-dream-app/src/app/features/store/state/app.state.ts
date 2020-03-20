@@ -1,11 +1,11 @@
 import { RouterReducerState } from '@ngrx/router-store';
-import { initialAuthState, IAuthState } from './auth.state';
 import { INotificationsState, initialNotificationsState } from './notification.state';
 import { initialUserState, IUserState } from './user.state';
 import { IFriendsState, initialFriendsState } from './friends.state';
 import { IDialogState, initialDialogState } from './dialog.state';
 import { IPaginationState, initialPaginationState } from './pagination.state';
 import { IAlbumState, initialAlbumState } from './album.state';
+import { IErrorsState, initialErrorsState } from './errors.state';
 
 export interface IAppState {
     router?: RouterReducerState;
@@ -16,6 +16,7 @@ export interface IAppState {
     dialog: IDialogState;
     pagination: IPaginationState;
     albums: IAlbumState;
+    errors: IErrorsState;
 }
 
 export const initialAppState: IAppState = {
@@ -25,7 +26,8 @@ export const initialAppState: IAppState = {
     friends: initialFriendsState,
     dialog: initialDialogState,
     pagination: initialPaginationState,
-    albums: initialAlbumState 
+    albums: initialAlbumState,
+    errors: initialErrorsState
 }
 
 export function getInitialState(): IAppState {

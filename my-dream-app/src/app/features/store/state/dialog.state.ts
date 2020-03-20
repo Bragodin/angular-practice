@@ -9,5 +9,5 @@ export interface IDialogState {
 export const initialDialogState: IDialogState = {
     id: null,
     users: null,
-    messages: null
+    messages: []
 } 

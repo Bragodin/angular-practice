@@ -41,6 +41,7 @@ export class ProfileComponent implements OnInit {
     const friend = localStorage.getItem('id');
     this.sub = this.notificationsService.addToFriends(this.id, friend).subscribe( data => {
       this.websocketService.sendNotification(this.id, localStorage.getItem('id'));
+      this.isFriend = !this.isFriend;
     });
     // this.onAdd.emit({friend1: this.id, friend2: friend});
   }

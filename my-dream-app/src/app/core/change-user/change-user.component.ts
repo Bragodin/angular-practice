@@ -65,7 +65,7 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
     this.sub = this.albumService.sendAvatar(formData, id).subscribe(
       data => {
         this._store.dispatch(new UpdateAvatar(data.avatar))
-        alert('Photo is update')
+        alert('Photo is update');
       }
     );
   }
@@ -85,8 +85,6 @@ export class ChangeUserComponent implements OnInit, OnDestroy {
       }
     }
     if(id && user) {
-      // this.usersService.updateUsers(id, userUpdate);
-      // this.router.navigate([`/profile/${id}`]);
       this._store.dispatch(new UpdateMyUser(userUpdate));
       this.router.navigate([`/profile/${id}`]);
     }

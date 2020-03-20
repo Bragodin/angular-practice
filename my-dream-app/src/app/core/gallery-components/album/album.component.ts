@@ -22,7 +22,6 @@ export class AlbumComponent implements OnInit, OnDestroy {
   albumLength: number;
   @Input() item: Album;
   @Input() myProfilePage: boolean;
-  private subscriptions: Subscription[] = [];
   constructor(private _store: Store<IAppState>) {
   }
   ngOnInit() {
@@ -55,7 +54,6 @@ export class AlbumComponent implements OnInit, OnDestroy {
     this._store.dispatch(new PostPhotos({formData: formData, item: item}));
   }
   removePhoto(image, itemId){
-    console.log(itemId)
     this.item.photosName = this.item.photosName.filter( elem => elem !== image);
     this._store.dispatch(new DeletePhotos({ image: image.name, albumId: itemId}));
   }

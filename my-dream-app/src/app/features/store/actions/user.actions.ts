@@ -34,7 +34,7 @@ export class GetMyUser implements Action {
 
 export class LoginUserFailure implements Action {
     public readonly type = EUserActions.LoginUserFailure;
-    constructor(public payload?: string){}
+    constructor(public payload?: any){}
 }
 
 export class GetAutorizationUser implements Action {

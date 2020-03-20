@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { PostFriend } from 'src/app/features/store/actions/friends.actions';
 import { SetActiveUser } from 'src/app/features/store/actions/user.actions';
-import { GetNotifications } from 'src/app/features/store/actions/notifications.actions';
+import { GetNotifications, DeleteFriendNotification } from 'src/app/features/store/actions/notifications.actions';
 import { selectNotifications } from 'src/app/features/store/selectors/notifications.selectors';
 
 @Component({
@@ -21,8 +21,11 @@ export class RequestToFriendComponent implements OnInit {
       data => this.users = data.friendsNotification
     )
   }
+  removeNotification(id){
+    this._store.dispatch(new DeleteFriendNotification({myId: localStorage.getItem('id'), userId: id}));
+  }
   accept(id, user){
     this._store.dispatch(new SetActiveUser(user));
-    this._store.dispatch(new PostFriend({friend1: localStorage.getItem('id'), friend2: id}))
+    this._store.dispatch(new PostFriend({friend1: localStorage.getItem('id'), friend2: id}));
   }
 }

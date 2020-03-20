@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Effect, Actions, ofType } from '@ngrx/effects'; 
 import { switchMap, map, catchError } from 'rxjs/operators';
-import { GetMyUser, EUserActions, GetMyUserSuccess, GetMyUsers, GetMyUsersSuccess, GetMyUserFailure, PostUser, PostUserSuccess, GetUserSuccess, GetAutorizationUser, GetAutorizationUserSuccess, LogoutUser, LogoutUserSuccess, LoginUser, LoginUserSuccess, UpdateMyUser, UpdateMyUserSuccess, DeleteMyUser, LoginUserFailure } from '../actions/user.actions';
+import { GetMyUser, EUserActions, GetMyUserSuccess, GetMyUsers, GetMyUsersSuccess, GetMyUserFailure, PostUser, PostUserSuccess,  GetAutorizationUser, GetAutorizationUserSuccess, LogoutUser, LogoutUserSuccess, LoginUser, LoginUserSuccess, UpdateMyUser, UpdateMyUserSuccess, DeleteMyUser, LoginUserFailure } from '../actions/user.actions';
 import { UsersService } from '../../services/users.service';
 import { of } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { LoginService } from '../../services/login.service';
-
+import { CreateError } from '../actions/errors.actions';
+import { ErrorTypes } from '../../../models/errors.model';
 @Injectable()
 export class UserEffects {
     @Effect()
@@ -50,7 +51,6 @@ export class UserEffects {
                     return new PostUserSuccess(users.user);
                 }),
                 catchError(err => {
-                    alert('Something went wrong');
                     return of(new LoginUserFailure());
                 })
             );
@@ -79,12 +79,12 @@ export class UserEffects {
                     localStorage.setItem('token', user.token);
                     return new LoginUserSuccess(user.user);
                 }),
-                catchError(err => {
-                    if(err.error.error === 'Unable user'){
-                        alert('User don\'t  found')
-                    }
-                    return of(new LoginUserFailure());
-                })
+            //     catchError((err: any) => {
+            //         if(err.error.error === 'Unable user'){
+            //             new CreateError({ type: ErrorTypes.UserNotFound, message: 'User do not found' })
+            //         }
+            //         return new LoginUserFailure();
+            //     })
             );
         }), 
         

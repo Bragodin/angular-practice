@@ -13,6 +13,4 @@ export class ActivePhotoComponent implements OnInit {
   }
   ngOnInit() {
   }
-
-
 }

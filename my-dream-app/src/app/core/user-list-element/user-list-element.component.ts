@@ -26,6 +26,8 @@ export class UserListElementComponent implements OnInit {
   @Input() user: User;
   @Input() buttonState: string;
   @Output() onChanged = new EventEmitter<any>();
+  @Input() rejectRequest: boolean;
+  @Output() onRejectRequest = new EventEmitter<string>();
   constructor(private _store: Store<IAppState>) {
   }
   ngOnInit() {     
@@ -33,6 +35,11 @@ export class UserListElementComponent implements OnInit {
   sendButtonEvent(user){
     this.onChanged.emit(user._id);
   }
+
+  rejectRequestClick(id){
+    this.onRejectRequest.emit(id);
+  }
+  
   getBackground(){
     if(this.index % 2 == 0){
       return {

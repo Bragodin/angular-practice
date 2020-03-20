@@ -67,6 +67,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { AlbumsEffects } from './features/store/effects/albums.effects';
 import { FriendNotificationComponent } from './ui/friend-notification/friend-notification.component';
 import { MessageNotificationComponent } from './ui/message-notification/message-notification.component';
+import { NotificationWindowComponent } from './core/notification-window/notification-window.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
  
@@ -106,7 +107,8 @@ const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
     LoginContainer,
     PaginationComponent,
     FriendNotificationComponent,
-    MessageNotificationComponent
+    MessageNotificationComponent,
+    NotificationWindowComponent
   ],
   imports: [
     BrowserModule,

@@ -4,9 +4,9 @@
       <h3>{{user.name}}  {{user.surname}}</h3>
       <h4>{{user.login}}</h4>
       <h4>{{user.phone}}</h4>
-      <button mat-raised-button color="accent" *ngIf='!buttonState; else pets' (click)='showPets()'>Show User Pets</button>
-      <button mat-raised-button color="accent" *ngIf='!isFriend && !myProfilePage && !friendsNotificationState' (click)='addFriend()'>Add to friends</button>
-      <button mat-raised-button color="accent" *ngIf='friendsNotificationState' (click)='accept()'>Accept</button>
+      <button mat-raised-button color="accent" *ngIf='!buttonState; else pets' (click)='showPets()' class="profile__information_button">Show User Pets</button>
+      <button mat-raised-button color="accent" *ngIf='!isFriend && !myProfilePage && !friendsNotificationState' (click)='addFriend()' class="profile__information_button"class="profile__information_button"class="profile__information_button">Add to friends</button>
+      <button mat-raised-button color="accent" *ngIf='friendsNotificationState' (click)='accept()' class="profile__information_button">Accept</button>
       <ng-template #pets>
          <button mat-raised-button color="accent" (click)='showPets()'>Hide User Pets</button>
          <h3>{{user.name}}s pets:</h3>
@@ -14,11 +14,5 @@
             {{pet.name}}
          </div>
       </ng-template>
-   </div>
-   <div class="profile-inform">
-      dddddddddddddddd
-   </div>
-   <div class="profile-inform">
-      dddddddddddddddd
    </div>
 </div>
