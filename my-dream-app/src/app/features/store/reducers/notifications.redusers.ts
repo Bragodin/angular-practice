@@ -22,9 +22,6 @@ export function notificationsReducers(
       };
     }
     case ENotificationsActions.PostMessageNotification: {    
-      console.log('post message reducer')
-      console.log(state)
-      console.log(action.payload)
       const isHaveNotif = state.messageNotification.find((elem: any)=> elem._id === action.payload._id);
       if(isHaveNotif){
         return {

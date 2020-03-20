@@ -18,15 +18,11 @@ export class NotificationsService {
   }
 
   removeMessageNotification(myId, userId){
-    let a = this.http.put<Notification>(`http://localhost:3000/notifications/message/${myId}`, {userId: userId});
-    a.subscribe(data => console.log(data))
-    return a;
+    return this.http.put<Notification>(`http://localhost:3000/notifications/message/${myId}`, {userId: userId});
   }
 
   removeFriendNotification(myId, userId){
-    let a = this.http.put<Notification>(`http://localhost:3000/notifications/friend/${myId}`, {userId: userId});
-    a.subscribe(data => console.log(data))
-    return a;
+    return this.http.put<Notification>(`http://localhost:3000/notifications/friend/${myId}`, {userId: userId});
   }
   
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Component } from '@angular/core';
+import {  MatDialogRef } from '@angular/material';
 import { Store, select } from '@ngrx/store';
 import { selectNotifications } from 'src/app/features/store/selectors/notifications.selectors';
 import { IAppState } from 'src/app/features/store/state/app.state';

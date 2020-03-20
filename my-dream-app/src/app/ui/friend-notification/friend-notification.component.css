@@ -1,7 +1,7 @@
 .friend{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     padding-top: 5px;
     cursor: pointer;
     border-radius: 3px;

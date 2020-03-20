@@ -14,7 +14,7 @@ import { DeleteAlbums, PostPhotos, DeletePhotos } from 'src/app/features/store/a
 
 export class AlbumComponent implements OnInit, OnDestroy {
   imagePath: object;
-  urls: any[] = new Array<string>();
+  urls: string[] = new Array<string>();
   photoName: string;
   files: any;
   usersService: Observable<User[]>;
@@ -46,12 +46,15 @@ export class AlbumComponent implements OnInit, OnDestroy {
     }
   }
   sendPhotos(item){
-    const formData = new FormData();
-    let files: any = this.files;
-    for(let i = 0; i < files.length; i++){
-      formData.append('profiles', files[i]);
+    if(this.files){
+      const formData = new FormData();
+      let files: any = this.files;
+      for(let i = 0; i < files.length; i++){
+        formData.append('profiles', files[i]);
+      }
+      this._store.dispatch(new PostPhotos({formData: formData, item: item}));
+      this.urls = [];
     }
-    this._store.dispatch(new PostPhotos({formData: formData, item: item}));
   }
   removePhoto(image, itemId){
     this.item.photosName = this.item.photosName.filter( elem => elem !== image);

@@ -1,5 +1,8 @@
 import { Action } from '@ngrx/store';
 import { User } from 'src/app/models/user.model';
+import { Id } from 'src/app/models/id.model';
+import { Notification } from '../../../models/notification.model';
+import { Friends } from 'src/app/models/friend.model';
 
 export enum ENotificationsActions {
     GetNotifications = '[Notifications] Get Notifications',
@@ -16,11 +19,11 @@ export enum ENotificationsActions {
 export class GetNotifications implements Action {
     public readonly type = ENotificationsActions.GetNotifications;
     constructor(public payload: string){}
-}
+}  
 
 export class GetNotificationsSuccess implements Action {
     public readonly type = ENotificationsActions.GetNotificationsSuccess;
-    constructor(public payload: any){}
+    constructor(public payload: Notification){}
 }
 
 export class DeleteNotification implements Action {
@@ -31,7 +34,6 @@ export class DeleteNotification implements Action {
 export class PostMessageNotification implements Action {
     public readonly type = ENotificationsActions.PostMessageNotification;
     constructor(public payload: any){
-
     }
 }
 
@@ -42,17 +44,17 @@ export class DeleteMessageNotification implements Action {
 
 export class DeleteMessageNotificationSuccess implements Action {
     public readonly type = ENotificationsActions.DeleteMessageNotificationSuccess;
-    constructor(public payload: any){}
+    constructor(public payload: Notification){}
 }
 
 export class DeleteFriendNotificationSuccess implements Action {
     public readonly type = ENotificationsActions.DeleteFriendNotificationSuccess;
-    constructor(public payload: any){}
+    constructor(public payload: Id){}
 }
 
 export class DeleteFriendNotification implements Action {
     public readonly type = ENotificationsActions.DeleteFriendNotification;
-    constructor(public payload: any){}
+    constructor(public payload: Friends){}
 }
 
 export class DeleteMeggaseNotification implements Action {

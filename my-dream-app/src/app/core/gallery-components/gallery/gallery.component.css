@@ -1,5 +1,7 @@
 .gallery {
     margin-top: 20px;
+    margin-bottom: 20px;
     border-radius: 3px;
     min-width: 20px;
+    padding: 30px;
 }

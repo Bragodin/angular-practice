@@ -15,11 +15,5 @@ export class FriendsComponent implements OnInit {
   constructor(private _store: Store<IAppState>) { }
   ngOnInit() { 
     this._store.dispatch(new GetMyFriends(localStorage.getItem('id')));
-    // this._store.pipe(select(selectFriends)).subscribe(
-    //   data => console.log(data)
-    // );
-    // this.sub = this.friendsService.getMyFriends(id).subscribe(
-    //   data => console.log(data)
-    // );
   }
 }

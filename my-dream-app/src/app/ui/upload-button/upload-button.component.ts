@@ -6,10 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./upload-button.component.css']
 })
 export class UploadButtonComponent implements OnInit {
-
   constructor() { }
-
   ngOnInit() {
   }
-
 }

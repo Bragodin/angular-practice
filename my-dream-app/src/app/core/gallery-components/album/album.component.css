@@ -1,13 +1,16 @@
-/* .gallery h3 {
-    display: inline;
-} */
 .gallery__images {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap; 
+    margin: 10px;
 }
 .images-container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+}
+
+.change-photo__buttons button {
+    margin: 10px;
+    margin-left: 0px;
 }

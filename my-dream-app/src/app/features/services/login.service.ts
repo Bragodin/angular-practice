@@ -8,14 +8,6 @@ import { User } from  '../../models/user.model';
 export class LoginService {
   constructor(private http: HttpClient) { 
   }
-  // login(data: any){
-  //   return this.http.post('http://localhost:3000/login', data).pipe(map((data: any) => {
-  //     localStorage.setItem('id', data.user._id);
-  //     localStorage.setItem('token', data.token);
-  //     return data;
-  //   })); 
-
-  // }
   login(data: any){
     return this.http.post<any>('http://localhost:3000/login', data);
   }

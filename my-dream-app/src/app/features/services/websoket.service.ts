@@ -8,6 +8,7 @@ import { selectDialogId } from '../store/selectors/dialog.selectors';
 import { GetMessage } from '../store/actions/dialog.actions';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user.model';
+import { selectUser } from '../store/selectors/user.selectors';
 
 @Injectable()
 export class WebsocketService {
@@ -21,18 +22,17 @@ export class WebsocketService {
     this.subs.push(this._store.pipe(select(selectDialogId)).subscribe(
       data => this.dialogId = data
     ));
+    this.subs.push(this._store.pipe(select(selectUser)).subscribe(
+      data => this.activeUser = data
+    ));
   }
   connection(){
-    this.socket.emit('id', {id: localStorage.getItem('id')});
-    //TODO переделать ! ! ! 
-    
+    this.socket.emit('id', {id: localStorage.getItem('id')});  
     this.socket.on('newFriend', (data) => {
       this._store.dispatch(new GetNotifications(this.id));
-      // this._store.pipe(select(selectFriendsNotification));
       });
       this.socket.on('showMessage', (data) => {
-        // this._store.dispatch(new GetNotifications(this.id));
-        this._store.dispatch(new PostMessageNotification({_id: data.recipient}));
+        this._store.dispatch(new PostMessageNotification(this.activeUser));
         this._store.dispatch(new GetMessage({dialogId: this.dialogId, message: data.msg}));
       })
   }

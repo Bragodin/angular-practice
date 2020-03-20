@@ -34,7 +34,6 @@ export class DashboardContainerComponent implements OnInit, OnDestroy {
     }
   }
   onChangePage(page){
-    console.log(page)
     this._store.dispatch(new GetMyUsers({page: page.page, count: page.count}));
   }
 }

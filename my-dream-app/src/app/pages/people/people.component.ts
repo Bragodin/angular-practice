@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { Observable, Subscription, of } from 'rxjs';
+import { FormControl } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { filter, debounceTime, switchMap, catchError } from 'rxjs/operators';
 import { SearchService } from '../../features/services/search.service';
 

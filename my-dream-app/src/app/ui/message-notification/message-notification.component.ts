@@ -13,7 +13,7 @@ export class MessageNotificationComponent implements OnInit {
   @Input() user: User;
   ngOnInit() {
   }
-  goToFriendsRequests(){
+  goToMessage(){
     this.onChose.emit();
   }
 }

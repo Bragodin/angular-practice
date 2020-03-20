@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { IAppState } from 'src/app/features/store/state/app.state';
 import { Store, select } from '@ngrx/store';
 import { selectUser } from 'src/app/features/store/selectors/user.selectors';
@@ -9,6 +9,7 @@ import { selectMessages } from 'src/app/features/store/selectors/dialog.selector
 import { ActivatedRoute } from '@angular/router';
 import { selectMessageNotifications } from 'src/app/features/store/selectors/notifications.selectors';
 import { DeleteMessageNotification } from 'src/app/features/store/actions/notifications.actions';
+import { GetMyUser } from 'src/app/features/store/actions/user.actions';
 
 
 @Component({
@@ -25,19 +26,18 @@ export class DialogDataComponent implements OnInit {
     this.id = activateRoute.snapshot.params['id'];
   }
   ngOnInit() {
-    this._store.pipe(select(selectMessageNotifications)).subscribe(
+      this._store.pipe(select(selectMessageNotifications)).subscribe(
       data => {
         if(data){
           const isNaveNotification = data.find((elem: any) => {
             return elem._id === this.id
           });
           if(isNaveNotification){
-            console.log(localStorage.getItem('id'))
-            this._store.dispatch(new DeleteMessageNotification({ myId: localStorage.getItem('id'), userId: this.id }));
+            let data = { myId: localStorage.getItem('id'), userId: this.id };
+            this._store.dispatch(new DeleteMessageNotification(data));
           }
         }
-      }
-    );
+      });
     this._store.pipe(select(selectMessages)).subscribe(
         data => this.messages = data
     );
@@ -47,6 +47,7 @@ export class DialogDataComponent implements OnInit {
         this._store.dispatch(new GetMyDialog([localStorage.getItem('id'), this.id]));
         }
       );
+    this._store.dispatch(new GetMyUser(this.id))
   }
   sendMessage(name){
     let message = {

@@ -8,26 +8,27 @@ import { IAppState } from '../state/app.state';
 import { selectUser } from '../selectors/user.selectors';
 import { WebsocketService } from '../../services/websoket.service';
 import { selectDialogId } from '../selectors/dialog.selectors';
+import { Dialog } from 'src/app/models/dialog.model';
 
 @Injectable()
 export class DialogEffects {
     @Effect()
     postDialog$ = this._actions$.pipe(
         ofType<PostDialog>(EDialogActions.PostDialog),
-        switchMap((action) => {
+        switchMap((action: PostDialog) => {
             const body = {
                 users: [action.payload, action.payload_second]
             }
             return this.dialogService.addDialog(body);
         }),
-        map((dialog)=> { 
+        map((dialog: Dialog)=> { 
             return new PostDialogSuccess(dialog)
         })        
     );
     @Effect()
     getDialog$ = this._actions$.pipe(
         ofType<GetMyDialog>(EDialogActions.GetMyDialog),
-        switchMap((action) => {
+        switchMap((action: GetMyDialog) => {
             return this.dialogService.getDialog(action.payload);
         }),
         withLatestFrom(this._store.pipe(select(selectUser))),
@@ -49,7 +50,6 @@ export class DialogEffects {
                 ...action.payload,
                 dialogId: dialogId
             }
-            console.log(messageData)
             const dialog = this.websocketService.sendMessage(messageData);
             return [dialog];
         }),

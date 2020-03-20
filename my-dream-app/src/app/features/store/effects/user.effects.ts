@@ -8,12 +8,13 @@ import { User } from 'src/app/models/user.model';
 import { LoginService } from '../../services/login.service';
 import { CreateError } from '../actions/errors.actions';
 import { ErrorTypes } from '../../../models/errors.model';
+
 @Injectable()
 export class UserEffects {
     @Effect()
     getUser$ = this._actions$.pipe(
         ofType<GetMyUser>(EUserActions.GetMyUser),
-        switchMap((action) => {
+        switchMap((action: GetMyUser) => {
             return this.usersService.getUserById(action.payload)}),
         map((user: User)=> {   
             return new GetMyUserSuccess(user);
@@ -23,7 +24,7 @@ export class UserEffects {
     @Effect()
     getMyUsers$ = this._actions$.pipe(
         ofType<GetMyUsers>(EUserActions.GetMyUsers),
-        switchMap((action) => { 
+        switchMap((action: GetMyUsers) => { 
             return this.usersService.getUsers(action.payload.page, action.payload.count);
         }), 
         map((users: User[])=> {   
@@ -34,7 +35,7 @@ export class UserEffects {
     @Effect()
     getAuthUser$ = this._actions$.pipe(
         ofType<GetAutorizationUser>(EUserActions.GetAutorizationUser),
-        switchMap((action) => {
+        switchMap((action: GetAutorizationUser) => {
             return this.usersService.getUserById(action.payload)}),
         map((user: User) => {   
             return new GetAutorizationUserSuccess(user);
@@ -43,7 +44,7 @@ export class UserEffects {
     @Effect()
     postUser$ = this._actions$.pipe(
         ofType<PostUser>(EUserActions.PostUser),
-        switchMap((action) => { 
+        switchMap((action: PostUser) => { 
             return this.loginService.register(action.payload).pipe(
                 map((users: any) => {  
                     localStorage.setItem('id', users.user._id);
@@ -72,19 +73,19 @@ export class UserEffects {
     @Effect()
     loginUser$ = this._actions$.pipe(
         ofType<LoginUser>(EUserActions.LoginUser),
-        switchMap((action) => { 
+        switchMap((action: LoginUser) => { 
             return this.loginService.login(action.payload).pipe(
                 map((user) => { 
                     localStorage.setItem('id', user.user._id);
                     localStorage.setItem('token', user.token);
                     return new LoginUserSuccess(user.user);
                 }),
-            //     catchError((err: any) => {
-            //         if(err.error.error === 'Unable user'){
-            //             new CreateError({ type: ErrorTypes.UserNotFound, message: 'User do not found' })
-            //         }
-            //         return new LoginUserFailure();
-            //     })
+                // catchError((err: any) => {
+                //     if(err.error.error === 'Unable user'){
+                //         alert('User do not found');
+                //     }
+                //     return new LoginUserFailure();
+                // })
             );
         }), 
         
@@ -92,20 +93,20 @@ export class UserEffects {
     @Effect()
     updateUser$ = this._actions$.pipe(
         ofType<UpdateMyUser>(EUserActions.UpdateMyUser),
-        switchMap((action) => { 
+        switchMap((action: UpdateMyUser) => { 
             return this.usersService.updateUsers(localStorage.getItem('id'), action.payload);
         }), 
-        map((user) => { 
+        map((user: User[]) => { 
             return new UpdateMyUserSuccess(user);
         })
     );
     @Effect()
     removeUser$ = this._actions$.pipe(
         ofType<DeleteMyUser>(EUserActions.DeleteMyUser),
-        switchMap((action) => { 
+        switchMap((action: DeleteMyUser) => { 
             return this.usersService.remove(action.payload);
         }), 
-        map(user => {
+        map((user: User) => {
             if(user){
                 localStorage.removeItem('token');
                 localStorage.removeItem('id');

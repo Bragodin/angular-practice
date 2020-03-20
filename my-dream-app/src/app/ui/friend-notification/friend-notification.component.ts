@@ -8,7 +8,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class FriendNotificationComponent implements OnInit {
   @Output() onChose = new EventEmitter();
-  constructor() { }
+  constructor() {}
   @Input() text: string;
   @Input() user: User;
   ngOnInit() {

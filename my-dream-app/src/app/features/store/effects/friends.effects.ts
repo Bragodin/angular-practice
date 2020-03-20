@@ -7,16 +7,17 @@ import { Store, select } from '@ngrx/store';
 import { IAppState } from '../state/app.state';
 import { selectUser } from '../selectors/user.selectors';
 import { DeleteNotification } from '../actions/notifications.actions';
+import { Friendship } from 'src/app/models/friendship.model';
 
 @Injectable()
 export class FriendsEffects {
     @Effect()
     getFriends$ = this._actions$.pipe(
         ofType<GetMyFriends>(EFriendsActions.GetMyFriends),
-        switchMap((action) => {
+        switchMap((action: GetMyFriends) => {
             return this.friendsService.getMyFriends(action.payload);
         }),
-        map((friends: any)=> {   
+        map((friends: any)=> {  
             return new GetMyFriendsSuccess(friends);
         })        
     );
@@ -24,10 +25,10 @@ export class FriendsEffects {
     @Effect()
     deleteFriend$ = this._actions$.pipe(
         ofType<DeleteFriend>(EFriendsActions.DeleteFriend),
-        switchMap((action) => {
+        switchMap((action: DeleteFriend) => {
             return this.friendsService.removeFromFriends(action.payload.myId, action.payload.userId);
         }),
-        map((user: any)=> {
+        map((user: Friendship)=> {
             if(user.friend1 === localStorage.getItem('id')){
                 return new DeleteFriendSuccess(user.friend2);
             }
@@ -40,7 +41,7 @@ export class FriendsEffects {
     @Effect()
     postFriend$ = this._actions$.pipe(
         ofType<PostFriend>(EFriendsActions.PostFriend),
-        switchMap((action) => {
+        switchMap((action: PostFriend) => {
             return this.friendsService.addToFriends(action.payload);
         }),
         withLatestFrom(this._store.pipe(select(selectUser))),

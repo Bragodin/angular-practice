@@ -4,6 +4,7 @@ import { switchMap, map, catchError } from 'rxjs/operators';
 import { GetAlbums, EAlbumsActions, GetAlbumsSuccess, DeleteAlbums, DeleteAlbumsSuccess, PostAlbum, PostAlbumSuccess, PostPhotos, PostPhotosSuccess, DeletePhotos, DeletePhotosSuccess } from '../actions/albums.actions';
 import { AlbumService } from '../../services/album.service';
 import { Album } from 'src/app/models/album.model';
+import { Photo } from 'src/app/models/photo.model';
 
 @Injectable()
 export class AlbumsEffects {
@@ -20,10 +21,10 @@ export class AlbumsEffects {
     @Effect()
     romoveAlbum$ = this._actions$.pipe(
         ofType<DeleteAlbums>(EAlbumsActions.DeleteAlbums),
-        switchMap((action) => {
+        switchMap((action: DeleteAlbums) => {
             return this.albumService.removeAlbum(action.payload);
         }),
-        map((album: any) => {
+        map((album: Album) => {
             return new DeleteAlbumsSuccess(album);
         })        
     ); 
@@ -31,7 +32,7 @@ export class AlbumsEffects {
     @Effect()
     postAlbum$ = this._actions$.pipe(
         ofType<PostAlbum>(EAlbumsActions.PostAlbum),
-        switchMap((action) => {
+        switchMap((action: PostAlbum) => {
             return this.albumService.addAlbum(action.payload);
         }),
         map((album: Album) => {
@@ -43,10 +44,10 @@ export class AlbumsEffects {
     @Effect()
     postPhotos$ = this._actions$.pipe(
         ofType<PostPhotos>(EAlbumsActions.PostPhotos),
-        switchMap((action) => {
+        switchMap((action: PostPhotos) => {
             return this.albumService.sendPhotos(action.payload.formData, action.payload.item);
         }),
-        map((photos: any) => {
+        map((photos: Photo) => {
             return new PostPhotosSuccess(photos);
         })        
     );
@@ -68,10 +69,10 @@ export class AlbumsEffects {
     @Effect()
     removePhotos$ = this._actions$.pipe(
         ofType<DeletePhotos>(EAlbumsActions.DeletePhotos),
-        switchMap((action) => {
+        switchMap((action: DeletePhotos) => {
             return this.albumService.deltePhoto(action.payload.image);
         }),
-        map((data: any) => {
+        map((data: Photo) => {
             return new DeletePhotosSuccess(data);
         })       
     );
